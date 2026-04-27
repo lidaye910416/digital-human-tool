@@ -1,6 +1,19 @@
 # CLAUDE.md
 
-数字人播报视频生成器 - 项目开发指南
+> **当前分支**: `feature/deploy-local`  
+> **主要功能**: 图生视频 - 让数字人基于图片开口说话
+
+---
+
+## 🎯 分支目标
+
+本分支专注于**图生视频 (Image-to-Video)** 功能的开发：
+- 核心能力：输入一张图片 + 文本/音频 → 输出数字人说话视频
+- 典型场景：静态照片 → 动态播报视频
+
+---
+
+# 数字人播报视频生成器 - 项目开发指南
 
 > 本项目基于 [Andrej Karpathy](https://karpathy.github.io/) 编码准则编写，融合了 AI Coding Guidelines 和项目特定需求。
 
@@ -136,6 +149,28 @@ model: "MiniMax-Hailuo-2.3" 或 "MiniMax-Hailuo-2.3-Fast"
 POST https://api.minimaxi.com/v1/image_generation
 model: "image-01"
 ```
+
+---
+
+## 📋 图生视频功能规划
+
+### 核心流程
+```
+图片 → 数字人形象 → TTS语音 → 图生视频 → 最终视频
+```
+
+### 待实现功能
+- [ ] 图片预处理（人脸检测、裁剪、对齐）
+- [ ] 改进的唇形同步
+- [ ] 情感控制（高兴、严肃、平静）
+- [ ] 背景保持（防止背景变形）
+- [ ] 视频时长控制
+- [ ] 多角色支持
+
+### API 扩展
+- `POST /api/video/generate` - 图生视频（核心功能）
+- `POST /api/video/preview` - 预览生成效果
+- `GET /api/video/{task_id}` - 查询生成状态
 
 ---
 
