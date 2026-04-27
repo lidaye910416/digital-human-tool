@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-> **当前分支**: `feature/deploy-local`  
+> **当前分支**: `feature/image-to-video`  
 > **主要功能**: 图生视频 - 让数字人基于图片开口说话
 
 ---
@@ -156,12 +156,12 @@ model: "image-01"
 
 ### 核心流程
 ```
-图片 → 数字人形象 → TTS语音 → 图生视频 → 最终视频
+图片 → 数字人形象 → TTS语音 → 唇形同步 → 最终视频
 ```
 
 ### 待实现功能
 - [ ] 图片预处理（人脸检测、裁剪、对齐）
-- [ ] 改进的唇形同步
+- [ ] 唇形同步（核心功能）
 - [ ] 情感控制（高兴、严肃、平静）
 - [ ] 背景保持（防止背景变形）
 - [ ] 视频时长控制
@@ -171,6 +171,65 @@ model: "image-01"
 - `POST /api/video/generate` - 图生视频（核心功能）
 - `POST /api/video/preview` - 预览生成效果
 - `GET /api/video/{task_id}` - 查询生成状态
+
+---
+
+## 🔬 技术调研 - 唇形同步方案
+
+### 方案对比
+
+| 项目 | Stars | 难度 | GPU需求 | 推荐度 |
+|------|-------|------|---------|--------|
+| **SadTalker** | ⭐ 13.7k | 中 | 必须 | ⭐⭐⭐⭐⭐ |
+| **Wav2Lip** | ⭐ 13k | 中 | 必须 | ⭐⭐⭐⭐ |
+| **LatentSync** | ⭐ 5.6k | 低 | 推荐 | ⭐⭐⭐⭐ |
+| **First-Order-Model** | ⭐ 5.2k | 低 | 可选 | ⭐⭐⭐ |
+| **PaddleGAN** | ⭐ 8k | 低 | 推荐 | ⭐⭐⭐ |
+
+### 方案详情
+
+#### 1. SadTalker (CVPR 2023) ⭐ 推荐
+- **仓库**: https://github.com/OpenTalker/SadTalker
+- **优点**: 效果好，3D系数驱动，保持原图风格
+- **缺点**: 需要GPU，部署复杂
+- **适用**: 高质量需求
+
+#### 2. Wav2Lip (ACM 2020)
+- **仓库**: https://github.com/Rudrabha/Wav2Lip
+- **优点**: 经典方案，稳定可靠
+- **缺点**: 需要GPU，效果一般
+- **适用**: 稳定优先
+
+#### 3. LatentSync (字节跳动)
+- **仓库**: https://github.com/bytedance/LatentSync
+- **优点**: 基于Stable Diffusion，效果好
+- **缺点**: 较新，文档少
+- **适用**: 尝鲜用户
+
+#### 4. First-Order-Model (轻量)
+- **仓库**: https://github.com/AliaksandrSiarohin/first-order-model
+- **优点**: 轻量，CPU可跑，部署简单
+- **缺点**: 效果一般
+- **适用**: 低配机器/快速原型
+
+#### 5. PaddleGAN (百度飞桨)
+- **仓库**: https://github.com/PaddlePaddle/PaddleGAN
+- **优点**: 一个库集成多种能力
+- **缺点**: 依赖飞桨生态
+- **适用**: 百度用户
+
+### TODO 清单
+
+- [ ] **调研阶段** - 分析各方案优缺点
+  - [x] SadTalker
+  - [x] Wav2Lip
+  - [x] LatentSync
+  - [x] First-Order-Model
+  - [x] PaddleGAN
+- [ ] **选型决策** - 确定最终方案
+- [ ] **集成开发** - 接入选定的唇形同步库
+- [ ] **API封装** - 对外提供唇形同步接口
+- [ ] **效果优化** - 根据实际效果调优
 
 ---
 
