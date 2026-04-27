@@ -27,4 +27,6 @@ def init_db():
     from src.models.avatar import Avatar
     from src.models.video_project import VideoProject
     from src.models.scene import Scene
+    from src.models.consultation import Consultation
+    from src.models.news import NewsItem
     Base.metadata.create_all(bind=engine)

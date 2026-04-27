@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import ConsultationPage from './pages/ConsultationPage';
 
 // 配置
 const API_BASE = 'http://localhost:8001';

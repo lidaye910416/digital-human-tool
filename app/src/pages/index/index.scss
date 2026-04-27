@@ -1,0 +1,149 @@
+.index-page {
+  min-height: 100vh;
+  background: #0f0f1a;
+  padding: 20px;
+  padding-bottom: 100px;
+}
+
+.header {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.title {
+  display: block;
+  font-size: 36px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.subtitle {
+  display: block;
+  font-size: 14px;
+  color: #86868B;
+  margin-top: 8px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.section-more {
+  font-size: 14px;
+  color: #007AFF;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #86868B;
+}
+
+.news-scroll {
+  white-space: nowrap;
+}
+
+.news-card {
+  display: inline-block;
+  width: 280px;
+  margin-right: 16px;
+  padding: 16px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  vertical-align: top;
+}
+
+.news-title {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.news-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #86868B;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.action-card {
+  flex: 1;
+  position: relative;
+  padding: 20px 12px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.action-icon {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.action-text {
+  display: block;
+  font-size: 13px;
+  color: #fff;
+}
+
+.action-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 6px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #FF9500;
+  font-size: 10px;
+  border-radius: 4px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.category-item {
+  padding: 16px 8px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.category-emoji {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.category-name {
+  display: block;
+  font-size: 12px;
+  color: #fff;
+}

@@ -6,9 +6,20 @@ import os
 import logging
 from src.models.database import get_db
 
+# 导入咨询路由
+from src.api.consultations import router as consultations_router
+# 导入资讯路由
+from src.api.news import router as news_router
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["api"])
+
+# 注册咨询路由
+router.include_router(consultations_router)
+
+# 注册资讯路由
+router.include_router(news_router)
 
 # 服务器基础URL
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8001")

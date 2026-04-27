@@ -1,7 +1,7 @@
 [project]
-name = "digital-human-tool"
-version = "0.1.0"
-description = "数字人播报视频生成器"
+name = "tech-echo"
+version = "0.2.0"
+description = "Tech Echo - 科技资讯播报平台"
 requires-python = ">=3.10"
 
 dependencies = [
@@ -13,6 +13,8 @@ dependencies = [
     "python-multipart>=0.0.6",
     "aiofiles>=23.0.0",
     "passlib[bcrypt]>=1.7.4",
+    "apscheduler>=3.10.0",
+    "feedparser>=6.0.0",
 ]
 
 [project.optional-dependencies]
