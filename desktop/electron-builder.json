@@ -1,0 +1,21 @@
+{
+  "appId": "com.digitalhuman.tooldesktop",
+  "productName": "数字人播报",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "dist-renderer/**/*"
+  ],
+  "mac": {
+    "category": "public.app-category.productivity",
+    "target": ["dmg", "zip"]
+  },
+  "win": {
+    "target": ["nsis", "portable"]
+  },
+  "linux": {
+    "target": ["AppImage"]
+  }
+}
