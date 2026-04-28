@@ -1,0 +1,1769 @@
+{
+  "lastUpdate": "2026-04-28 10:34",
+  "totalCount": 100,
+  "stats": {
+    "A+": 0,
+    "A": 0,
+    "B": 0,
+    "C": 9,
+    "D": 91
+  },
+  "categories": [
+    "ai",
+    "tools",
+    "news",
+    "product"
+  ],
+  "news": [
+    {
+      "id": "fd193dbb-4367-43e1-a5bd-bafd55547585",
+      "title_zh": "台积电泄密案 Tokyo Electron 子公司被判有罪",
+      "title_en": "",
+      "content_zh": "台智慧财产及商业法院 4 月 27 日就台积电（TSMC）机密外泄案做出判决，对日本 Tokyo Electron 台子公司判处缓刑 3 年，罚款 1亿 5000 万新台币（约合人民币 3257.8万元），须赔偿台积电 1 亿新台币。任职于该子公司的台积电前员工陈力铭被判处 10 年有期徒刑。台高等检察署于 2025 年 8 月起诉台积电的三名前员工陈力铭、吴秉骏和戈一平，指控他们非法获取和利用台积电的机密信息。陈力铭表示其目的是改善该公司的生产设备。吴秉骏获刑 3 年，戈一平 2 年、陈韦杰 6 年，卢怡尹 10 个月缓刑 3 年。检方指出，陈力铭为求协助新东家争取订单与技术突破，铤而走险，找上昔日具有师徒关系的台积电工程师吴秉骏与戈一平协助。2 人涉嫌利用远端连线方式进入内部资料库，再偷拍 12 张涉及 2 纳米制程的机密照片，传送给陈力铭，供其整理后写入 Tokyo Electron 内部文件，企图协助量产。",
+      "content_en": "",
+      "summary_zh": "台智慧财产及商业法院 4 月 27 日就台积电（TSMC）机密外泄案做出判决，对日本 Tokyo Electron 台子公司判处缓刑 3 年，罚款 1亿 5000 万新台币（约合人民币 3257.8万元），须赔偿台积电 1 亿新台币。任职于该子公司的台积电前员工陈力铭被判处 10 年有期徒刑。台高等检察署于 2025 年 8 月起诉台积电的三名前员工陈力铭、吴秉骏和戈一平，指控他们非法获取和利用台积电的机密信息。陈力铭表示其目的是改善该公司的生产设备。吴秉骏获刑 3 年，戈一平 2 年、陈韦杰 6 年，卢怡尹 10 个月缓刑 3 年。检方指出，陈力铭为求协助新东家争取订单与技术突破，铤而走险，",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84158",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 15:58:31 +0800",
+      "created_at": "2026-04-28T10:33:34.276575",
+      "quality": {
+        "total_100": 64.5,
+        "weighted_total": 6.45,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 7.5,
+          "actionability": 6.0,
+          "impact": 5.5,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "afed23a0-504f-4d89-988d-c370a081dd19",
+      "title_zh": "派早报：X 推出聊天软件 XChat",
+      "title_en": "",
+      "content_zh": "X 推出聊天软件 XChat美国要求外交人员向他国警告中国 AI 蒸馏行为国内 AI 公司被要求不接受未经批准的美国投资香港在黄金周前加强电子烟禁令的内地宣传FILCO 键盘母公司关停官方回应豆包提前查到 2026 山东事业编成绩看看就行的简讯少数派的近期动态你可能错过的好文章查看全文",
+      "content_en": "",
+      "summary_zh": "X 推出聊天软件 XChat美国要求外交人员向他国警告中国 AI 蒸馏行为国内 AI 公司被要求不接受未经批准的美国投资香港在黄金周前加强电子烟禁令的内地宣传FILCO 键盘母公司关停官方回应豆包提前查到 2026 山东事业编成绩看看就行的简讯少数派的近期动态你可能错过的好文章查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/109114",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Mon, 27 Apr 2026 07:40:49 +0800",
+      "created_at": "2026-04-28T10:33:34.086482",
+      "quality": {
+        "total_100": 63.8,
+        "weighted_total": 6.38,
+        "grade": "C",
+        "scores": {
+          "completeness": 4.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 7.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "6f16fbf0-9cc8-47d2-94c2-cec36367e6a7",
+      "title_zh": "AI 成本可能高于人工成本",
+      "title_en": "",
+      "content_zh": "多家企业在 AI 上的支出已经超过了员工薪资，IT 预算严重超支。Uber CTO 的 2026 年 AI 预算因 token 费用超支。根据 Gartner 预测，2026 年全球 IT 支出预计将达到 6.31 万亿美元，比 2025 年增长 13.5%。这一增长是由 AI 基础设施、软件和云服务的“持续发展势头”推动的。即使是 IT 预算最充足的公司也需要证明 AI 投入的长期回报。当 AI 实验室提高价格时，对 AI 的大量投入可能会从一种炫耀的资本变成一种负担。",
+      "content_en": "",
+      "summary_zh": "多家企业在 AI 上的支出已经超过了员工薪资，IT 预算严重超支。Uber CTO 的 2026 年 AI 预算因 token 费用超支。根据 Gartner 预测，2026 年全球 IT 支出预计将达到 6.31 万亿美元，比 2025 年增长 13.5%。这一增长是由 AI 基础设施、软件和云服务的“持续发展势头”推动的。即使是 IT 预算最充足的公司也需要证明 AI 投入的长期回报。当 AI 实验室提高价格时，对 AI 的大量投入可能会从一种炫耀的资本变成一种负担。",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84159",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 17:29:16 +0800",
+      "created_at": "2026-04-28T10:33:34.276409",
+      "quality": {
+        "total_100": 62.2,
+        "weighted_total": 6.22,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.5,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 7.5,
+          "actionability": 6.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "5a5c92b7-150f-4353-9ffc-e58ece13745c",
+      "title_zh": "杀虫剂导致北美蝴蝶数量大减",
+      "title_en": "",
+      "content_zh": "2025 年 3 月科学家在《科学》期刊上发表研究，Xerces Society for Invertebrate Conservation 保护协会随后发表了蝴蝶现状报告。研究发现，从 2000 年到 2020 年全美蝴蝶总数下降了 22%，有 24 种蝴蝶数量下降 90% 或以上。杀虫剂被认为是导致这一结果的主要原因。1960 年代化学公司研制出了强效杀虫剂滴滴涕（DDT），公众对滴滴涕的反对促使企业研制出弱化对人类伤害但强化对昆虫杀伤力的新杀虫剂。多种混合型杀虫剂的使用导致蝴蝶等昆虫在 21 世纪加速减少。生态学家 Matt Forister 等人在《Environmental Toxicology and Chemistry》期刊上报告，他们分析了 336 株植物只有 22 株植物没有检测到农药残留。这些植物至少含有三种化学物质，其中 71 株植物的农药浓度对蝴蝶而言是致命或接近致命。在 2022 年的一项类似研究中，Forister 团队分析了 33 家苗圃出售的 235 株乳草（对帝王蝶至关重要的植物），发现每株植物平均含有 12.2 种杀虫剂。",
+      "content_en": "",
+      "summary_zh": "2025 年 3 月科学家在《科学》期刊上发表研究，Xerces Society for Invertebrate Conservation 保护协会随后发表了蝴蝶现状报告。研究发现，从 2000 年到 2020 年全美蝴蝶总数下降了 22%，有 24 种蝴蝶数量下降 90% 或以上。杀虫剂被认为是导致这一结果的主要原因。1960 年代化学公司研制出了强效杀虫剂滴滴涕（DDT），公众对滴滴涕的反对促使企业研制出弱化对人类伤害但强化对昆虫杀伤力的新杀虫剂。多种混合型杀虫剂的使用导致蝴蝶等昆虫在 21 世纪加速减少。生态学家 Matt Forister 等人在《Environmental Toxi",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84162",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 20:45:39 +0800",
+      "created_at": "2026-04-28T10:33:34.275776",
+      "quality": {
+        "total_100": 59.8,
+        "weighted_total": 5.97,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.5,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 5.0,
+          "actionability": 6.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "c70e4eb4-96b1-4dc3-a1c1-314891c0d52b",
+      "title_zh": "发改委要求撤销对 Manus 的收购",
+      "title_en": "",
+      "content_zh": "国家发展改革委周一发布通报，外商投资安全审查工作机制办公室（国家发改委）依法依规对外资收购 Manus 项目作出禁止投资决定，要求当事人撤销该收购交易。《外商投资安全审查办法》于 2020 年 12 月 19 日由国家发展改革委、商务部联合发布，自 2021 年 1 月 18 日开始施行，对适用审查的外商投资类型、审查机构、审查范围、审查程序、审查决定监督执行和违规处理等进行规定。跟据该文件，国家建立外商投资安全审查工作机制，工作机制办公室设在国家发展改革委，由国家发展改革委、商务部牵头，承担外商投资安全审查的日常工作。",
+      "content_en": "",
+      "summary_zh": "国家发展改革委周一发布通报，外商投资安全审查工作机制办公室（国家发改委）依法依规对外资收购 Manus 项目作出禁止投资决定，要求当事人撤销该收购交易。《外商投资安全审查办法》于 2020 年 12 月 19 日由国家发展改革委、商务部联合发布，自 2021 年 1 月 18 日开始施行，对适用审查的外商投资类型、审查机构、审查范围、审查程序、审查决定监督执行和违规处理等进行规定。跟据该文件，国家建立外商投资安全审查工作机制，工作机制办公室设在国家发展改革委，由国家发展改革委、商务部牵头，承担外商投资安全审查的日常工作。",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84161",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 20:20:29 +0800",
+      "created_at": "2026-04-28T10:33:34.275983",
+      "quality": {
+        "total_100": 59.0,
+        "weighted_total": 5.9,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 5.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "0fb85fbc-7365-41ee-ac88-a29157382a8f",
+      "title_zh": "本周看什么 | 最近值得一看的 11 部作品",
+      "title_en": "",
+      "content_zh": "📅本周新预告《泥面人》首支预告4月23日，DC新片《泥面人》发布了首支预告，将于10月23日在北美上映。詹姆斯·瓦特金斯执导，汤姆·里斯·哈里斯、娜奥米·阿基、麦克思·明格拉等主演，一位B级片演员给自 ...查看全文",
+      "content_en": "",
+      "summary_zh": "📅本周新预告《泥面人》首支预告4月23日，DC新片《泥面人》发布了首支预告，将于10月23日在北美上映。詹姆斯·瓦特金斯执导，汤姆·里斯·哈里斯、娜奥米·阿基、麦克思·明格拉等主演，一位B级片演员给自 ...查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/109050",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Fri, 24 Apr 2026 18:17:33 +0800",
+      "created_at": "2026-04-28T10:33:34.086745",
+      "quality": {
+        "total_100": 58.8,
+        "weighted_total": 5.88,
+        "grade": "C",
+        "scores": {
+          "completeness": 4.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "6e1ff5ab-bb66-44d4-a5b4-779d648ffacd",
+      "title_zh": "调查称半数澳大利亚青少年仍然能访问社交媒体",
+      "title_en": "",
+      "content_zh": "澳大利亚禁止 16 岁以下青少年使用社媒的禁令于 2025 年 12 月 10 日生效，社媒公司如 Meta、Snap 和 TikTok 必须删除和停用逾百万未成年人账户，违反者将面临最高 3250 万美元的罚款。但根据英国预防自杀组织 Molly Rose Foundation 对 1050 名 12 至 15 岁澳大利亚青少年的调查，禁令生效前拥有社媒账号的青少年逾六成仍然能访问至少一个平台。TikTok、YouTube 和 Instagram 仍然保留了逾半数 16 岁以下用户账号。三分之二年轻用户表示这些平台未采取任何行动删除禁令前已存在的账户。澳大利亚互联网监管机构正呼吁对五家最大的社媒平台展开调查，以查明其是否存在违反禁令的行为。",
+      "content_en": "",
+      "summary_zh": "澳大利亚禁止 16 岁以下青少年使用社媒的禁令于 2025 年 12 月 10 日生效，社媒公司如 Meta、Snap 和 TikTok 必须删除和停用逾百万未成年人账户，违反者将面临最高 3250 万美元的罚款。但根据英国预防自杀组织 Molly Rose Foundation 对 1050 名 12 至 15 岁澳大利亚青少年的调查，禁令生效前拥有社媒账号的青少年逾六成仍然能访问至少一个平台。TikTok、YouTube 和 Instagram 仍然保留了逾半数 16 岁以下用户账号。三分之二年轻用户表示这些平台未采取任何行动删除禁令前已存在的账户。澳大利亚互联网监管机构正呼吁对五家最大的",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84155",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 11:31:27 +0800",
+      "created_at": "2026-04-28T10:33:34.277097",
+      "quality": {
+        "total_100": 57.2,
+        "weighted_total": 5.72,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.5,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "68e325a8-fa9d-4c58-88ac-a9a0a5ee8a76",
+      "title_zh": "对话奔驰集团高层：“中国研发团队拥有自己的职责和权利”",
+      "title_en": "",
+      "content_zh": "奔驰正在试图把中国从“重要市场”，变成全球研发体系中的技术源头。",
+      "content_en": "",
+      "summary_zh": "奔驰正在试图把中国从“重要市场”，变成全球研发体系中的技术源头。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7968926.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 08:59:16 +0800",
+      "created_at": "2026-04-28T10:33:33.636243",
+      "quality": {
+        "total_100": 56.5,
+        "weighted_total": 5.65,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "dff96e37-5713-4345-86e1-c2bd6777207e",
+      "title_zh": "欧洲批准了 Moderna 的流感和 COVID-19 联合疫苗",
+      "title_en": "",
+      "content_zh": "欧洲批准了 Moderna 研发的基于 mRNA 技术的流感和 COVID-19 联合疫苗。被称为 mRNA-1083 或 mCOMBRIAX 的疫苗成为全球首个获得批准的针对这两种呼吸道病毒的联合疫苗。疫苗获批是基于一项 4000 名成年人参与的 III 期临床试验结果。试验分为两组，一组为 50-64 岁的受试者，与标准流感疫苗进行比较；另一组为 65 岁及以上的受试者，与高剂量流感疫苗进行比较。两组受试者中，相对于对照组 mCOMBRIAX 疫苗都能诱导对常见流感病毒株（A/H1N1、A/H3N2 和 B/Victoria）以及 SARS-CoV-2 病毒产生统计上显著更高的免疫反应。试验未发现安全性或不良反应方面的问题。",
+      "content_en": "",
+      "summary_zh": "欧洲批准了 Moderna 研发的基于 mRNA 技术的流感和 COVID-19 联合疫苗。被称为 mRNA-1083 或 mCOMBRIAX 的疫苗成为全球首个获得批准的针对这两种呼吸道病毒的联合疫苗。疫苗获批是基于一项 4000 名成年人参与的 III 期临床试验结果。试验分为两组，一组为 50-64 岁的受试者，与标准流感疫苗进行比较；另一组为 65 岁及以上的受试者，与高剂量流感疫苗进行比较。两组受试者中，相对于对照组 mCOMBRIAX 疫苗都能诱导对常见流感病毒株（A/H1N1、A/H3N2 和 B/Victoria）以及 SARS-CoV-2 病毒产生统计上显著更高的免疫反应。试",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84163",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 23:29:31 +0800",
+      "created_at": "2026-04-28T10:33:34.275549",
+      "quality": {
+        "total_100": 55.0,
+        "weighted_total": 5.5,
+        "grade": "C",
+        "scores": {
+          "completeness": 3.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "757330ef-af34-4c0a-abdd-e89fdb5acc33",
+      "title_zh": "早报｜小米玄戒O1出货破百万，未来还将「上车」/OpenAI与微软「分手」/小红书发布首份AI治理主张",
+      "title_en": "",
+      "content_zh": "· 李想称理想领先大众两代，大众高管反击：只有价格和营销领先 · OpenAI 发布 AGI 研发五大原则 · 阿里 HappyHorse 1.0 开启灰测，720P 视频生成最低 0.44 元/秒#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "content_en": "",
+      "summary_zh": "· 李想称理想领先大众两代，大众高管反击：只有价格和营销领先 · OpenAI 发布 AGI 研发五大原则 · 阿里 HappyHorse 1.0 开启灰测，720P 视频生成最低 0.44 元/秒#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "summary_en": "",
+      "source_zh": "爱范儿",
+      "source_en": "",
+      "source_url": "https://www.ifanr.com/1664127?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Tue, 28 Apr 2026 00:27:40 +0000",
+      "created_at": "2026-04-28T10:33:33.930391",
+      "quality": {
+        "total_100": 54.5,
+        "weighted_total": 5.45,
+        "grade": "D",
+        "scores": {
+          "completeness": 3.0,
+          "language": 6.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 5.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "296fd8e9-aee6-4020-81f6-ed68b527c4e6",
+      "title_zh": "开庭前夕，微软和OpenAI分手了？",
+      "title_en": "",
+      "content_zh": "OpenAI突然更新了与微软的合作关系。",
+      "content_en": "",
+      "summary_zh": "OpenAI突然更新了与微软的合作关系。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7969504.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 09:45:00 +0800",
+      "created_at": "2026-04-28T10:33:33.636023",
+      "quality": {
+        "total_100": 54.2,
+        "weighted_total": 5.42,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "679674a0-b2ae-4c39-9e1e-c56740817d28",
+      "title_zh": "Greg K-H 使用基于 AMD Ryzen AI Max 的 AI 工具发现内核 Bug",
+      "title_en": "",
+      "content_zh": "稳定版内核维护者 Greg Kroah-Hartman 正在使用名为 gkh_clanker_t1000 的 AI 工具发现内核 Bug。他在 Mastodon 上分享了 gkh_clanker_t1000 的硬件图片。gkh_clanker_t1000 运行在搭载 AMD Ryzen AI Max+“Strix Halo”APU 的 Framework Desktop 之上，Ryzen AI Max+ 提供了最高 128GB 的统一内存，可分配 96GB 内存给 GPU 使用，其性能足以运行本地大模型以及其它基于开源软件栈的 AI 工具。Greg K-H 尚未透露 gkh_clanker_t1000 软件方面的信息。",
+      "content_en": "",
+      "summary_zh": "稳定版内核维护者 Greg Kroah-Hartman 正在使用名为 gkh_clanker_t1000 的 AI 工具发现内核 Bug。他在 Mastodon 上分享了 gkh_clanker_t1000 的硬件图片。gkh_clanker_t1000 运行在搭载 AMD Ryzen AI Max+“Strix Halo”APU 的 Framework Desktop 之上，Ryzen AI Max+ 提供了最高 128GB 的统一内存，可分配 96GB 内存给 GPU 使用，其性能足以运行本地大模型以及其它基于开源软件栈的 AI 工具。Greg K-H 尚未透露 gkh_clanker_t",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84160",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 18:03:08 +0800",
+      "created_at": "2026-04-28T10:33:34.276209",
+      "quality": {
+        "total_100": 52.8,
+        "weighted_total": 5.28,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "f93bcc69-1210-44f8-9a37-70a3d5f1cdf0",
+      "title_zh": "关于流感和疫苗，你需要知道哪些信息？",
+      "title_en": "",
+      "content_zh": "冬天往往是传染病肆虐的季节。除了在全世界范围内流行已久的新冠病毒，引起季节性流感的流感病毒也不可小视。想要预防流感带来的后果，最简单的方法就是接种流感疫苗。本文就将介绍在打流感疫苗之前，关于流感和疫苗，你需要知道什么。查看全文",
+      "content_en": "",
+      "summary_zh": "冬天往往是传染病肆虐的季节。除了在全世界范围内流行已久的新冠病毒，引起季节性流感的流感病毒也不可小视。想要预防流感带来的后果，最简单的方法就是接种流感疫苗。本文就将介绍在打流感疫苗之前，关于流感和疫苗，你需要知道什么。查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/76945",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Mon, 27 Apr 2026 11:30:55 +0800",
+      "created_at": "2026-04-28T10:33:34.086383",
+      "quality": {
+        "total_100": 52.5,
+        "weighted_total": 5.25,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 7.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "458a9da5-b93c-4102-b6fe-966cf8ea1860",
+      "title_zh": "换了新显示器怎么验？我做了一个开箱即用的全平台屏幕检测工具",
+      "title_en": "",
+      "content_zh": "一站式、在线测试屏幕的各项功能。查看全文",
+      "content_en": "",
+      "summary_zh": "一站式、在线测试屏幕的各项功能。查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/108455",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Fri, 24 Apr 2026 15:06:50 +0800",
+      "created_at": "2026-04-28T10:33:34.086812",
+      "quality": {
+        "total_100": 52.0,
+        "weighted_total": 5.2,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "e7469e46-dd22-41cc-ae1d-bab1334d8dc3",
+      "title_zh": "绿氢产能已达百万吨，供应端产能飙升，企业海外寻找“真订单”",
+      "title_en": "",
+      "content_zh": "百万吨，这是中国可再生能源制氢跑出的新数字。",
+      "content_en": "",
+      "summary_zh": "百万吨，这是中国可再生能源制氢跑出的新数字。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7969266.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 09:13:00 +0800",
+      "created_at": "2026-04-28T10:33:33.636173",
+      "quality": {
+        "total_100": 51.8,
+        "weighted_total": 5.17,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "43da0598-c8cb-4a45-ac72-35621b8fc1f8",
+      "title_zh": "少数派的共创时代，「2050 大会」活动精彩回顾",
+      "title_en": "",
+      "content_zh": "4月25日，杭州云栖小镇2050大会现场，【少数派的共创时代】社区交流活动圆满落幕。活动邀请了少数派创始人@老麦、白描开发者@Tolecen、汽车博主@小狮子佑酱进行主题演讲与分享——老麦：少数派的产 ...查看全文",
+      "content_en": "",
+      "summary_zh": "4月25日，杭州云栖小镇2050大会现场，【少数派的共创时代】社区交流活动圆满落幕。活动邀请了少数派创始人@老麦、白描开发者@Tolecen、汽车博主@小狮子佑酱进行主题演讲与分享——老麦：少数派的产 ...查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/108202",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Fri, 24 Apr 2026 11:25:15 +0800",
+      "created_at": "2026-04-28T10:33:34.086858",
+      "quality": {
+        "total_100": 51.8,
+        "weighted_total": 5.17,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "4b803ed8-e548-466f-9fa5-626fea741b03",
+      "title_zh": "Linux 7.1-rc1 释出",
+      "title_en": "",
+      "content_zh": "Linus Torvalds 在内核邮件列表上宣布释出 Linux 7.1-rc1。主要变化包括：移除对部分旧硬件的支持，其中包括 i486 和俄罗斯 Baikal CPU，清理部分旧 PCMCIA 驱动；新 NTFS 驱动，支持 12 种新 SoC，新联想 Legion Go 驱动，Intel QAT Zstd 支持，AMD Zen 6 支持，Intel Linear Address Space Separation (LASS)，等等。",
+      "content_en": "",
+      "summary_zh": "Linus Torvalds 在内核邮件列表上宣布释出 Linux 7.1-rc1。主要变化包括：移除对部分旧硬件的支持，其中包括 i486 和俄罗斯 Baikal CPU，清理部分旧 PCMCIA 驱动；新 NTFS 驱动，支持 12 种新 SoC，新联想 Legion Go 驱动，Intel QAT Zstd 支持，AMD Zen 6 支持，Intel Linear Address Space Separation (LASS)，等等。",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84157",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 14:35:53 +0800",
+      "created_at": "2026-04-28T10:33:34.276729",
+      "quality": {
+        "total_100": 51.8,
+        "weighted_total": 5.17,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "0d850362-c906-4cb7-a07b-b7c7eb294bb0",
+      "title_zh": "掌控专注力，你需要做的和没必要做的",
+      "title_en": "",
+      "content_zh": "Matrix是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选Matrix最优质的文章，展示来自用户的最真实的体验和观点。文章代表作者个人观点，少数派仅对标题和排 ...查看全文",
+      "content_en": "",
+      "summary_zh": "Matrix是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选Matrix最优质的文章，展示来自用户的最真实的体验和观点。文章代表作者个人观点，少数派仅对标题和排 ...查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/108977",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Sat, 25 Apr 2026 18:18:17 +0800",
+      "created_at": "2026-04-28T10:33:34.086658",
+      "quality": {
+        "total_100": 51.5,
+        "weighted_total": 5.15,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 7.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "bd330238-8600-4a2a-a5a4-d485bdd9c5a2",
+      "title_zh": "",
+      "title_en": "Data center demand drives 66% surge in natural gas power plant costs",
+      "content_zh": "",
+      "content_en": "Natural gas power plant costs have nearly doubled in two years and take 23% longer to build as data center electricity demand skyrockets.",
+      "summary_zh": "",
+      "summary_en": "Natural gas power plant costs have nearly doubled in two years and take 23% longer to build as data center electricity demand skyrockets.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/data-center-demand-drives-66-surge-in-natural-gas-power-plant-costs/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 15:27:52 +0000",
+      "created_at": "2026-04-28T10:34:08.299502",
+      "quality": {
+        "total_100": 51.2,
+        "weighted_total": 5.12,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.5,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 6.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "b95a6e7e-3de8-460d-ac3b-7ddc44e4df74",
+      "title_zh": "10小时测完DeepSeek-V4！北大团队终结工程师噩梦？深扒大模型评测的“千亿生意”",
+      "title_en": "",
+      "content_zh": "大模型时代的淘金热远未结束。",
+      "content_en": "",
+      "summary_zh": "大模型时代的淘金热远未结束。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7969493.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 09:35:51 +0800",
+      "created_at": "2026-04-28T10:33:33.636069",
+      "quality": {
+        "total_100": 50.5,
+        "weighted_total": 5.05,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "df430506-f4cd-48d6-be7b-2979fd32403b",
+      "title_zh": "",
+      "title_en": "Health-care AI is here. We don’t know if it actually helps patients.",
+      "content_zh": "",
+      "content_en": "I don’t need to tell you that&#160;AI is everywhere. Or that it is being used, increasingly, in hospitals. Doctors are using AI to help them with note-taking. AI-based tools are trawling through patient records, flagging people who may require certain support or treatments. They are also used to interpret medical exam results and x-rays. A&#8230;",
+      "summary_zh": "",
+      "summary_en": "I don’t need to tell you that&#160;AI is everywhere. Or that it is being used, increasingly, in hospitals. Doctors are using AI to help them with note-taking. AI-based tools are trawling through patient records, flagging people who may require certain support or treatments. They are also used to int",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/24/1136352/health-care-ai-dont-know-actually-helps-patients/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Fri, 24 Apr 2026 09:00:00 +0000",
+      "created_at": "2026-04-28T10:34:09.266281",
+      "quality": {
+        "total_100": 50.5,
+        "weighted_total": 5.05,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "497d61b2-d33c-4a82-ae22-e7fe6f4d9dda",
+      "title_zh": "App+1 | 谈谈网页浏览器中的一个异类：qutebrowser",
+      "title_en": "",
+      "content_zh": "对以键盘操作为优先的用户来说，一旦学会了如何退出Vim，可能不消多久，便想在肉眼可见之处使用Vim的这套模态编辑。多年来，不少软件都内置了Vim风格的按键绑定，来迎合这类用户的肌肉记忆。其中，更有一些 ...查看全文",
+      "content_en": "",
+      "summary_zh": "对以键盘操作为优先的用户来说，一旦学会了如何退出Vim，可能不消多久，便想在肉眼可见之处使用Vim的这套模态编辑。多年来，不少软件都内置了Vim风格的按键绑定，来迎合这类用户的肌肉记忆。其中，更有一些 ...查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/98931",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Sun, 26 Apr 2026 15:00:00 +0800",
+      "created_at": "2026-04-28T10:33:34.086575",
+      "quality": {
+        "total_100": 50.2,
+        "weighted_total": 5.03,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "6dec46d0-07d4-4662-8ca0-3dfbcc78022f",
+      "title_zh": "派早报：阿里巴巴发布视频生成模型 HappyHorse 1.0 等",
+      "title_en": "",
+      "content_zh": "微信：警惕「755」开头仿冒来电、JBL 推出两款音频类新品等。查看全文",
+      "content_en": "",
+      "summary_zh": "微信：警惕「755」开头仿冒来电、JBL 推出两款音频类新品等。查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/109160",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Tue, 28 Apr 2026 08:55:37 +0800",
+      "created_at": "2026-04-28T10:33:34.085884",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 6.0,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "4efbb0b9-50be-4023-a3e8-4d2b9f064922",
+      "title_zh": "",
+      "title_en": "Elon Musk and Sam Altman are going to court over OpenAI’s future",
+      "content_zh": "",
+      "content_en": "After a yearslong legal feud, Elon Musk and OpenAI CEO Sam Altman are heading to trial this week in Northern California in a case that could have sweeping consequences. Ahead of OpenAI’s highly anticipated IPO, the court could rule on whether the company is allowed to exist as a for-profit enterprise and might even oust&#8230;",
+      "summary_zh": "",
+      "summary_en": "After a yearslong legal feud, Elon Musk and OpenAI CEO Sam Altman are heading to trial this week in Northern California in a case that could have sweeping consequences. Ahead of OpenAI’s highly anticipated IPO, the court could rule on whether the company is allowed to exist as a for-profit enterpris",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/27/1136466/elon-musk-and-sam-altman-are-going-to-court-over-openais-future/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 22:52:57 +0000",
+      "created_at": "2026-04-28T10:34:09.265758",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "5a7598df-3333-41f6-a9c2-df7ae91136e9",
+      "title_zh": "",
+      "title_en": "The missing step between hype and profit",
+      "content_zh": "",
+      "content_en": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. In February, I picked up a flyer at an anti-AI march in London. I can’t say for sure whether or not its writers meant to riff on South Park’s underpants gnomes. But&#8230;",
+      "summary_zh": "",
+      "summary_en": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. In February, I picked up a flyer at an anti-AI march in London. I can’t say for sure whether or not its writers meant to riff on South Park’s underpants gnomes. B",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/27/1136456/the-missing-step-between-hype-and-profit/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 16:13:41 +0000",
+      "created_at": "2026-04-28T10:34:09.265899",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "85822f27-0073-456b-947e-f5fd73a5dd0f",
+      "title_zh": "",
+      "title_en": "Rebuilding the data stack for AI",
+      "content_zh": "",
+      "content_en": "Artificial intelligence may be dominating boardroom agendas, but many enterprises are discovering that the biggest obstacle to meaningful adoption is the state of their data. While consumer-facing AI tools have dazzled users with speed and ease, enterprise leaders are discovering that deploying AI at scale requires something far less glamorous but far more consequential: data&#8230;",
+      "summary_zh": "",
+      "summary_en": "Artificial intelligence may be dominating boardroom agendas, but many enterprises are discovering that the biggest obstacle to meaningful adoption is the state of their data. While consumer-facing AI tools have dazzled users with speed and ease, enterprise leaders are discovering that deploying AI a",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/27/1136322/rebuilding-the-data-stack-for-ai/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 13:00:00 +0000",
+      "created_at": "2026-04-28T10:34:09.265983",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "989d7ced-c779-45c3-96b4-1bc59b15b4e2",
+      "title_zh": "",
+      "title_en": "The Download: DeepSeek’s latest AI breakthrough, and the race to build world models",
+      "content_zh": "",
+      "content_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Three reasons why DeepSeek’s new model matters On Friday, Chinese AI firm DeepSeek released a preview of V4, its long-awaited new flagship model. Notably, the model can process much longer prompts&#8230;",
+      "summary_zh": "",
+      "summary_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Three reasons why DeepSeek’s new model matters On Friday, Chinese AI firm DeepSeek released a preview of V4, its long-awaited new flagship model. Nota",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/27/1136438/the-download-deepseek-v4-ai-world-models/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 12:10:00 +0000",
+      "created_at": "2026-04-28T10:34:09.266052",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "10e9bef4-9b5f-4157-a975-e6c27ab4d082",
+      "title_zh": "",
+      "title_en": "Three reasons why DeepSeek’s new model matters",
+      "content_zh": "",
+      "content_en": "On April 24, Chinese AI firm DeepSeek released a preview of V4, its long-awaited new flagship model. The model can process much longer prompts than its last generation, thanks to a new design that helps it handle large amounts of text more efficiently. Like DeepSeek’s previous models, V4 is open source, meaning it is available&#8230;",
+      "summary_zh": "",
+      "summary_en": "On April 24, Chinese AI firm DeepSeek released a preview of V4, its long-awaited new flagship model. The model can process much longer prompts than its last generation, thanks to a new design that helps it handle large amounts of text more efficiently. Like DeepSeek’s previous models, V4 is open sou",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Fri, 24 Apr 2026 21:40:58 +0000",
+      "created_at": "2026-04-28T10:34:09.266131",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "34054728-fade-4110-a034-00b5ff7aec40",
+      "title_zh": "",
+      "title_en": "The Download: supercharged scams and studying AI healthcare",
+      "content_zh": "",
+      "content_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. We’re in a new era of AI-driven scams When ChatGPT was released in late 2022, it showed how easily generative AI could create human-like text. This quickly caught the eye of&#8230;",
+      "summary_zh": "",
+      "summary_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. We’re in a new era of AI-driven scams When ChatGPT was released in late 2022, it showed how easily generative AI could create human-like text. This qu",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/24/1136400/the-download-supercharged-scams-questionable-ai-healthcare/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Fri, 24 Apr 2026 12:10:00 +0000",
+      "created_at": "2026-04-28T10:34:09.266206",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "a76f4e9c-f00e-4647-a749-ec7749929d81",
+      "title_zh": "",
+      "title_en": "The Download: introducing the 10 Things That Matter in AI Right Now",
+      "content_zh": "",
+      "content_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Introducing: 10 Things That Matter in AI Right Now What actually matters in AI right now? It’s getting harder to tell amid the constant launches, hype, and warnings. To cut through&#8230;",
+      "summary_zh": "",
+      "summary_en": "This is today&#8217;s edition of The Download, our weekday newsletter that provides a daily dose of what&#8217;s going on in the world of technology. Introducing: 10 Things That Matter in AI Right Now What actually matters in AI right now? It’s getting harder to tell amid the constant launches, hype",
+      "source_zh": "",
+      "source_en": "MIT Tech Review",
+      "source_url": "https://www.technologyreview.com/2026/04/22/1136310/the-download-10-things-that-matter-in-ai-right-now/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Wed, 22 Apr 2026 12:10:00 +0000",
+      "created_at": "2026-04-28T10:34:09.266508",
+      "quality": {
+        "total_100": 49.8,
+        "weighted_total": 4.97,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 9.0,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "bfaeec54-4bb0-4b88-b370-2b4e19964ab8",
+      "title_zh": "F4集体出走，东方甄选为何留不住人才？",
+      "title_en": "",
+      "content_zh": "直播电商“去IP化”转型阵痛样本。",
+      "content_en": "",
+      "summary_zh": "直播电商“去IP化”转型阵痛样本。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7969523.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 09:56:00 +0800",
+      "created_at": "2026-04-28T10:33:33.634729",
+      "quality": {
+        "total_100": 49.5,
+        "weighted_total": 4.95,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "afb19d8f-a28a-452a-9628-1f26ef1aaad6",
+      "title_zh": "鼎一投资郑华玲斥资7亿入局，亿晶光电新主现身",
+      "title_en": "",
+      "content_zh": "“重组专业户”。",
+      "content_en": "",
+      "summary_zh": "“重组专业户”。",
+      "summary_en": "",
+      "source_zh": "钛媒体",
+      "source_en": "",
+      "source_url": "https://www.tmtpost.com/7969211.html",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Tue, 28 Apr 2026 09:10:00 +0800",
+      "created_at": "2026-04-28T10:33:33.636196",
+      "quality": {
+        "total_100": 49.5,
+        "weighted_total": 4.95,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "333e2aad-88ee-42c6-a501-1d5691b2f69f",
+      "title_zh": "一日一技｜让小企鹅输入法支持 14 键、18 键键位双拼",
+      "title_en": "",
+      "content_zh": "小企鹅输入法只支持 26 键，但有人基于小企鹅魔改了一下使其支持修改布局和图形化操作，加上万象拼音的 14 键位、18 键位，两者一结合——完美。查看全文",
+      "content_en": "",
+      "summary_zh": "小企鹅输入法只支持 26 键，但有人基于小企鹅魔改了一下使其支持修改布局和图形化操作，加上万象拼音的 14 键位、18 键位，两者一结合——完美。查看全文",
+      "summary_en": "",
+      "source_zh": "少数派",
+      "source_en": "",
+      "source_url": "https://sspai.com/post/108459",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Mon, 27 Apr 2026 15:46:53 +0800",
+      "created_at": "2026-04-28T10:33:34.086299",
+      "quality": {
+        "total_100": 49.5,
+        "weighted_total": 4.95,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "7bcec132-63af-465a-b66b-ab98a4815e23",
+      "title_zh": "",
+      "title_en": "OpenAI ends Microsoft legal peril over its $50B Amazon deal",
+      "content_zh": "",
+      "content_en": "OpenAI has won major concessions from its largest shareholder, Microsoft, that will allow it to sell products on AWS, while Microsoft gets more cash in a revenue-share agreement.",
+      "summary_zh": "",
+      "summary_en": "OpenAI has won major concessions from its largest shareholder, Microsoft, that will allow it to sell products on AWS, while Microsoft gets more cash in a revenue-share agreement.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/openai-ends-microsoft-legal-peril-over-its-50b-amazon-deal/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 17:40:38 +0000",
+      "created_at": "2026-04-28T10:34:08.299235",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "94a27665-0bbc-4db6-85c7-4e6f5bf8841b",
+      "title_zh": "",
+      "title_en": "DeepMind’s David Silver just raised $1.1B to build an AI that learns without human data",
+      "content_zh": "",
+      "content_en": "Ineffable Intelligence, a British AI lab founded a mere few months ago by former DeepMind researcher David Silver, has raised $1.1 billion in funding at a valuation of $5.1 billion.",
+      "summary_zh": "",
+      "summary_en": "Ineffable Intelligence, a British AI lab founded a mere few months ago by former DeepMind researcher David Silver, has raised $1.1 billion in funding at a valuation of $5.1 billion.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/deepminds-david-silver-just-raised-1-1b-to-build-an-ai-that-learns-without-human-data/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 17:24:21 +0000",
+      "created_at": "2026-04-28T10:34:08.299304",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "923ae69c-94c0-47e7-ba49-912e75cac15f",
+      "title_zh": "",
+      "title_en": "Investors back Skye’s AI home screen app for iPhone ahead of launch",
+      "content_zh": "",
+      "content_en": "Skye's new AI app attracted investors before it even launched — a sign of interest in a more AI-aware iPhone.",
+      "summary_zh": "",
+      "summary_en": "Skye's new AI app attracted investors before it even launched — a sign of interest in a more AI-aware iPhone.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/investors-back-skye-signull-labs-ai-home-screen-app-for-iphone-ahead-of-launch/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 16:13:02 +0000",
+      "created_at": "2026-04-28T10:34:08.299437",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "e8c3611d-e9e5-4634-ab68-f185b73085cd",
+      "title_zh": "",
+      "title_en": "China blocks Meta’s $2B Manus deal after months-long probe",
+      "content_zh": "",
+      "content_en": "China has ordered Meta to unwind its multibillion-dollar Manus acquisition, dealing a potential setback to Zuckerberg’s push into AI agents.",
+      "summary_zh": "",
+      "summary_en": "China has ordered Meta to unwind its multibillion-dollar Manus acquisition, dealing a potential setback to Zuckerberg’s push into AI agents.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/china-vetoes-metas-2b-manus-deal-after-months-long-probe/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 13:16:55 +0000",
+      "created_at": "2026-04-28T10:34:08.299605",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "3660c360-1be2-47fa-aaa9-658a63386da3",
+      "title_zh": "",
+      "title_en": "Musk and Altman face off in trial that will determine OpenAI's future",
+      "content_zh": "",
+      "content_en": "Musk’s shifting stance on AI dangers may complicate trial over OpenAI’s mission.",
+      "summary_zh": "",
+      "summary_en": "Musk’s shifting stance on AI dangers may complicate trial over OpenAI’s mission.",
+      "source_zh": "",
+      "source_en": "Ars Technica",
+      "source_url": "https://arstechnica.com/tech-policy/2026/04/musk-and-altman-face-off-in-trial-that-will-determine-openais-future/",
+      "lang": "en",
+      "category": "tools",
+      "published_at": "Mon, 27 Apr 2026 20:45:18 +0000",
+      "created_at": "2026-04-28T10:34:10.150249",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "14d3a2d1-0a8e-40b6-8941-64e7c3dcb396",
+      "title_zh": "",
+      "title_en": "Some Musk v. Altman Jurors Don't Like Elon Musk",
+      "content_zh": "",
+      "content_en": "Musk’s lawsuit challenges OpenAI’s evolution under Sam Altman. But during jury selection, several potential jurors voiced negative views of Musk himself.",
+      "summary_zh": "",
+      "summary_en": "Musk’s lawsuit challenges OpenAI’s evolution under Sam Altman. But during jury selection, several potential jurors voiced negative views of Musk himself.",
+      "source_zh": "",
+      "source_en": "Wired",
+      "source_url": "https://www.wired.com/story/some-musk-v-altman-jurors-dont-like-elon-musk/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Tue, 28 Apr 2026 00:39:30 +0000",
+      "created_at": "2026-04-28T10:34:12.767545",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "b64006ce-c983-466f-84d1-e56ae81dc834",
+      "title_zh": "",
+      "title_en": "The Man Behind AlphaGo Thinks AI Is Taking the Wrong Path",
+      "content_zh": "",
+      "content_en": "David Silver has a new billion-dollar company that aims to build AI “superlearners.”",
+      "summary_zh": "",
+      "summary_en": "David Silver has a new billion-dollar company that aims to build AI “superlearners.”",
+      "source_zh": "",
+      "source_en": "Wired",
+      "source_url": "https://www.wired.com/story/david-silver-ai-ineffable-intelligence-reinforcement-learning/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 14:00:00 +0000",
+      "created_at": "2026-04-28T10:34:12.768031",
+      "quality": {
+        "total_100": 49.0,
+        "weighted_total": 4.9,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 8.0,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "c3fca5c5-9369-4da6-a084-776523b47924",
+      "title_zh": "千问首发灰测 HappyHorse 1.0，开启免费体验",
+      "title_en": "",
+      "content_zh": "今天，千问正式首发灰测 HappyHorse 1.0，速览四大核心亮点：丰富镜头叙事、自然动作情绪、真实对白音效、多种美学风格，现已上线千问 APP 及千问创作 Web 端。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "content_en": "",
+      "summary_zh": "今天，千问正式首发灰测 HappyHorse 1.0，速览四大核心亮点：丰富镜头叙事、自然动作情绪、真实对白音效、多种美学风格，现已上线千问 APP 及千问创作 Web 端。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "summary_en": "",
+      "source_zh": "爱范儿",
+      "source_en": "",
+      "source_url": "https://www.ifanr.com/1664084?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Mon, 27 Apr 2026 11:15:15 +0000",
+      "created_at": "2026-04-28T10:33:33.930575",
+      "quality": {
+        "total_100": 48.8,
+        "weighted_total": 4.88,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 6.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "0c4b8383-bf94-494f-ad28-812f91de95de",
+      "title_zh": "盲猜要火！北京车展最帅「方盒子」找到了",
+      "title_en": "",
+      "content_zh": "面前这台就是全球首发亮相的传祺越 7，这是广汽传祺越野系列的首款重磅车型。我在展馆里绕了一圈，感觉全场颜值最高的方盒子车型就是它了。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "content_en": "",
+      "summary_zh": "面前这台就是全球首发亮相的传祺越 7，这是广汽传祺越野系列的首款重磅车型。我在展馆里绕了一圈，感觉全场颜值最高的方盒子车型就是它了。#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+      "summary_en": "",
+      "source_zh": "爱范儿",
+      "source_en": "",
+      "source_url": "https://www.ifanr.com/1664047?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Mon, 27 Apr 2026 09:48:43 +0000",
+      "created_at": "2026-04-28T10:33:33.930608",
+      "quality": {
+        "total_100": 48.8,
+        "weighted_total": 4.88,
+        "grade": "D",
+        "scores": {
+          "completeness": 1.5,
+          "language": 6.0,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 3
+    },
+    {
+      "id": "7df4dbae-5d70-418f-92bd-470debab8c46",
+      "title_zh": "老房子闹鬼可能源于陈旧设施产生的次声波",
+      "title_en": "",
+      "content_zh": "觉得老房子闹鬼？你可能是受到了陈旧设施如旧管道和旧锅炉产生的次声波的影响。根据发表在《Frontiers in Behavioural Neuroscience》期刊上的一项研究，研究人员让 36 名志愿者听轻音乐或鬼屋景点播放的那种令人心神不宁的音乐。在参与者不知情下，研究人员悄悄在半数情况下播放了次声波。结果显示，次声波让志愿者感到更烦躁和恼怒，觉得音乐更悲伤，且唾液中的皮质醇水平更高。研究人员称，人耳听不到次声波，但身体和情绪仍然能做出反应，且通常是不愉快的反应。《The Science of Weird Shit: Why Our Minds Conjure the Paranormal》一书的作者 Chris French 教授认为用次声波解释闹鬼有点牵强。",
+      "content_en": "",
+      "summary_zh": "觉得老房子闹鬼？你可能是受到了陈旧设施如旧管道和旧锅炉产生的次声波的影响。根据发表在《Frontiers in Behavioural Neuroscience》期刊上的一项研究，研究人员让 36 名志愿者听轻音乐或鬼屋景点播放的那种令人心神不宁的音乐。在参与者不知情下，研究人员悄悄在半数情况下播放了次声波。结果显示，次声波让志愿者感到更烦躁和恼怒，觉得音乐更悲伤，且唾液中的皮质醇水平更高。研究人员称，人耳听不到次声波，但身体和情绪仍然能做出反应，且通常是不愉快的反应。《The Science of Weird Shit: Why Our Minds Conjure the Paranorma",
+      "summary_en": "",
+      "source_zh": "Solidot",
+      "source_en": "",
+      "source_url": "https://www.solidot.org/story?sid=84164",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 23:52:42 +0800",
+      "created_at": "2026-04-28T10:33:34.275218",
+      "quality": {
+        "total_100": 48.8,
+        "weighted_total": 4.88,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 8.5,
+          "source_credibility": 9.0,
+          "info_density": 0.0,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "c3d40d06-bfef-4e70-950f-2bd771dc289f",
+      "title_zh": "",
+      "title_en": "OpenAI could be making a phone with AI agents replacing apps",
+      "content_zh": "",
+      "content_en": "There have been plenty of rumors about OpenAI's hardware plans, which involve launching a pair of earbuds. A new note from industry analyst Ming-Chi Kuo suggests that the AI company might be working on a phone in collaboration with MediaTek, Qualcomm, and Luxshare.",
+      "summary_zh": "",
+      "summary_en": "There have been plenty of rumors about OpenAI's hardware plans, which involve launching a pair of earbuds. A new note from industry analyst Ming-Chi Kuo suggests that the AI company might be working on a phone in collaboration with MediaTek, Qualcomm, and Luxshare.",
+      "source_zh": "",
+      "source_en": "TechCrunch",
+      "source_url": "https://techcrunch.com/2026/04/27/openai-could-be-making-a-phone-with-ai-agents-replacing-apps/",
+      "lang": "en",
+      "category": "news",
+      "published_at": "Mon, 27 Apr 2026 13:08:59 +0000",
+      "created_at": "2026-04-28T10:34:08.299675",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2.5
+    },
+    {
+      "id": "824fefad-6151-4eb7-aed9-c22daeaf511d",
+      "title_zh": "",
+      "title_en": "OpenAI ends its exclusive partnership with Microsoft",
+      "content_zh": "",
+      "content_en": "Amended agreement clears the way for OpenAI models to run on Amazon Bedrock.",
+      "summary_zh": "",
+      "summary_en": "Amended agreement clears the way for OpenAI models to run on Amazon Bedrock.",
+      "source_zh": "",
+      "source_en": "Ars Technica",
+      "source_url": "https://arstechnica.com/ai/2026/04/no-longer-exclusive-microsoft-agrees-to-let-openai-see-other-cloud-providers/",
+      "lang": "en",
+      "category": "tools",
+      "published_at": "Mon, 27 Apr 2026 20:10:11 +0000",
+      "created_at": "2026-04-28T10:34:10.150301",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "0c2c5931-3702-4627-8820-443b5b8b0226",
+      "title_zh": "",
+      "title_en": "Google is testing AI chatbot search for YouTube",
+      "content_zh": "",
+      "content_en": "Google is trying out an AI Mode-like search experience for YouTube. The company is now testing \"a new way to search on YouTube that feels more like a conversation,\" with results pulling in things like longform videos, YouTube Shorts, and text about what you're searching for. The \"experiment\" is now available if you're a YouTube [&#8230;]",
+      "summary_zh": "",
+      "summary_en": "Google is trying out an AI Mode-like search experience for YouTube. The company is now testing \"a new way to search on YouTube that feels more like a conversation,\" with results pulling in things like longform videos, YouTube Shorts, and text about what you're searching for. The \"experiment\" is now ",
+      "source_zh": "",
+      "source_en": "The Verge",
+      "source_url": "https://www.theverge.com/streaming/919441/google-ask-youtube-ai-chatbot-search",
+      "lang": "en",
+      "category": "product",
+      "published_at": "2026-04-27T20:01:54-04:00",
+      "created_at": "2026-04-28T10:34:10.533320",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "5e2a5057-b0f2-435e-873f-7e7fa3a4d6f3",
+      "title_zh": "",
+      "title_en": "Canonical lays out a plan for AI in Ubuntu Linux",
+      "content_zh": "",
+      "content_en": "One of the most popular Linux distributions is about to get an influx of AI features. As reported by Phoronix, Jon Seager, VP of engineering at Ubuntu developer Canonical, shared a blog post on Monday detailing plans to add AI features to the Linux distro over the next year. As the post states, the AI [&#8230;]",
+      "summary_zh": "",
+      "summary_en": "One of the most popular Linux distributions is about to get an influx of AI features. As reported by Phoronix, Jon Seager, VP of engineering at Ubuntu developer Canonical, shared a blog post on Monday detailing plans to add AI features to the Linux distro over the next year. As the post states, the ",
+      "source_zh": "",
+      "source_en": "The Verge",
+      "source_url": "https://www.theverge.com/tech/919411/canonical-ubuntu-linux-ai-features",
+      "lang": "en",
+      "category": "product",
+      "published_at": "2026-04-27T16:47:45-04:00",
+      "created_at": "2026-04-28T10:34:10.533489",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "b4104e5d-cf42-4258-a9f4-79c9f3adfca2",
+      "title_zh": "",
+      "title_en": "Google employees ask Sundar Pichai to say no to classified military AI use",
+      "content_zh": "",
+      "content_en": "Over 600 Google employees signed a letter to CEO Sundar Pichai demanding that Google block the Pentagon from using its AI models for classified purposes, reports the The Washington Post. Its organizers claim many of the signers work in Google's DeepMind AI lab, and include more than 20 principals, directors, and vice presidents. According to [&#8230;]",
+      "summary_zh": "",
+      "summary_en": "Over 600 Google employees signed a letter to CEO Sundar Pichai demanding that Google block the Pentagon from using its AI models for classified purposes, reports the The Washington Post. Its organizers claim many of the signers work in Google's DeepMind AI lab, and include more than 20 principals, d",
+      "source_zh": "",
+      "source_en": "The Verge",
+      "source_url": "https://www.theverge.com/ai-artificial-intelligence/919326/google-ai-pentagon-classified-letter",
+      "lang": "en",
+      "category": "product",
+      "published_at": "2026-04-27T14:17:12-04:00",
+      "created_at": "2026-04-28T10:34:10.533670",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "6de3d6a7-bc6f-472c-85a7-44297fa06f29",
+      "title_zh": "",
+      "title_en": "Elon Musk Boosts New Yorker’s Sam Altman Exposé on X as Trial Begins",
+      "content_zh": "",
+      "content_en": "The move comes as the trial for Elon Musk’s lawsuit against OpenAI kicks off in federal court in Oakland.",
+      "summary_zh": "",
+      "summary_en": "The move comes as the trial for Elon Musk’s lawsuit against OpenAI kicks off in federal court in Oakland.",
+      "source_zh": "",
+      "source_en": "Wired",
+      "source_url": "https://www.wired.com/story/elon-musk-boost-new-yorker-article-sam-altman-x/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 20:08:51 +0000",
+      "created_at": "2026-04-28T10:34:12.767741",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    },
+    {
+      "id": "3ab74217-4a11-479f-b87e-c120abb1dd54",
+      "title_zh": "",
+      "title_en": "Best Smart Glasses (2026): Meta, Viture, Xreal, and More",
+      "content_zh": "",
+      "content_en": "This burgeoning wearable tech category lets you talk to an AI assistant, listen to music, or check out a display screen right from the comfort of your very own face.",
+      "summary_zh": "",
+      "summary_en": "This burgeoning wearable tech category lets you talk to an AI assistant, listen to music, or check out a display screen right from the comfort of your very own face.",
+      "source_zh": "",
+      "source_en": "Wired",
+      "source_url": "https://www.wired.com/gallery/best-smart-glasses/",
+      "lang": "en",
+      "category": "ai",
+      "published_at": "Mon, 27 Apr 2026 13:03:00 +0000",
+      "created_at": "2026-04-28T10:34:12.768083",
+      "quality": {
+        "total_100": 48.2,
+        "weighted_total": 4.83,
+        "grade": "D",
+        "scores": {
+          "completeness": 0.0,
+          "language": 7.5,
+          "title": 7.0,
+          "source_credibility": 7.5,
+          "info_density": 2.5,
+          "actionability": 5.0,
+          "impact": 5.0,
+          "originality": 5.0
+        },
+        "issues": [
+          "内容要素不完整"
+        ]
+      },
+      "weight": 2
+    }
+  ]
+}

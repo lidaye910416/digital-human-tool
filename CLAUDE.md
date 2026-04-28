@@ -1,13 +1,13 @@
 # CLAUDE.md
 
 > **当前分支**: `feature/image-to-video`  
-> **当前版本**: v0.2.0 - Tech Echo 科技资讯播报平台
+> **当前版本**: v0.2.0 - TechEcho Pro Pro 科技资讯播报平台
 
 ---
 
 ## 🎯 产品概述
 
-**Tech Echo** - 科技资讯播报平台
+**TechEcho Pro Pro** - 科技资讯播报平台
 - 收集科技资讯，按日期存储
 - 支持阅读和 TTS 朗读
 - 数字人播报（预留）
