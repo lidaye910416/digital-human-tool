@@ -1,0 +1,132 @@
+{
+  "project": "TechEcho Pro - 智能科技资讯平台",
+  "branchName": "feature/techecho-redesign",
+  "description": "重构科技资讯平台，优化前端交互体验、日期选择、分类筛选、TTS朗读、质量过滤，参考shadcn/ui设计",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "重构项目名称和目录结构",
+      "description": "将项目重命名为TechEcho Pro，创建新的feature分支，建立多端适配的目录结构",
+      "acceptanceCriteria": [
+        "更新package.json项目名称为tech-echo-pro",
+        "创建feature/techecho-redesign分支",
+        "建立共享业务逻辑层（services、models）",
+        "建立前端多端目录结构（app/web/共享）",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-002",
+      "title": "实现优雅的滚轮式日期选择器",
+      "description": "实现拟人化的日期选择器动效，支持查看特定日期的新闻",
+      "acceptanceCriteria": [
+        "日期选择器从顶部滑入，带背景模糊遮罩",
+        "滚轮式日期选择，上下滑动有惯性效果",
+        "今天/昨天快捷按钮",
+        "选择日期后列表平滑过渡刷新",
+        "动画时长400ms，使用ease-out缓动",
+        "Typecheck passes",
+        "Verify in browser"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-003",
+      "title": "实现优雅的分类切换动效",
+      "description": "实现拟人化的分类标签切换动画，配合LLM智能分类",
+      "acceptanceCriteria": [
+        "分类标签横向滚动，带弹性效果",
+        "选中标签有下滑指示器动画",
+        "切换时内容渐变过渡（opacity 0.3s）",
+        "支持触摸滑动切换",
+        "Typecheck passes",
+        "Verify in browser"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-004",
+      "title": "参考shadcn/ui重构前端UI",
+      "description": "基于shadcn/ui的设计风格重构整个前端界面",
+      "acceptanceCriteria": [
+        "采用深色主题+玻璃拟态风格",
+        "实现统一的色彩系统（bg-primary, text-primary, accent等）",
+        "实现统一的间距和圆角系统",
+        "实现阴影和动效规范",
+        "重点突出日期选择和语言切换",
+        "弱化统计数字等次要信息",
+        "Typecheck passes",
+        "Verify in browser"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-005",
+      "title": "实现TTS语音朗读功能",
+      "description": "集成TTS服务，实现资讯语音朗读",
+      "acceptanceCriteria": [
+        "每条资讯显示朗读按钮",
+        "点击后调用TTS API生成音频",
+        "显示播放/暂停/停止控制",
+        "朗读中的资讯高亮显示",
+        "Typecheck passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "UI已实现，API集成待完成"
+    },
+    {
+      "id": "US-006",
+      "title": "添加数字人播报按钮（待完善）",
+      "description": "添加数字人播报按钮，点击显示功能待完善提示",
+      "acceptanceCriteria": [
+        "每条资讯显示播报按钮（图标+文字）",
+        "点击后弹出提示：功能待完善",
+        "按钮样式与其他操作按钮一致",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-007",
+      "title": "实现质量过滤-不展示低分新闻",
+      "description": "过滤评分低于55分的低质量新闻",
+      "acceptanceCriteria": [
+        "评分D级（<55分）的新闻不展示",
+        "默认展示C级及以上新闻",
+        "用户可选择查看所有新闻（含D级）",
+        "Typecheck passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "已完成"
+    },
+    {
+      "id": "US-008",
+      "title": "优化首页信息优先级展示",
+      "description": "重新设计首页布局，突出重要功能，弱化次要信息",
+      "acceptanceCriteria": [
+        "日期选择和语言切换放在显眼位置",
+        "统计数字（总资讯等）弱化展示",
+        "分类标签突出显示",
+        "资讯卡片突出标题和来源",
+        "Typecheck passes",
+        "Verify in browser"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "已完成"
+    }
+  ]
+}

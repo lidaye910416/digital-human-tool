@@ -1,0 +1,54 @@
+# Ralph Progress Log
+Started: 2026-04-28
+Project: TechEcho Pro - 智能科技资讯平台
+Branch: feature/techecho-redesign
+
+## Codebase Patterns
+- 使用 Taro 进行多端开发，支持微信小程序和H5
+- 共享业务逻辑放在 src/services/
+- 前端组件使用 React + TypeScript
+- shadcn/ui 设计风格参考
+
+---
+
+## 2026-04-28 11:46 - US-001 (完成)
+- 重命名项目为 TechEcho Pro
+- 更新 app/package.json 版本为 0.3.0
+- 创建 feature/techecho-redesign 分支
+- 建立 shared/ 目录结构：
+  - shared/models/index.ts - 共享数据模型
+  - shared/services/quality.ts - 质量过滤服务
+  - shared/constants.ts - 共享常量
+- 创建根目录 package.json 使用 workspaces
+- **Learnings:**
+  - 使用 workspaces 管理多端代码
+  - 共享逻辑放在 shared/ 目录
+  - TypeScript 接口放在 shared/models/
+---
+
+## 2026-04-28 11:55 - US-002, US-003, US-004, US-006, US-007, US-008 (完成)
+- 创建 DatePicker 组件：滚轮式日期选择器，支持滑动动画
+- 创建 CategoryTabs 组件：分类标签切换，带指示器动画
+- 创建 NewsCard 组件：资讯卡片，包含阅读、朗读、播报、收藏按钮
+- 实现统一的设计系统（shadcn/ui 风格）
+- 实现质量过滤（默认不显示 D 级）
+- **Learnings:**
+  - Taro 使用 @tarojs/components 而非 react-native
+  - 动画使用 Animated API + useNativeDriver
+  - 共享类型放在 shared/models/
+---
+
+## 2026-04-28 12:00 - 所有 Story 完成
+- US-001: 项目重命名和目录结构
+- US-002: 滚轮式日期选择器
+- US-003: 分类切换动效
+- US-004: shadcn/ui 风格 UI 重构
+- US-005: TTS 朗读 UI
+- US-006: 数字人播报按钮
+- US-007: 质量过滤
+- US-008: 信息优先级优化
+- **Learnings:**
+  - Taro 组件开发注意平台差异
+  - 使用 shared/ 目录共享代码
+  - 动效使用 Animated API
+---
