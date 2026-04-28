@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TechEcho Pro - 智能科技资讯</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #09090b;
+      --bg-secondary: #18181b;
+      --bg-card: #27272a;
+      --bg-elevated: #3f3f46;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #6366f1;
+      --accent-secondary: #8b5cf6;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: rgba(255,255,255,0.08);
+    }
+    
+    html, body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 20px;
+      background: rgba(9, 9, 11, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .header-content {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* Date Picker Button */
+    .date-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .date-btn:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+    
+    .date-btn .emoji { font-size: 14px; }
+
+    /* Language Switcher */
+    .lang-switch {
+      display: flex;
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 2px;
+    }
+    
+    .lang-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .lang-btn:hover { color: var(--text-primary); }
+    .lang-btn.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Category Tabs */
+    .categories {
+      padding: 12px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .categories::-webkit-scrollbar { display: none; }
+    
+    .cat-scroll {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+    }
+    
+    .cat-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    
+    .cat-chip:hover {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+    }
+    
+    .cat-chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Feed */
+    .feed {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
+
+    /* News Card */
+    .news-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .news-card:active {
+      transform: scale(0.98);
+    }
+
+    .card-top {
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .card-emoji {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    
+    .card-meta { flex: 1; min-width: 0; }
+    
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    
+    .tag {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .tag-zh { background: rgba(249,115,22,0.15); color: #f97316; }
+    .tag-en { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .tag-cat { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+    
+    .card-source { font-size: 12px; color: var(--text-muted); }
+    
+    .card-body { padding: 0 16px 16px; }
+    
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-summary {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .card-date { font-size: 11px; color: var(--text-muted); }
+    
+    .grade-badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    
+    .grade-A, .grade-Aplus { background: rgba(34,197,94,0.15); color: var(--success); }
+    .grade-B { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .grade-C { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .grade-D { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+    /* Actions */
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 16px;
+    }
+    
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .action-btn:active {
+      transform: scale(0.95);
+      background: var(--bg-elevated);
+    }
+    
+    .action-btn.playing {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(9, 9, 11, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 8px 20px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+      z-index: 100;
+    }
+    
+    .nav-inner {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      cursor: pointer;
+    }
+    
+    .nav-item.active { color: var(--accent); }
+    .nav-icon { font-size: 22px; }
+
+    /* Loading */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      gap: 16px;
+      color: var(--text-muted);
+    }
+    
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: var(--text-primary);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">📡</div>
+          <span class="logo-text">TechEcho</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="date-btn" id="dateBtn" onclick="toggleDatePicker()">
+            <span class="emoji">📅</span>
+            <span id="dateLabel">今天</span>
+          </button>
+          <div class="lang-switch">
+            <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+            <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div class="categories">
+      <div class="cat-scroll" id="catScroll"></div>
+    </div>
+    
+    <div class="feed" id="feed">
+      <div class="loading"><div class="spinner"></div>加载中...</div>
+    </div>
+    
+    <div class="bottom-nav">
+      <div class="nav-inner">
+        <button class="nav-item active">
+          <span class="nav-icon">🏠</span>
+          <span>首页</span>
+        </button>
+        <button class="nav-item" onclick="showToast('收藏功能待完善')">
+          <span class="nav-icon">📚</span>
+          <span>收藏</span>
+        </button>
+        <button class="nav-item" onclick="showToast('个人中心待完善')">
+          <span class="nav-icon">👤</span>
+          <span>我的</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+  </div>
+  
+  <!-- Date Picker Modal -->
+  <div id="datePicker" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(0,0,0,0.7)" onclick="closeDatePicker()">
+    <div style="position:absolute;top:0;left:0;right:0;background:#18181b;border-radius:0 0 24px 24px;padding:48px 20px 32px" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <span style="font-size:18px;font-weight:600">选择日期</span>
+        <span style="color:#71717a;font-size:14px;cursor:pointer" onclick="closeDatePicker()">取消</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-bottom:24px">
+        <button class="cat-chip active" id="todayBtn" onclick="selectDate(0)">今天</button>
+        <button class="cat-chip" id="yesterdayBtn" onclick="selectDate(1)">昨天</button>
+      </div>
+      <div id="dateList" style="display:flex;flex-direction:column;gap:4px;max-height:300px;overflow-y:auto"></div>
+      <button style="margin-top:24px;width:100%;padding:14px;background:#6366f1;border:none;border-radius:12px;color:white;font-size:16px;font-weight:600;cursor:pointer" onclick="confirmDate()">确定</button>
+    </div>
+  </div>
+
+  <script>
+    var news = [];
+    var filteredNews = [];
+    var currentLang = 'zh';
+    var currentCategory = 'all';
+    var currentDate = getTodayStr();
+    var selectedDateIndex = 0;
+    var playingId = null;
+
+    var categories = [
+      { id: 'all', name: '推荐', emoji: '✨' },
+      { id: 'ai', name: 'AI', emoji: '🤖' },
+      { id: 'tools', name: '工具', emoji: '🔧' },
+      { id: 'news', name: '动态', emoji: '📰' },
+      { id: 'product', name: '产品', emoji: '💡' }
+    ];
+
+    var categoryEmojis = { ai: '🤖', tools: '🔧', news: '📰', product: '💡' };
+    var categoryNames = { ai: 'AI', tools: '工具', news: '动态', product: '产品' };
+
+    function getTodayStr() {
+      return new Date().toISOString().split('T')[0];
+    }
+
+    function formatDate(date, offset) {
+      var d = new Date();
+      d.setDate(d.getDate() - offset);
+      return d.toISOString().split('T')[0];
+    }
+
+    function getDateLabel(dateStr) {
+      var today = getTodayStr();
+      var yesterday = formatDate(null, 1);
+      if (dateStr === today) return '今天';
+      if (dateStr === yesterday) return '昨天';
+      var d = new Date(dateStr);
+      return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+    }
+
+    function renderCategories() {
+      var html = '';
+      categories.forEach(function(c) {
+        var isActive = currentCategory === c.id;
+        html += '<button class="cat-chip' + (isActive ? ' active' : '') + '" onclick="setCategory(\\'' + c.id + '\\')">' + c.emoji + ' ' + c.name + '</button>';
+      });
+      document.getElementById('catScroll').innerHTML = html;
+    }
+
+    function renderDatePicker() {
+      var html = '';
+      for (var i = 0; i < 14; i++) {
+        var dateStr = formatDate(null, i);
+        var label = getDateLabel(dateStr);
+        var isSelected = i === selectedDateIndex;
+        html += '<div style="padding:14px;background:' + (isSelected ? 'rgba(99,102,241,0.15)' : 'transparent') + ';border-radius:10px;cursor:pointer;color:' + (isSelected ? '#fafafa' : '#a1a1aa') + ';font-weight:' + (isSelected ? '600' : '400') + '" onclick="selectDate(' + i + ')">' + label + ' <span style="color:#71717a;font-size:12px">' + dateStr + '</span></div>';
+      }
+      document.getElementById('dateList').innerHTML = html;
+      document.getElementById('todayBtn').className = selectedDateIndex === 0 ? 'cat-chip active' : 'cat-chip';
+      document.getElementById('yesterdayBtn').className = selectedDateIndex === 1 ? 'cat-chip active' : 'cat-chip';
+    }
+
+    function toggleDatePicker() {
+      var picker = document.getElementById('datePicker');
+      picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+      renderDatePicker();
+    }
+
+    function closeDatePicker() {
+      document.getElementById('datePicker').style.display = 'none';
+    }
+
+    function selectDate(index) {
+      selectedDateIndex = index;
+      renderDatePicker();
+    }
+
+    function confirmDate() {
+      currentDate = formatDate(null, selectedDateIndex);
+      document.getElementById('dateLabel').textContent = getDateLabel(currentDate);
+      closeDatePicker();
+      filterNews();
+      render();
+    }
+
+    function filterNews() {
+      filteredNews = news.filter(function(item) {
+        if (currentCategory !== 'all' && item.category !== currentCategory) return false;
+        if (currentLang === 'zh' && item.lang !== 'zh') return false;
+        if (currentLang === 'en' && item.lang !== 'en') return false;
+        // Quality filter: hide D grade (< 55)
+        if (item.quality && item.quality.total_100 < 55) return false;
+        return true;
+      });
+    }
+
+    function render() {
+      var feed = document.getElementById('feed');
+      
+      if (filteredNews.length === 0) {
+        feed.innerHTML = '<div class="loading"><div style="font-size:48px;margin-bottom:16px">📭</div><div>暂无内容</div></div>';
+        return;
+      }
+
+      var html = '';
+      filteredNews.forEach(function(item) {
+        var title = currentLang === 'zh' ? item.title_zh : item.title_en;
+        var summary = currentLang === 'zh' ? item.summary_zh : item.summary_en;
+        var source = currentLang === 'zh' ? item.source_zh : item.source_en;
+        var emoji = categoryEmojis[item.category] || '📰';
+        var catName = categoryNames[item.category] || item.category;
+        var grade = (item.quality && item.quality.grade) || 'D';
+        var score = (item.quality && item.quality.total_100) || 0;
+        var langLabel = item.lang === 'zh' ? '中文' : 'EN';
+        var isPlaying = playingId === item.id;
+
+        html += '<div class="news-card">' +
+          '<div class="card-top">' +
+            '<div class="card-emoji">' + emoji + '</div>' +
+            '<div class="card-meta">' +
+              '<div class="card-tags">' +
+                '<span class="tag tag-' + item.lang + '">' + langLabel + '</span>' +
+                '<span class="tag tag-cat">' + catName + '</span>' +
+              '</div>' +
+              '<div class="card-source">' + source + '</div>' +
+            '</div>' +
+            '<div class="grade-badge grade-' + grade + '">' + grade + ' ' + score + '分</div>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<div class="card-title">' + title + '</div>' +
+            '<div class="card-summary">' + summary + '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            '<button class="action-btn" onclick="showToast(\\'阅读功能待完善\\')">📖 阅读</button>' +
+            '<button class="action-btn' + (isPlaying ? ' playing' : '') + '" onclick="togglePlay(\\'' + item.id + '\\')">' + (isPlaying ? '⏸️ 暂停' : '🔊 朗读') + '</button>' +
+            '<button class="action-btn" onclick="showToast(\\'数字人播报功能待完善\\')">🎬 播报</button>' +
+            '<button class="action-btn" onclick="showToast(\\'已收藏\\')">❤️ 收藏</button>' +
+          '</div>' +
+        '</div>';
+      });
+      
+      feed.innerHTML = html;
+    }
+
+    function setLang(l) {
+      currentLang = l;
+      document.getElementById('btn-zh').className = 'lang-btn' + (l === 'zh' ? ' active' : '');
+      document.getElementById('btn-en').className = 'lang-btn' + (l === 'en' ? ' active' : '');
+      filterNews();
+      render();
+    }
+
+    function setCategory(c) {
+      currentCategory = c;
+      renderCategories();
+      filterNews();
+      render();
+    }
+
+    function togglePlay(id) {
+      playingId = playingId === id ? null : id;
+      render();
+      if (playingId) {
+        showToast('正在生成语音...');
+      }
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    function loadNews() {
+      fetch('./data/news.json')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          news = d.news || [];
+          filterNews();
+          render();
+        })
+        .catch(function(e) {
+          console.error('Error:', e);
+          document.getElementById('feed').innerHTML = '<div class="loading"><div>⚠️ 加载失败</div></div>';
+        });
+    }
+
+    // Init
+    renderCategories();
+    document.getElementById('dateLabel').textContent = getDateLabel(currentDate);
+    loadNews();
+  </script>
+</body>
+</html>
