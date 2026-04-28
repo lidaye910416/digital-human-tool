@@ -1,72 +1,36 @@
 {
-  "project": "TechEcho Pro - 优化项目功能和UI",
+  "project": "TechEcho Pro - 功能完善",
   "branchName": "feature/techecho-redesign",
-  "description": "优化日期选择器动效、修复功能问题、优化分类选择动效、调用后端新闻收集工作流",
+  "description": "继续完善新闻收集功能和UI优化",
   "userStories": [
     {
       "id": "US-001",
-      "title": "优化日期选择器动效",
-      "description": "参考shadcn/ui简化日期选择器动效，移除过重的滚动效果",
+      "title": "测试新闻收集脚本",
+      "description": "确保 scripts/collect_news.py 能正常运行",
       "acceptanceCriteria": [
-        "日期选择器使用简洁的列表选择而非滚轮",
-        "选中日期有清晰的视觉反馈",
-        "动画使用 ease-out，时长200-300ms",
-        "今天/昨天快捷按钮高亮",
-        "Typecheck passes",
-        "Verify in browser"
+        "脚本执行不报错",
+        "能读取配置",
+        "能生成 news.json",
+        "Tests pass"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "已移除滚轮效果，改用Segmented Control风格的简洁日期选择"
+      "notes": "Fixed BilingualNewsCollector.collect_all() to accept lang and category parameters. Script now runs successfully."
     },
     {
       "id": "US-002",
-      "title": "修复功能问题并重新设计",
-      "description": "修复阅读、收藏、我的功能，设计合理的功能流程，移除新闻评级显示",
+      "title": "优化前端刷新功能",
+      "description": "前端刷新按钮调用后端API获取最新数据",
       "acceptanceCriteria": [
-        "阅读按钮：点击展开新闻详情Modal",
-        "收藏按钮：点击收藏/取消收藏，显示提示",
-        "底部导航收藏页：显示已收藏的新闻列表",
-        "底部导航我的页：用户信息占位页面",
-        "移除新闻卡片上的评级显示",
+        "刷新按钮有加载状态",
+        "成功刷新后显示新数据",
+        "失败显示错误提示",
         "Typecheck passes",
         "Verify in browser"
       ],
       "priority": 2,
-      "passes": true,
-      "notes": "已实现阅读Modal、收藏功能和本地存储、底部导航切换"
-    },
-    {
-      "id": "US-003",
-      "title": "优化新闻分类选择动效",
-      "description": "参考shadcn/ui设计更简洁优雅的分类选择动效，确保功能正常",
-      "acceptanceCriteria": [
-        "分类标签使用简洁的chip风格",
-        "切换时有平滑的颜色过渡",
-        "选中状态清晰明确",
-        "支持点击切换",
-        "分类筛选功能正常工作",
-        "Typecheck passes",
-        "Verify in browser"
-      ],
-      "priority": 3,
-      "passes": true,
-      "notes": "已使用简洁的chip风格，切换动效平滑"
-    },
-    {
-      "id": "US-004",
-      "title": "调用后端新闻收集工作流",
-      "description": "确保前后端解耦，添加后端API调用触发新闻收集",
-      "acceptanceCriteria": [
-        "创建Python脚本调用新闻收集服务",
-        "提供API端点触发收集任务",
-        "前端可以手动刷新获取最新新闻",
-        "后端收集逻辑与前端解耦",
-        "Typecheck passes"
-      ],
-      "priority": 4,
-      "passes": true,
-      "notes": "已创建scripts/collect_news.py和src/api/news_api.py"
+      "passes": false,
+      "notes": ""
     }
   ]
 }

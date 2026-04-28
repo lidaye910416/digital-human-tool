@@ -1,22 +1,13 @@
 # Ralph Progress Log
-Started: 2026-04-28
-Project: TechEcho Pro - 优化项目功能和UI
+Started: 2026-04-28 12:45
+Project: TechEcho Pro
 Branch: feature/techecho-redesign
 
-## Codebase Patterns
-- 前端使用原生HTML/JS (app/index.html)
-- 后端使用Python (src/services/)
-- 使用shared/目录共享代码
-
----
-
-## 2026-04-28 12:30 - US-001 到 US-004 完成
-- US-001: 优化日期选择器，使用Segmented Control风格
-- US-002: 实现阅读Modal、收藏功能、本地存储
-- US-003: 优化分类选择，使用简洁chip风格
-- US-004: 创建后端收集脚本和API端点
-- **Learnings:**
-  - shadcn/ui 偏好简洁而非复杂的动效
-  - 使用 localStorage 存储用户收藏
-  - 前后端通过 JSON 文件解耦
+## 2026-04-28 14:45 - US-001
+- What was implemented: Fixed BilingualNewsCollector.collect_all() to accept lang and category parameters. Updated scripts/collect_news.py to properly pass parameters. Verified script runs successfully and generates app/data/news.json with high quality news items.
+- Files changed: src/services/news_collector_v2.py, app/data/news.json
+- **Learnings for future iterations:**
+  - The collect_all() method in BilingualNewsCollector didn't accept lang/category parameters but the script was trying to pass them
+  - Always verify method signatures match how they're being called
+  - The script needs PYTHONPATH=. to find src modules
 ---
