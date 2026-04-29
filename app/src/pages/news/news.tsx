@@ -1,47 +1,35 @@
 import { useState, useEffect } from 'react'
 import { View, Text, ScrollView } from '@tarojs/components'
-import { getNewsList, getAvailableDates, NewsItem } from '../../api'
+import { getNewsList, getNewsStats, NewsItem, getDisplayTitle, getDisplaySource } from '../../api'
 import './news.scss'
 
 export default function News() {
-  const [dates, setDates] = useState<string[]>([])
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState<{ categories: string[]; stats: Record<string, number> } | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   useEffect(() => {
-    loadDates()
-  }, [])
+    loadData()
+  }, [selectedCategory])
 
-  useEffect(() => {
-    if (selectedDate) {
-      loadNews(selectedDate)
-    }
-  }, [selectedDate])
-
-  const loadDates = async () => {
-    try {
-      const res = await getAvailableDates()
-      if (res.success && res.data.length > 0) {
-        setDates(res.data)
-        setSelectedDate(res.data[0])
-      } else {
-        // 无资讯时显示今天
-        const today = new Date().toISOString().split('T')[0]
-        setDates([today])
-        setSelectedDate(today)
-      }
-    } catch (e) {
-      console.error('Load dates failed:', e)
-    }
-  }
-
-  const loadNews = async (date: string) => {
+  const loadData = async () => {
     setLoading(true)
     try {
-      const res = await getNewsList({ date, limit: 50 })
-      if (res.success) {
-        setNews(res.data.items)
+      // 加载统计信息
+      const statsRes = await getNewsStats()
+      if (statsRes.success) {
+        setStats(statsRes.data)
+      }
+
+      // 加载新闻列表
+      const params: { category?: string; limit?: number } = { limit: 50 }
+      if (selectedCategory !== 'all') {
+        params.category = selectedCategory
+      }
+      const newsRes = await getNewsList(params)
+      if (newsRes.success && Array.isArray(newsRes.data)) {
+        setNews(newsRes.data)
       }
     } catch (e) {
       console.error('Load news failed:', e)
@@ -55,33 +43,38 @@ export default function News() {
     })
   }
 
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr)
-    const today = new Date()
-    const yesterday = new Date(today)
-    yesterday.setDate(yesterday.getDate() - 1)
-
-    if (dateStr === today.toISOString().split('T')[0]) return '今天'
-    if (dateStr === yesterday.toISOString().split('T')[0]) return '昨天'
-    
-    return `${date.getMonth() + 1}/${date.getDate()}`
-  }
+  const categories = stats?.categories || ['ai', 'product', 'news']
 
   return (
     <View className="news-page">
-      {/* 日期选择 */}
-      <ScrollView scrollX className="date-tabs">
-        {dates.map(date => (
+      {/* 分类选择 */}
+      <ScrollView scrollX className="category-tabs">
+        <View
+          key="all"
+          className={`category-tab ${selectedCategory === 'all' ? 'active' : ''}`}
+          onClick={() => setSelectedCategory('all')}
+        >
+          <Text className="category-text">全部</Text>
+        </View>
+        {categories.map(cat => (
           <View
-            key={date}
-            className={`date-tab ${selectedDate === date ? 'active' : ''}`}
-            onClick={() => setSelectedDate(date)}
+            key={cat}
+            className={`category-tab ${selectedCategory === cat ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(cat)}
           >
-            <Text className="date-text">{formatDate(date)}</Text>
-            <Text className="date-full">{date}</Text>
+            <Text className="category-text">{cat.toUpperCase()}</Text>
           </View>
         ))}
       </ScrollView>
+
+      {/* 统计信息 */}
+      {stats && (
+        <View className="stats-bar">
+          <Text className="stats-text">
+            共 {news.length} 条 | A/B级 {stats.stats['A'] + stats.stats['A+'] + stats.stats['B'] || 0} 条
+          </Text>
+        </View>
+      )}
 
       {/* 资讯列表 */}
       <ScrollView scrollY className="news-list">
@@ -91,7 +84,7 @@ export default function News() {
           <View className="empty">
             <Text className="empty-icon">📭</Text>
             <Text className="empty-text">暂无资讯</Text>
-            <Text className="empty-hint">请选择其他日期查看</Text>
+            <Text className="empty-hint">请选择其他分类查看</Text>
           </View>
         ) : (
           news.map(item => (
@@ -101,16 +94,20 @@ export default function News() {
               onClick={() => handleNewsClick(item)}
             >
               <View className="news-content">
-                <Text className="news-title">{item.title}</Text>
-                {item.summary && (
-                  <Text className="news-summary">{item.summary}</Text>
-                )}
-                <View className="news-meta">
-                  <Text className="news-source">{item.source_name}</Text>
-                  <View className="news-actions">
-                    <Text className="action-btn">🔊 朗读</Text>
-                    <Text className="action-btn">📖 阅读</Text>
+                <View className="news-header">
+                  <View className="news-tags">
+                    <View className="news-lang-tag">{item.lang === 'zh' ? '中文' : 'EN'}</View>
+                    <View className="news-category-tag">{item.category}</View>
                   </View>
+                  <View className={`news-grade grade-${item.quality?.grade?.toLowerCase() || 'd'}`}>
+                    {item.quality?.grade || 'D'} {item.quality?.total_100 || 0}分
+                  </View>
+                </View>
+                <Text className="news-title">{getDisplayTitle(item)}</Text>
+                <Text className="news-summary">{item.summary_zh?.slice(0, 100)}...</Text>
+                <View className="news-meta">
+                  <Text className="news-source">{getDisplaySource(item)}</Text>
+                  <Text className="news-date">{item.published_at?.slice(0, 10)}</Text>
                 </View>
               </View>
             </View>

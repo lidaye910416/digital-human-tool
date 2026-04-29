@@ -87,6 +87,52 @@ async def get_available_dates(
         "data": [r[0] for r in results]
     }
 
+@router.get("/stats")
+async def get_news_stats(db: Session = Depends(get_db)):
+    """获取资讯统计信息"""
+    from src.models.news import NewsItem
+    from sqlalchemy import func
+
+    total = db.query(func.count(NewsItem.id)).scalar() or 0
+
+    # 按分类统计
+    category_stats = db.query(
+        NewsItem.category,
+        func.count(NewsItem.id).label('count')
+    ).group_by(NewsItem.category).all()
+
+    categories = [s[0] for s in category_stats]
+
+    # 按评分统计 (简化版)
+    stats = {"A+": 0, "A": 0, "B": 0, "C": 0, "D": 0}
+    all_news = db.query(NewsItem).all()
+    for news in all_news:
+        score = news.score
+        if score >= 90:
+            stats["A+"] = stats.get("A+", 0) + 1
+        elif score >= 75:
+            stats["A"] = stats.get("A", 0) + 1
+        elif score >= 60:
+            stats["B"] = stats.get("B", 0) + 1
+        elif score >= 45:
+            stats["C"] = stats.get("C", 0) + 1
+        else:
+            stats["D"] = stats.get("D", 0) + 1
+
+    # 获取最后更新时间
+    latest = db.query(NewsItem).order_by(desc(NewsItem.collected_at)).first()
+    last_update = latest.collected_at.isoformat() if latest else None
+
+    return {
+        "success": True,
+        "data": {
+            "lastUpdate": last_update,
+            "totalCount": total,
+            "stats": stats,
+            "categories": categories
+        }
+    }
+
 @router.get("/categories")
 async def get_categories():
     """获取资讯分类"""

@@ -6,6 +6,7 @@ TechEcho Pro - AI质量校准器
 2. 分类验证与修正
 3. 过滤无关内容（如游戏、娱乐）
 4. 自动修正明显错误的分数
+5. 内容润色 - 清理无效信息，输出简洁干净的新闻
 
 使用 MiniMax 2.7 模型
 """
@@ -71,6 +72,12 @@ class CalibrationResult:
     reason: str                     # 校准理由
     action: str                     # 操作: pass, adjust, discard
 
+    # 内容润色（新增）
+    refined_title: str = ""         # 润色后的标题
+    refined_summary: str = ""       # 润色后的摘要
+    refined_content: str = ""       # 润色后的正文
+    content_refined: bool = False   # 是否进行了内容润色
+
 
 class NewsAICalibrator:
     """AI质量校准器"""
@@ -92,15 +99,26 @@ class NewsAICalibrator:
                 reason="AI校准未启用",
                 action="pass"
             )
-        
-        # 构建提示词
-        prompt = self._build_prompt(news_item)
-        
-        # 调用MiniMax API
-        response = self._call_minimax(prompt)
-        
+
+        # 构建校准提示词
+        calibration_prompt = self._build_calibration_prompt(news_item)
+
+        # 调用MiniMax API进行质量校准
+        response = self._call_minimax(calibration_prompt)
+
         if response:
-            return self._parse_response(response, news_item)
+            result = self._parse_calibration_response(response, news_item)
+
+            # 如果新闻通过审核且启用了内容润色，进行内容润色
+            if result.action in ('pass', 'adjust') and self.enabled:
+                refined = self._refine_content(news_item)
+                if refined:
+                    result.refined_title = refined.get('title', '')
+                    result.refined_summary = refined.get('summary', '')
+                    result.refined_content = refined.get('content', '')
+                    result.content_refined = True
+
+            return result
         else:
             # API失败时返回原始结果
             return CalibrationResult(
@@ -112,8 +130,83 @@ class NewsAICalibrator:
                 reason="API调用失败，保持原分数",
                 action="pass"
             )
+
+    def _refine_content(self, news: Dict) -> Optional[Dict]:
+        """使用AI对新闻内容进行润色
+
+        润色目标:
+        1. 标题简洁有力，无废话
+        2. 摘要精炼，50-100字
+        3. 正文干净，删除无效信息如"点击阅读全文"、"扫码关注"等
+        4. 保持原文核心信息不变
+        """
+        title = news.get('title_zh') or news.get('title_en', '')
+        summary = news.get('summary_zh') or news.get('summary_en', '')
+        content = news.get('content_zh') or news.get('content_en', '')
+
+        refine_prompt = f"""你是一个专业的科技新闻编辑。请对以下新闻进行润色处理。
+
+## 原始新闻
+标题: {title}
+摘要: {summary}
+正文: {content[:2000]}
+
+## 润色要求
+1. 标题: 简洁有力，15-30字，去除无关前缀后缀（如"36氪首发"、"爱范儿消息"等）
+2. 摘要: 50-100字，概括核心内容，语言精炼
+3. 正文: 删除以下无效信息:
+   - "点击阅读全文"、"Read more"、"查看详情"等引导点击
+   - "扫码关注"、"关注公众号"等引导关注
+   - "图片来自于..."、"图源..."等图片来源说明
+   - "责任编辑"、"作者"、"编辑"等署名信息
+   - 重复的段落或句子
+   - 广告内容
+   - 过多的强调符号（如"！！！"）
+4. 保持: 核心事实、数据、人名、公司名等重要信息不变
+
+## 输出格式
+请直接输出JSON，不要使用markdown格式:
+{{
+    "title": "润色后的标题",
+    "summary": "润色后的摘要",
+    "content": "润色后的正文",
+    "summary_changes": "摘要修改说明（简述即可）"
+}}"""
+
+        try:
+            response = self._call_minimax(refine_prompt, max_tokens=1500)
+            if response:
+                return self._parse_refine_response(response)
+        except Exception as e:
+            print(f"   内容润色失败: {e}")
+
+        return None
+
+    def _parse_refine_response(self, response: str) -> Optional[Dict]:
+        """解析润色响应"""
+        try:
+            cleaned = response.strip()
+
+            # 提取JSON
+            if '```json' in cleaned:
+                cleaned = cleaned.split('```json')[1].split('```')[0]
+            elif '```' in cleaned:
+                cleaned = cleaned.split('```')[1]
+
+            # 替换中文引号
+            cleaned = cleaned.replace('"', '"').replace('"', '"')
+
+            data = json.loads(cleaned.strip())
+            return {
+                'title': data.get('title', ''),
+                'summary': data.get('summary', ''),
+                'content': data.get('content', '')
+            }
+        except Exception as e:
+            print(f"   解析润色结果失败: {e}")
+            return None
     
-    def _build_prompt(self, news: Dict) -> str:
+    def _build_calibration_prompt(self, news: Dict) -> str:
         """构建校准提示词"""
         title = news.get('title_zh') or news.get('title_en', '')
         summary = news.get('summary_zh') or news.get('summary_en', '')
@@ -122,13 +215,13 @@ class NewsAICalibrator:
         original_score = news.get('quality', {}).get('total_100', 0)
         original_category = news.get('category', 'news')
         original_scores = news.get('quality', {}).get('scores', {})
-        
+
         prompt = f"""你是一个专业的科技新闻质量评估专家。请对以下新闻进行AI二次校准。
 
 ## 新闻信息
 标题: {title}
 摘要: {summary}
-正文: {content}
+正文: {content[:300]}
 来源: {source}
 原始分数: {original_score}
 原始分类: {original_category}
@@ -155,6 +248,7 @@ class NewsAICalibrator:
 - 娱乐八卦
 - 音乐、影视
 - 体育赛事
+- 明显低质量内容（如纯广告、无实质信息的软文）
 
 ## 任务
 1. 判断新闻是否属于四大目标分类（是/否）
@@ -162,20 +256,20 @@ class NewsAICalibrator:
 3. 如果分数明显不合理，给出修正建议
 4. 决定操作：pass（通过）、adjust（修正分数后通过）、discard（舍弃）
 
-请以JSON格式返回结果:
+请直接输出JSON格式，不要使用markdown:
 {{
-    "is_related": true/false,  // 是否属于四大分类
-    "category": "ai/tools/news/product",  // 确认的分类
-    "category_confirmed": true/false,  // 分类是否需要修正
-    "score_appropriate": true/false,  // 原始分数是否合理
-    "adjusted_score": 75.0,  // 如果分数不合理，修正后的分数(0-100)
-    "reason": "校准理由",  // 简短说明
-    "action": "pass/adjust/discard"  // 操作建议
+    "is_related": true/false,
+    "category": "ai/tools/news/product",
+    "category_confirmed": true/false,
+    "score_appropriate": true/false,
+    "adjusted_score": 75.0,
+    "reason": "校准理由",
+    "action": "pass/adjust/discard"
 }}"""
-        
+
         return prompt
     
-    def _call_minimax(self, prompt: str) -> Optional[Dict]:
+    def _call_minimax(self, prompt: str, max_tokens: int = 500) -> Optional[Dict]:
         """调用MiniMax API"""
         try:
             url = "https://api.minimax.chat/v1/text/chatcompletion_v2"
@@ -184,16 +278,16 @@ class NewsAICalibrator:
                 "Content-Type": "application/json"
             }
             payload = {
-                "model": "MiniMax-M2.7",  # 使用最新的 M2.7 模型
+                "model": "MiniMax-Text-01",  # 使用 MiniMax Text-01 模型
                 "messages": [
                     {"role": "system", "content": "你是一个专业的科技新闻质量评估专家。请严格按要求输出JSON格式。"},
                     {"role": "user", "content": prompt}
                 ],
                 "temperature": 0.3,  # 低温度保证稳定性
-                "max_tokens": 500
+                "max_tokens": max_tokens
             }
 
-            response = requests.post(url, headers=headers, json=payload, timeout=30)
+            response = requests.post(url, headers=headers, json=payload, timeout=60)
 
             if response.status_code == 200:
                 result = response.json()
@@ -214,7 +308,7 @@ class NewsAICalibrator:
             print(f"   API调用失败: {e}")
             return None
     
-    def _parse_response(self, response: str, news: Dict) -> CalibrationResult:
+    def _parse_calibration_response(self, response: str, news: Dict) -> CalibrationResult:
         """解析API响应"""
         try:
             # 清理响应文本中的特殊字符
@@ -284,42 +378,43 @@ class NewsAICalibrator:
                 action="pass"
             )
     
-    def batch_calibrate(self, news_list: List[Dict], 
+    def batch_calibrate(self, news_list: List[Dict],
                         min_score: int = 50) -> Tuple[List[Dict], Dict]:
         """批量校准新闻
-        
+
         Returns:
             (保留的新闻列表, 统计信息)
         """
         if not self.enabled:
             # 未启用AI校准，只过滤低分
-            filtered = [n for n in news_list 
+            filtered = [n for n in news_list
                        if n.get('quality', {}).get('total_100', 0) >= min_score]
-            return filtered, {"total": len(news_list), "passed": len(filtered), 
+            return filtered, {"total": len(news_list), "passed": len(filtered),
                             "ai_calibration": "disabled"}
-        
+
         print(f"\n[AI校准] 开始校准 {len(news_list)} 条新闻...")
-        
+
         results = []
         stats = {
             "total": len(news_list),
             "passed": 0,
             "adjusted": 0,
             "discarded": 0,
+            "content_refined": 0,
             "categories": {"ai": 0, "tools": 0, "news": 0, "product": 0, "other": 0}
         }
-        
+
         for i, news in enumerate(news_list):
             print(f"   [{i+1}/{len(news_list)}] {news.get('title_zh', '')[:30]}...")
-            
+
             result = self.calibrate(news)
-            
+
             # 应用校准结果
             if result.action == 'discard' or not result.is_related:
                 stats["discarded"] += 1
                 print(f"      ❌ 舍弃: {result.reason}")
                 continue
-            
+
             # 更新分数和分类
             if result.action == 'adjust':
                 stats["adjusted"] += 1
@@ -327,12 +422,24 @@ class NewsAICalibrator:
                 news['quality']['ai_calibrated'] = True
                 news['quality']['calibration_reason'] = result.reason
                 print(f"      🔄 修正分数: {result.original_score} → {result.calibrated_score}")
-            
+
             if result.category_confirmed and result.category != news.get('category'):
                 news['category'] = result.category
                 news['category_confirmed'] = True
                 print(f"      📁 分类修正: → {result.category}")
-            
+
+            # 应用内容润色
+            if result.content_refined:
+                stats["content_refined"] += 1
+                if result.refined_title:
+                    news['title_zh'] = result.refined_title
+                if result.refined_summary:
+                    news['summary_zh'] = result.refined_summary
+                if result.refined_content:
+                    news['content_zh'] = result.refined_content
+                news['quality']['content_refined'] = True
+                print(f"      ✨ 内容润色完成")
+
             # 更新等级
             score = news['quality']['total_100']
             if score >= 85: news['quality']['grade'] = 'A+'
@@ -340,13 +447,13 @@ class NewsAICalibrator:
             elif score >= 65: news['quality']['grade'] = 'B'
             elif score >= 55: news['quality']['grade'] = 'C'
             else: news['quality']['grade'] = 'D'
-            
+
             results.append(news)
             stats["passed"] += 1
             stats["categories"][result.category] = stats["categories"].get(result.category, 0) + 1
-        
-        print(f"\n[AI校准完成] 通过: {stats['passed']}, 修正: {stats['adjusted']}, 舍弃: {stats['discarded']}")
-        
+
+        print(f"\n[AI校准完成] 通过: {stats['passed']}, 修正: {stats['adjusted']}, 润色: {stats['content_refined']}, 舍弃: {stats['discarded']}")
+
         return results, stats
 
 

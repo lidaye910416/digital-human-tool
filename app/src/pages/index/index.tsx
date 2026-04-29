@@ -1,14 +1,28 @@
 import { useState, useEffect } from 'react'
 import { View, Text, ScrollView } from '@tarojs/components'
-import { getNewsList, getAvailableDates, getCategories, NewsItem } from '../../api'
+import { getNewsList, getNewsStats, NewsItem, getDisplayTitle, getDisplaySource } from '../../api'
 import './index.scss'
 
+// 分类配置
+const CATEGORIES = [
+  { id: 'all', name: '推荐', emoji: '✨' },
+  { id: 'ai', name: 'AI', emoji: '🤖' },
+  { id: 'tools', name: '工具', emoji: '🔧' },
+  { id: 'news', name: '动态', emoji: '📰' },
+  { id: 'product', name: '产品', emoji: '💡' }
+]
+
+const CATEGORY_EMOJIS: Record<string, string> = {
+  ai: '🤖',
+  tools: '🔧',
+  news: '📰',
+  product: '💡'
+}
+
 export default function Index() {
-  const [dates, setDates] = useState<string[]>([])
-  const [categories, setCategories] = useState<{id: string; name: string; emoji: string}[]>([])
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [stats, setStats] = useState<{ lastUpdate: string; totalCount: number; stats: Record<string, number> } | null>(null)
 
   useEffect(() => {
     loadData()
@@ -17,23 +31,16 @@ export default function Index() {
   const loadData = async () => {
     setLoading(true)
     try {
-      // 加载日期
-      const datesRes = await getAvailableDates()
-      if (datesRes.success && datesRes.data.length > 0) {
-        setDates(datesRes.data)
-        setSelectedDate(datesRes.data[0])
-      }
-
-      // 加载分类
-      const categoriesRes = await getCategories()
-      if (categoriesRes.success) {
-        setCategories(categoriesRes.data)
+      // 加载统计信息
+      const statsRes = await getNewsStats()
+      if (statsRes.success) {
+        setStats(statsRes.data)
       }
 
       // 加载最新资讯
       const newsRes = await getNewsList({ limit: 10 })
-      if (newsRes.success) {
-        setNews(newsRes.data.items)
+      if (newsRes.success && Array.isArray(newsRes.data)) {
+        setNews(newsRes.data)
       }
     } catch (e) {
       console.error('Load data failed:', e)
@@ -73,10 +80,12 @@ export default function Index() {
                 className="news-card"
                 onClick={() => handleNewsClick(item)}
               >
-                <Text className="news-title">{item.title}</Text>
+                <Text className="news-title">{getDisplayTitle(item)}</Text>
                 <View className="news-meta">
-                  <Text className="news-source">{item.source_name}</Text>
-                  <Text className="news-date">{item.date_key}</Text>
+                  <Text className="news-source">{getDisplaySource(item)}</Text>
+                  <Text className="news-grade">
+                    {item.quality?.grade || ''} {item.quality?.total_100 || 0}分
+                  </Text>
                 </View>
               </View>
             ))}
@@ -112,14 +121,37 @@ export default function Index() {
           <Text className="section-title">📂 分类浏览</Text>
         </View>
         <View className="category-grid">
-          {categories.map(cat => (
+          {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
             <View key={cat.id} className="category-item">
-              <Text className="category-emoji">{cat.emoji}</Text>
+              <Text className="category-emoji">{CATEGORY_EMOJIS[cat.id] || cat.emoji}</Text>
               <Text className="category-name">{cat.name}</Text>
             </View>
           ))}
         </View>
       </View>
+
+      {/* 统计信息 */}
+      {stats && (
+        <View className="section">
+          <View className="section-header">
+            <Text className="section-title">📊 数据统计</Text>
+          </View>
+          <View className="stats-grid">
+            <View className="stat-item">
+              <Text className="stat-value">{stats.totalCount}</Text>
+              <Text className="stat-label">总资讯</Text>
+            </View>
+            <View className="stat-item">
+              <Text className="stat-value">{stats.stats['A'] + stats.stats['A+'] || 0}</Text>
+              <Text className="stat-label">优质(A/B)</Text>
+            </View>
+            <View className="stat-item">
+              <Text className="stat-value">{stats.lastUpdate?.slice(0, 10) || '-'}</Text>
+              <Text className="stat-label">更新时间</Text>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   )
 }

@@ -8,8 +8,10 @@ from src.models.database import get_db
 
 # 导入咨询路由
 from src.api.consultations import router as consultations_router
-# 导入资讯路由
+# 导入资讯路由 (数据库版)
 from src.api.news import router as news_router
+# 导入资讯路由 (JSON数据版)
+from src.api.news_api import router as news_api_router
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +20,11 @@ router = APIRouter(prefix="/api", tags=["api"])
 # 注册咨询路由
 router.include_router(consultations_router)
 
-# 注册资讯路由
-router.include_router(news_router)
+# 注册资讯路由 (数据库版 - 已弃用)
+# router.include_router(news_router)
+
+# 注册资讯路由 (JSON数据版 - 当前使用)
+router.include_router(news_api_router)
 
 # 服务器基础URL
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8001")
