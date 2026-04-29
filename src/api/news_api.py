@@ -29,14 +29,35 @@ def load_news_data():
 async def get_news_list(
     lang: Optional[str] = Query(None, description="语言筛选: zh, en, both"),
     category: Optional[str] = Query(None, description="分类筛选"),
+    date: Optional[str] = Query(None, description="日期筛选: YYYY-MM-DD"),
     min_quality: Optional[int] = Query(55, description="最低质量分")
 ):
-    """获取新闻列表"""
+    """获取新闻列表
+
+    特殊逻辑: 如果请求今天但没有今天的新闻，自动返回昨天的新闻
+    (因为新闻通常在当天上午收集，但内容是昨天的)
+    """
     data = load_news_data()
     if not data:
         raise HTTPException(status_code=404, detail="News data not found")
 
     news = data.get('news', [])
+    today = datetime.now().strftime('%Y-%m-%d')
+    yesterday = (datetime.now() - __import__('datetime').timedelta(days=1)).strftime('%Y-%m-%d')
+
+    # 日期过滤
+    if date:
+        # 检查请求的日期是否有新闻
+        date_news = [n for n in news if n.get('published_at', '').startswith(date)]
+        if date_news:
+            news = date_news
+        elif date == today and yesterday:
+            # 今天没有新闻，返回昨天的
+            date_news = [n for n in news if n.get('published_at', '').startswith(yesterday)]
+            if date_news:
+                news = date_news
+        else:
+            news = []
 
     # 过滤
     if lang:
@@ -54,7 +75,13 @@ async def get_news_list(
 
 @router.get("/dates")
 async def get_available_dates():
-    """获取有新闻的日期列表"""
+    """获取有新闻的日期列表
+
+    逻辑:
+    - 返回新闻实际发布日期
+    - 如果最新新闻是昨天(非今天), 添加"今天"作为选项
+      (因为新闻通常在当天上午收集, 但内容是昨天的)
+    """
     data = load_news_data()
     if not data:
         return {'success': True, 'data': []}
@@ -62,12 +89,19 @@ async def get_available_dates():
     # 从 news.json 提取日期
     news = data.get('news', [])
     dates = set()
+    today = datetime.now().strftime('%Y-%m-%d')
+    yesterday = (datetime.now() - __import__('datetime').timedelta(days=1)).strftime('%Y-%m-%d')
+
     for item in news:
         published_at = item.get('published_at', '')
         if published_at:
             date_str = published_at.split(' ')[0] if ' ' in published_at else published_at[:10]
             if len(date_str) == 10:
                 dates.add(date_str)
+
+    # 如果最新新闻是昨天但没有今天的新闻, 添加"今天"选项
+    if dates and yesterday in dates and today not in dates:
+        dates.add(today)
 
     return {
         'success': True,

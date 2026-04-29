@@ -6,7 +6,7 @@ from typing import Optional, List
 from src.models.database import get_db
 from src.services.consultation_service import consultation_service
 from src.services.minimax_client import get_minimax_client
-from src.services.tts_service import TextToSpeechService
+from src.services.tts_service import TTSService as TextToSpeechService
 import logging
 
 logger = logging.getLogger(__name__)

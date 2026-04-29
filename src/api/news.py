@@ -1,4 +1,4 @@
-"""科技资讯 API 路由"""
+"""科技资讯 API 路由 (已弃用 - 请使用 news_api.py)"""
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
@@ -6,8 +6,8 @@ from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime, timedelta
 from src.models.database import get_db
-from src.services.news_collector import news_collector
-from src.services.tts_service import TextToSpeechService
+# from src.services.news_collector import news_collector  # 已移除，向后兼容
+from src.services.tts_service import TTSService as TextToSpeechService
 import logging
 
 logger = logging.getLogger(__name__)
@@ -174,29 +174,8 @@ async def trigger_collect(
     request: CollectRequest = None,
     db: Session = Depends(get_db)
 ):
-    """手动触发资讯收集"""
-    target_date = None
-    if request and request.target_date:
-        target_date = request.target_date
-    else:
-        # 默认收集昨日
-        target_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-    
-    logger.info(f"Manual collection triggered for date: {target_date}")
-    
-    try:
-        stats = await news_collector.collect_all(db, target_date)
-        return {
-            "success": True,
-            "data": {
-                "target_date": target_date,
-                "stats": stats
-            },
-            "message": f"成功收集 {stats['total']} 条资讯"
-        }
-    except Exception as e:
-        logger.error(f"Collection failed: {e}")
-        raise HTTPException(status_code=500, detail=f"Collection failed: {str(e)}")
+    """手动触发资讯收集 (已弃用)"""
+    raise HTTPException(status_code=410, detail="此接口已弃用，请使用 /api/news 端点获取新闻")
 
 @router.post("/{news_id}/read")
 async def read_news_aloud(

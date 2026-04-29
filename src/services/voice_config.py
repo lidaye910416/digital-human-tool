@@ -1,27 +1,82 @@
-from typing import Dict, List
+"""
+统一语音配置服务
+
+整合所有 TTS 提供商的语音配置
+"""
+
+from typing import Dict, List, Optional, Callable
+
+
+# ===== 语音风格定义 (工作流使用的 4 种声音) =====
+
+VOICE_STYLES: Dict[str, Dict] = {
+    "voice1": {
+        "name": "晓晓-女声",
+        "minimax": "female-tianmei",
+        "edge": "zh-CN-XiaoxiaoNeural",
+        "azure": "zh-CN-XiaoxiaoNeural",
+        "gender": "female",
+    },
+    "voice2": {
+        "name": "云希-男声",
+        "minimax": "male-qn-qingse",
+        "edge": "zh-CN-YunxiNeural",
+        "azure": "zh-CN-YunxiNeural",
+        "gender": "male",
+    },
+    "voice3": {
+        "name": "晓伊-女声",
+        "minimax": "female-yizhi",
+        "edge": "zh-CN-XiaoyiNeural",
+        "azure": "zh-CN-XiaoyiNeural",
+        "gender": "female",
+    },
+    "voice4": {
+        "name": "云扬-男声",
+        "minimax": "male-tx-jingxin",
+        "edge": "zh-CN-YunyangNeural",
+        "azure": "zh-CN-YunyangNeural",
+        "gender": "male",
+    },
+}
+
+
+# ===== MiniMax 系统语音 =====
+
+MINIMAX_VOICES: List[Dict] = [
+    {"id": "female-tianmei", "name": "甜美女声", "gender": "female", "age": "young", "available": True},
+    {"id": "female-shaonv", "name": "少女声", "gender": "female", "age": "young", "available": True},
+    {"id": "female-yujie", "name": "御姐女声", "gender": "female", "age": "adult", "available": True},
+    {"id": "female-chengshu", "name": "成熟女声", "gender": "female", "age": "middle", "available": True},
+    {"id": "male-tianmei", "name": "甜美男声", "gender": "male", "age": "young", "available": False},
+    {"id": "male-shaonv", "name": "少年男声", "gender": "male", "age": "young", "available": False},
+    {"id": "male-yujie", "name": "御姐男声", "gender": "male", "age": "adult", "available": False},
+    {"id": "male-qn", "name": "青年男声", "gender": "male", "age": "young", "available": False},
+    {"id": "male-chengshu", "name": "成熟男声", "gender": "male", "age": "middle", "available": False},
+]
+
+
+# ===== edge-tts / Azure 语音 =====
+
+EDGE_VOICES: List[Dict] = [
+    {"id": "zh-CN-XiaoxiaoNeural", "name": "晓晓 (女声)", "language": "zh-CN", "gender": "female"},
+    {"id": "zh-CN-YunxiNeural", "name": "云希 (男声)", "language": "zh-CN", "gender": "male"},
+    {"id": "zh-CN-XiaoyiNeural", "name": "晓伊 (女声)", "language": "zh-CN", "gender": "female"},
+    {"id": "zh-CN-YunyangNeural", "name": "云扬 (男声)", "language": "zh-CN", "gender": "male"},
+    {"id": "en-US-JennyNeural", "name": "Jenny (女声)", "language": "en-US", "gender": "female"},
+    {"id": "en-US-GuyNeural", "name": "Guy (男声)", "language": "en-US", "gender": "male"},
+]
+
 
 class VoiceConfigService:
+    """语音配置服务"""
+
     def __init__(self):
-        # MiniMax 可用的声音列表
-        # 女声：全部可用
-        # 男声：需要开通权限，暂时不可用
-        self.voices = [
-            # 可用的女声
-            {"id": "female-tianmei", "name": "甜美女声", "gender": "female", "age": "young", "available": True},
-            {"id": "female-shaonv", "name": "少女声", "gender": "female", "age": "young", "available": True},
-            {"id": "female-yujie", "name": "御姐女声", "gender": "female", "age": "adult", "available": True},
-            {"id": "female-chengshu", "name": "成熟女声", "gender": "female", "age": "middle", "available": True},
-            # 暂时不可用的男声（需要开通 MiniMax 语音权限）
-            {"id": "male-tianmei", "name": "甜美男声", "gender": "male", "age": "young", "available": False},
-            {"id": "male-shaonv", "name": "少年男声", "gender": "male", "age": "young", "available": False},
-            {"id": "male-yujie", "name": "御姐男声", "gender": "male", "age": "adult", "available": False},
-            {"id": "male-qn", "name": "青年男声", "gender": "male", "age": "young", "available": False},
-            {"id": "male-chengshu", "name": "成熟男声", "gender": "male", "age": "middle", "available": False},
-        ]
+        self.voices = MINIMAX_VOICES
 
     def get_all_voices(self) -> List[Dict]:
         return self.voices
-    
+
     def get_available_voices(self) -> List[Dict]:
         """只返回可用的声音"""
         return [v for v in self.voices if v.get("available", True)]
@@ -29,28 +84,28 @@ class VoiceConfigService:
     def get_voices_by_gender(self, gender: str) -> List[Dict]:
         return [v for v in self.voices if v["gender"] == gender]
 
+    def get_voice_style(self, voice_id: str) -> Optional[Dict]:
+        """获取指定语音风格的配置"""
+        return VOICE_STYLES.get(voice_id)
+
+    def get_all_voice_styles(self) -> List[str]:
+        """返回所有可用的语音风格 ID"""
+        return list(VOICE_STYLES.keys())
+
     def get_emotion_styles(self) -> List[str]:
         return ["professional", "warm", "energetic", "calm", "friendly"]
 
     def apply_preset(self, preset_name: str) -> Dict:
         presets = {
             "professional_female": {"voice_id": "female-tianmei", "speed": 1.0, "emotion": "professional"},
-            "professional_male": {"voice_id": "female-tianmei", "speed": 1.0, "emotion": "professional"},  # 暂时用女声
+            "professional_male": {"voice_id": "female-tianmei", "speed": 1.0, "emotion": "professional"},
             "friendly_female": {"voice_id": "female-shaonv", "speed": 1.1, "emotion": "friendly"},
-            "friendly_male": {"voice_id": "female-shaonv", "speed": 1.1, "emotion": "friendly"},  # 暂时用女声
+            "friendly_male": {"voice_id": "female-shaonv", "speed": 1.1, "emotion": "friendly"},
             "energetic_female": {"voice_id": "female-yujie", "speed": 1.2, "emotion": "energetic"},
-            "calm_male": {"voice_id": "female-chengshu", "speed": 0.9, "emotion": "calm"}  # 暂时用女声
+            "calm_male": {"voice_id": "female-chengshu", "speed": 0.9, "emotion": "calm"}
         }
         return presets.get(preset_name, presets["professional_female"])
 
 
-# 测试声音是否可用
-async def test_voice(voice_id: str) -> bool:
-    """测试声音是否可用"""
-    from src.services.minimax_client import get_minimax_client
-    client = get_minimax_client()
-    try:
-        result = await client.text_to_speech("测试", voice_id)
-        return bool(result.get("data", {}).get("audio_url"))
-    except:
-        return False
+# 全局实例
+voice_config = VoiceConfigService()

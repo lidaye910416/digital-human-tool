@@ -187,6 +187,10 @@ class NewsAICalibrator:
         try:
             cleaned = response.strip()
 
+            # 先移除 thinking 标签内容
+            if '</think>' in cleaned:
+                cleaned = cleaned.split('</think>')[-1].strip()
+
             # 提取JSON
             if '```json' in cleaned:
                 cleaned = cleaned.split('```json')[1].split('```')[0]
@@ -210,100 +214,89 @@ class NewsAICalibrator:
         """构建校准提示词"""
         title = news.get('title_zh') or news.get('title_en', '')
         summary = news.get('summary_zh') or news.get('summary_en', '')
-        content = (news.get('content_zh') or news.get('content_en', ''))[:500]
         source = news.get('source_zh') or news.get('source_en', '')
         original_score = news.get('quality', {}).get('total_100', 0)
         original_category = news.get('category', 'news')
-        original_scores = news.get('quality', {}).get('scores', {})
 
-        prompt = f"""你是一个专业的科技新闻质量评估专家。请对以下新闻进行AI二次校准。
+        prompt = f"""评估新闻，只返回JSON，不能有其他文字。
 
-## 新闻信息
 标题: {title}
-摘要: {summary}
-正文: {content[:300]}
+摘要: {summary[:200]}
 来源: {source}
-原始分数: {original_score}
-原始分类: {original_category}
+分数: {original_score}
+分类: {original_category}
 
-## 规则评分详情
-- completeness: {original_scores.get('completeness', 0)} (内容完整性)
-- language: {original_scores.get('language', 0)} (语言质量)
-- title: {original_scores.get('title', 0)} (标题质量)
-- source_credibility: {original_scores.get('source_credibility', 0)} (来源权威性)
-- info_density: {original_scores.get('info_density', 0)} (信息密度)
-- actionability: {original_scores.get('actionability', 0)} (可操作性)
-- impact: {original_scores.get('impact', 0)} (影响力)
-- originality: {original_scores.get('originality', 0)} (独创性)
+规则: 分类必须是 ai/tools/news/product 之一，过滤游戏/娱乐。
 
-## 四大目标分类
-1. AI: AI基础能力、大模型、机器学习相关
-2. tools: 前沿科技工具、开发框架、API服务
-3. news: 数字产业、产业数字化动态
-4. product: 优秀软件产品、设计创新
+返回纯JSON:
+{{"is_related":true,"category":"ai","score_appropriate":true,"adjusted_score":{original_score},"reason":"理由","action":"pass"}}
 
-## 过滤条件
-以下内容应被舍弃:
-- 游戏、电竞相关
-- 娱乐八卦
-- 音乐、影视
-- 体育赛事
-- 明显低质量内容（如纯广告、无实质信息的软文）
-
-## 任务
-1. 判断新闻是否属于四大目标分类（是/否）
-2. 评估原始分数是否合理
-3. 如果分数明显不合理，给出修正建议
-4. 决定操作：pass（通过）、adjust（修正分数后通过）、discard（舍弃）
-
-请直接输出JSON格式，不要使用markdown:
-{{
-    "is_related": true/false,
-    "category": "ai/tools/news/product",
-    "category_confirmed": true/false,
-    "score_appropriate": true/false,
-    "adjusted_score": 75.0,
-    "reason": "校准理由",
-    "action": "pass/adjust/discard"
-}}"""
+只输出JSON，不要解释。"""
 
         return prompt
     
+    # MiniMax API 配置
+    API_BASE_URL = "https://api.minimaxi.com"
+
+    # 支持的模型列表（按优先级）
+    SUPPORTED_MODELS = [
+        "MiniMax-M2.7",           # 最新模型，质量最好
+        "MiniMax-M2.7-highspeed", # 快速版本
+        "MiniMax-M2.5",           # 稳定版本
+        "MiniMax-M2.5-highspeed", # 快速版本
+    ]
+
     def _call_minimax(self, prompt: str, max_tokens: int = 500) -> Optional[Dict]:
-        """调用MiniMax API"""
+        """调用 MiniMax API (OpenAI 兼容格式)"""
         try:
-            url = "https://api.minimax.chat/v1/text/chatcompletion_v2"
+            url = f"{self.API_BASE_URL}/v1/chat/completions"
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
             }
-            payload = {
-                "model": "MiniMax-Text-01",  # 使用 MiniMax Text-01 模型
-                "messages": [
-                    {"role": "system", "content": "你是一个专业的科技新闻质量评估专家。请严格按要求输出JSON格式。"},
-                    {"role": "user", "content": prompt}
-                ],
-                "temperature": 0.3,  # 低温度保证稳定性
-                "max_tokens": max_tokens
-            }
 
-            response = requests.post(url, headers=headers, json=payload, timeout=60)
+            # 尝试多个模型
+            last_error = None
+            for model in self.SUPPORTED_MODELS:
+                payload = {
+                    "model": model,
+                    "messages": [
+                        {"role": "system", "content": "你是一个专业的科技新闻质量评估专家。请严格按要求输出JSON格式。"},
+                        {"role": "user", "content": prompt}
+                    ],
+                    "temperature": 0.3,  # 低温度保证稳定性
+                    "max_tokens": max_tokens
+                }
 
-            if response.status_code == 200:
-                result = response.json()
-                # 检查API返回的错误
-                base_resp = result.get('base_resp', {})
-                if base_resp.get('status_code') == 0:
-                    content = result.get('choices', [{}])[0].get('message', {}).get('content', '')
-                    return content
-                else:
-                    error_msg = base_resp.get('status_msg', 'Unknown error')
+                try:
+                    response = requests.post(url, headers=headers, json=payload, timeout=60)
+                    result = response.json()
+
+                    # 检查成功
+                    base_resp = result.get('base_resp', {})
+                    if base_resp.get('status_code') == 0:
+                        content = result.get('choices', [{}])[0].get('message', {}).get('content', '')
+                        return content
+
+                    # 检查是否是模型不支持的错误
+                    error_msg = base_resp.get('status_msg', '').lower()
+                    if 'model' in error_msg and ('not' in error_msg or 'support' in error_msg or 'have' in error_msg):
+                        last_error = f"模型 {model} 不支持"
+                        continue  # 尝试下一个模型
+
+                    # 其他错误
                     print(f"   MiniMax API错误: {error_msg}")
                     return None
-            else:
-                print(f"   MiniMax HTTP错误: {response.status_code}")
-                return None
-                
+
+                except Exception as e:
+                    last_error = str(e)
+                    continue
+
+            # 所有模型都失败
+            if last_error:
+                print(f"   MiniMax API错误: {last_error}")
+            return None
+
         except Exception as e:
             print(f"   API调用失败: {e}")
             return None
@@ -314,12 +307,18 @@ class NewsAICalibrator:
             # 清理响应文本中的特殊字符
             cleaned = response.strip()
 
-            # 提取JSON（处理可能的markdown格式）
+            # 提取JSON（处理可能的markdown格式和thinking内容）
             json_str = cleaned
-            if '```json' in cleaned:
-                json_str = cleaned.split('```json')[1].split('```')[0]
-            elif '```' in cleaned:
-                json_str = cleaned.split('```')[1]
+
+            # 先移除 thinking 标签内容
+            if '</think>' in json_str:
+                json_str = json_str.split('</think>')[-1].strip()
+
+            # 提取JSON（处理可能的markdown格式）
+            if '```json' in json_str:
+                json_str = json_str.split('```json')[1].split('```')[0]
+            elif '```' in json_str:
+                json_str = json_str.split('```')[1]
 
             # 替换中文引号为英文引号
             json_str = json_str.replace('"', '"').replace('"', '"')

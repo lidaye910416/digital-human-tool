@@ -63,12 +63,14 @@ interface NewsListResponse {
 export async function getNewsList(params: {
   lang?: string
   category?: string
+  date?: string  // YYYY-MM-DD 格式
   min_quality?: number
   limit?: number
 }): Promise<ApiResponse<NewsItem[]>> {
   const query = new URLSearchParams()
   if (params.lang) query.set('lang', params.lang)
   if (params.category) query.set('category', params.category)
+  if (params.date) query.set('date', params.date)
   if (params.min_quality) query.set('min_quality', String(params.min_quality))
   if (params.limit) query.set('limit', String(params.limit))
 
