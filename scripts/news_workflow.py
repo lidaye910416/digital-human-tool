@@ -436,7 +436,7 @@ def run_workflow(skip_tts=False, skip_ai=False, min_quality=55):
     print(f"✅ 总计: {len(news_list)} 条新闻")
     print(f"✅ 语音: {len(tts_results)} 个文件")
     if not skip_tts:
-        print(f"   (MiniMax: {stats['minimax']}, edge-tts: {stats['edge_tts']}, 缓存: {stats['cached']})")
+        print(f"   (MiniMax: {tts_stats['minimax']}, edge-tts: {tts_stats['edge_tts']}, 缓存: {tts_stats['cached']})")
 
 def main():
     parser = argparse.ArgumentParser(description='TechEcho Pro 新闻收集与TTS工作流')

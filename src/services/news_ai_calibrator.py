@@ -19,7 +19,7 @@ from dataclasses import dataclass
 # MiniMax API 配置
 MINIMAX_API_KEY = os.getenv("MINIMAX_API_KEY", "")
 MINIMAX_BASE_URL = "https://api.minimax.chat/v1"
-MODEL = "MiniMax-Text-01"  # 使用 MiniMax 2.7 模型
+MINIMAX_DAILY_LIMIT = 11000  # 免费用户每日限制
 
 # 四大目标分类
 TARGET_CATEGORIES = {
@@ -178,13 +178,13 @@ class NewsAICalibrator:
     def _call_minimax(self, prompt: str) -> Optional[Dict]:
         """调用MiniMax API"""
         try:
-            url = f"{MINIMAX_BASE_URL}/text_m2"
+            url = "https://api.minimax.chat/v1/text/chatcompletion_v2"
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
             }
             payload = {
-                "model": MODEL,
+                "model": "MiniMax-M2.7",  # 使用最新的 M2.7 模型
                 "messages": [
                     {"role": "system", "content": "你是一个专业的科技新闻质量评估专家。请严格按要求输出JSON格式。"},
                     {"role": "user", "content": prompt}
@@ -192,14 +192,22 @@ class NewsAICalibrator:
                 "temperature": 0.3,  # 低温度保证稳定性
                 "max_tokens": 500
             }
-            
+
             response = requests.post(url, headers=headers, json=payload, timeout=30)
-            
+
             if response.status_code == 200:
                 result = response.json()
-                return result.get('choices', [{}])[0].get('message', {}).get('content', '')
+                # 检查API返回的错误
+                base_resp = result.get('base_resp', {})
+                if base_resp.get('status_code') == 0:
+                    content = result.get('choices', [{}])[0].get('message', {}).get('content', '')
+                    return content
+                else:
+                    error_msg = base_resp.get('status_msg', 'Unknown error')
+                    print(f"   MiniMax API错误: {error_msg}")
+                    return None
             else:
-                print(f"   MiniMax API错误: {response.status_code}")
+                print(f"   MiniMax HTTP错误: {response.status_code}")
                 return None
                 
         except Exception as e:
@@ -209,25 +217,51 @@ class NewsAICalibrator:
     def _parse_response(self, response: str, news: Dict) -> CalibrationResult:
         """解析API响应"""
         try:
-            # 提取JSON
-            json_str = response
-            if '```json' in response:
-                json_str = response.split('```json')[1].split('```')[0]
-            elif '```' in response:
-                json_str = response.split('```')[1]
-            
-            data = json.loads(json_str.strip())
-            
+            # 清理响应文本中的特殊字符
+            cleaned = response.strip()
+
+            # 提取JSON（处理可能的markdown格式）
+            json_str = cleaned
+            if '```json' in cleaned:
+                json_str = cleaned.split('```json')[1].split('```')[0]
+            elif '```' in cleaned:
+                json_str = cleaned.split('```')[1]
+
+            # 替换中文引号为英文引号
+            json_str = json_str.replace('"', '"').replace('"', '"')
+
+            # 尝试直接解析
+            try:
+                data = json.loads(json_str.strip())
+            except json.JSONDecodeError:
+                # 如果失败，尝试提取部分JSON
+                # 查找action字段
+                import re
+                action_match = re.search(r'"action"\s*:\s*"?(\w+)"?', json_str)
+                category_match = re.search(r'"category"\s*:\s*"?(\w+)"?', json_str)
+                is_related_match = re.search(r'"is_related"\s*:\s*(true|false)', json_str)
+                adjusted_match = re.search(r'"adjusted_score"\s*:\s*(\d+\.?\d*)', json_str)
+
+                if action_match:
+                    data = {
+                        'action': action_match.group(1),
+                        'category': category_match.group(1) if category_match else news.get('category', 'news'),
+                        'is_related': is_related_match.group(1) == 'true' if is_related_match else True,
+                        'adjusted_score': float(adjusted_match.group(1)) if adjusted_match else news.get('quality', {}).get('total_100', 0)
+                    }
+                else:
+                    raise ValueError("无法解析JSON响应")
+
             original_score = news.get('quality', {}).get('total_100', 0)
             action = data.get('action', 'pass')
-            
+
             if action == 'discard':
                 calibrated_score = 0
             elif action == 'adjust':
                 calibrated_score = data.get('adjusted_score', original_score)
             else:
                 calibrated_score = original_score
-            
+
             return CalibrationResult(
                 original_score=original_score,
                 calibrated_score=calibrated_score,
@@ -237,9 +271,9 @@ class NewsAICalibrator:
                 reason=data.get('reason', ''),
                 action=action
             )
-            
+
         except Exception as e:
-            print(f"   解析响应失败: {e}")
+            # 解析失败时返回原始结果
             return CalibrationResult(
                 original_score=news.get('quality', {}).get('total_100', 0),
                 calibrated_score=news.get('quality', {}).get('total_100', 0),
