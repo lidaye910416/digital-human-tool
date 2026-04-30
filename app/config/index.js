@@ -1,4 +1,12 @@
+// defineAppConfig wrapper - returns config directly since Taro 3.x handles it automatically
+const defineAppConfig = (config) => config;
+
 export default defineAppConfig({
+  projectName: 'tech-echo-pro',
+  sourceRoot: 'src',
+  outputRoot: 'dist',
+  framework: 'react',
+  compiler: 'webpack5',
   pages: [
     'pages/index/index',
     'pages/news/news',
