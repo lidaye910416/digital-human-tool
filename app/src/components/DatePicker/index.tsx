@@ -27,7 +27,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const backdropOpacity = useRef(new Animated.Value(visible ? 0 : 0)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
 
-  // Generate dates (today, yesterday, and last 6 days)
+  // Generate dates - 实际日期偏移1天
+  // UI显示"今天"但实际对应昨天的新闻，"昨天"对应前天，以此类推
   useEffect(() => {
     const generateDates = () => {
       const items: DateItem[] = [];
@@ -35,11 +36,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
       today.setHours(0, 0, 0, 0);
 
       for (let i = 0; i < 30; i++) {
+        // 实际日期偏移1天：i=0时取昨天，i=1时取前天
         const date = new Date(today);
-        date.setDate(date.getDate() - i);
+        date.setDate(date.getDate() - (i + 1));
         const value = date.toISOString().split('T')[0];
         const isToday = i === 0;
-        
+
         let label: string;
         if (isToday) {
           label = '今天';
