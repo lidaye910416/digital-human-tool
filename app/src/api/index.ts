@@ -3,7 +3,7 @@
  */
 
 // 基础配置
-const BASE_URL = 'http://localhost:8001'
+const BASE_URL = 'http://localhost:8000'
 
 // API 响应格式
 interface ApiResponse<T = any> {

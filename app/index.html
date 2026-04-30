@@ -1232,8 +1232,14 @@
     }
 
     function parseDate(dateStr) {
-      // Handle formats like "Mon, 27 Apr 2026 15:58:31 +0800" or "2026-04-28"
+      // Handle formats like "Mon, 27 Apr 2026 15:58:31 +0800" or "2026-04-28" or "2026-04-28 20:44:39 +0800"
       if (!dateStr) return null;
+
+      // If first part is a date (YYYY-MM-DD), use it directly
+      if (dateStr.substring(0, 10).match(/^\d{4}-\d{2}-\d{2}$/)) {
+        return dateStr.substring(0, 10);
+      }
+
       var parts = dateStr.split(' ');
       if (parts.length >= 3) {
         // "Mon, 27 Apr 2026" format
@@ -1256,13 +1262,23 @@
       if (!datePart) return true;
 
       var today = getTodayStr();
+      var yesterday = getDateStrDaysAgo(1);
       var monthStart = today.substring(0, 7) + '-01';
 
       if (currentDateFilter === 'today') {
+        // First check if there are today's news
+        var hasTodayNews = allNews.some(function(item) {
+          var itemDate = parseDate(item.published_at || item.created_at || '');
+          return itemDate === today;
+        });
+        // If no today's news, show yesterday's news instead
+        if (!hasTodayNews) {
+          return datePart === yesterday;
+        }
         return datePart === today;
       }
       if (currentDateFilter === 'yesterday') {
-        return datePart === getDateStrDaysAgo(1);
+        return datePart === yesterday;
       }
       if (currentDateFilter === 'week') {
         var weekAgo = getDateStrDaysAgo(7);
