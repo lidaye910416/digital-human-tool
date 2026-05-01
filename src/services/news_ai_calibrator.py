@@ -62,11 +62,6 @@ class NewsAICalibrator:
         self.api_key = api_key or MINIMAX_API_KEY
         self.enabled = bool(self.api_key)
 
-        if self.enabled:
-            logger.info(f"[AI校准器] 已启用，使用模型: {SUPPORTED_MODELS[0]}")
-        else:
-            logger.warning("[AI校准器] 未配置 API Key，将使用降级模式 (规则截断)")
-
     def calibrate(self, news_item: Dict) -> CalibrationResult:
         """对单条新闻进行校准
 
@@ -87,7 +82,7 @@ class NewsAICalibrator:
                 category=news_item.get('category', 'news'),
                 category_confirmed=False,
                 is_related=True,
-                reason="降级模式: 规则截断",
+                reason="",
                 action="pass",
                 refined_content=refined,
                 content_refined=True
@@ -127,7 +122,6 @@ class NewsAICalibrator:
                 logger.info(f"[AI校准] 重试中... ({attempt + 2}/{MAX_RETRIES})")
 
         # 重试耗尽，降级到规则模式
-        logger.warning(f"[AI校准] API调用失败，降级到规则模式: {last_error}")
         content = news_item.get('content_zh', '')[:500] if news_item.get('lang') == 'zh' \
             else news_item.get('content_en', '')[:500]
         refined = self._truncate_at_sentence(content, 150)
@@ -325,14 +319,8 @@ class NewsAICalibrator:
         return truncated.rstrip()
 
     def batch_calibrate(self, news_list: List[Dict], min_score: int = 50) -> Tuple[List[Dict], Dict]:
-        """批量校准
-
-        支持降级模式:
-        - AI模式: 调用 MiniMax API，有语义过滤能力
-        - 降级模式: 纯规则截断，无语义过滤
-        """
-        mode = "AI模式" if self.enabled else "降级模式"
-        print(f"\n[AI校准] 开始校准 {len(news_list)} 条新闻 ({mode})...")
+        """批量校准"""
+        print(f"\n[AI校准] 开始校准 {len(news_list)} 条新闻...")
 
         results = []
         stats = {
@@ -341,7 +329,6 @@ class NewsAICalibrator:
             "adjusted": 0,
             "discarded": 0,
             "content_refined": 0,
-            "mode": mode,
             "categories": {"ai": 0, "tools": 0, "news": 0, "product": 0}
         }
 
@@ -393,7 +380,7 @@ class NewsAICalibrator:
             else:
                 print(f"      ✅ 通过 | 分类: {result.category}")
 
-        print(f"\n[AI校准完成] 通过: {stats['passed']}, 舍弃: {stats['discarded']}, 润色: {stats['content_refined']} ({stats['mode']})")
+        print(f"\n[AI校准完成] 通过: {stats['passed']}, 舍弃: {stats['discarded']}, 润色: {stats['content_refined']}")
         return results, stats
 
 

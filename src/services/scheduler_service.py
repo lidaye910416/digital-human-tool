@@ -55,7 +55,7 @@ async def daily_news_collection():
         # AI 校准 (支持降级模式)
         calibrated_news, stats = calibrator.batch_calibrate(news_dicts, min_score=55)
 
-        logger.info(f"✅ 资讯收集完成: 通过 {stats['passed']} 条, 舍弃 {stats['discarded']} 条, 模式: {stats['mode']}")
+        logger.info(f"✅ 资讯收集完成: 通过 {stats['passed']} 条, 舍弃 {stats['discarded']} 条")
 
         await collector.close()
 
