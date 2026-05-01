@@ -1,256 +1,144 @@
 {
-  "lastUpdate": "2026-05-01 17:24",
-  "totalCount": 8,
+  "lastUpdate": "2026-05-01 21:48",
+  "totalCount": 9,
   "stats": {
     "A+": 0,
     "A": 0,
     "B": 0,
-    "C": 8,
+    "C": 9,
     "D": 0
   },
   "categories": [
-    "product",
-    "ai",
-    "news"
+    "tools",
+    "news",
+    "product"
   ],
   "news": [
     {
-      "id": "ed196064-35be-413d-999a-d8e02bf7966e",
-      "title_zh": "氪星晚报｜澳门一季度GDP按年实质增长7.1%；小红书加大AI投入，柯南出任总裁",
-      "title_en": "",
-      "content_zh": "澳门一季度GDP按年实质增长7.1%，经济总量恢复至2019年同期的90.3%。小红书宣布全面整合社区、电商、商业化业务及技术体系，成立AI一级部门Dots和企业智能部，柯南出任总裁统筹核心业务，加大AI投入。联发科一季度毛利率为46.3%，同比下滑1.8个百分点。阿里云域名产品将于5月12日调价。",
-      "content_en": "",
-      "source_zh": "36氪",
-      "source_en": "",
-      "source_url": "https://36kr.com/p/3789059666173189?f=rss",
-      "lang": "zh",
-      "category": "ai",
-      "published_at": "2026-04-30 16:53:38  +0800",
-      "created_at": "2026-05-01T17:16:17.819971",
-      "quality": {
-        "total_100": 62.0,
-        "grade": "C",
-        "scores": {
-          "completeness": 5.0,
-          "language": 8.0,
-          "title": 7.0,
-          "source_credibility": 9.0,
-          "info_density": 5.0,
-          "actionability": 6.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
-        "content_refined": true
-      },
-      "category_confirmed": true
-    },
-    {
-      "id": "7c93fe0a-8735-432c-91b7-00e38216567b",
-      "title_zh": "Rust编辑器Zed发布1.0版本，主打AI原生并行运行",
-      "title_en": "",
-      "content_zh": "用Rust开发的文本编辑器Zed正式发布1.0版本。开发者表示，1.0并不意味着“完成”或“完美”，而是标志着一个关键里程碑。Zed定位为AI原生编辑器，能并行运行多个AI智能体，包括Claude Agent、Codex、OpenCode和Cursor，且AI构建于编辑器底层架构之中，而非附加组件。",
-      "content_en": "",
-      "source_zh": "Solidot",
-      "source_en": "",
-      "source_url": "https://www.solidot.org/story?sid=84187",
-      "lang": "zh",
-      "category": "product",
-      "published_at": "Wed, 29 Apr 2026 23:36:21 +0800",
-      "created_at": "2026-05-01T17:15:47.245382",
-      "quality": {
-        "total_100": 59.0,
-        "grade": "C",
-        "scores": {
-          "completeness": 3.0,
-          "language": 8.0,
-          "title": 8.5,
-          "source_credibility": 9.0,
-          "info_density": 5.0,
-          "actionability": 5.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
-        "content_refined": true
-      },
-      "category_confirmed": true
-    },
-    {
-      "id": "cd1810d7-082b-4196-9cce-80da37b2c77b",
-      "title_zh": "乐道L80/一加Ace 6至尊版发布，Valve Steam手柄亮相",
-      "title_en": "",
-      "content_zh": "今日科技圈热闹非凡。乐道L80正式发布，一加 Ace 6 至尊版同步亮相。Valve推出新一代Steam手柄，中国联通则带来了“联通魔方”自选服务。",
-      "content_en": "",
-      "source_zh": "少数派",
-      "source_en": "",
-      "source_url": "https://sspai.com/post/109204",
-      "lang": "zh",
-      "category": "product",
-      "published_at": "Wed, 29 Apr 2026 08:22:00 +0800",
-      "created_at": "2026-05-01T17:15:47.051785",
-      "quality": {
-        "total_100": 58.8,
-        "grade": "C",
-        "scores": {
-          "completeness": 4.5,
-          "language": 8.0,
-          "title": 8.5,
-          "source_credibility": 9.0,
-          "info_density": 2.5,
-          "actionability": 5.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
-        "content_refined": true
-      }
-    },
-    {
-      "id": "7744f456-327c-496f-840e-979e6e423398",
-      "title_zh": "AI+产业对接会北京亦庄启动 两天聊透落地合作",
-      "title_en": "",
-      "content_zh": "2026年5月19日至20日，“世界咖啡·AI+产业对接会”将在北京亦庄通明湖会展中心举行。由北京经开区指导、36氪主办，对接会聚焦“AI+科学技术、AI+产业发展、AI+消费提质、AI+民生福祉”四大领域，为场景方与AI技术方搭建高效对接平台。两天时间，需求方与技术方面对面聊透案例，探讨合作落地。",
-      "content_en": "",
-      "source_zh": "36氪",
-      "source_en": "",
-      "source_url": "https://36kr.com/p/3788996733803782?f=rss",
-      "lang": "zh",
-      "category": "ai",
-      "published_at": "2026-04-30 15:28:06  +0800",
-      "created_at": "2026-05-01T17:16:17.820091",
-      "quality": {
-        "total_100": 58.8,
-        "grade": "C",
-        "scores": {
-          "completeness": 4.5,
-          "language": 8.0,
-          "title": 8.5,
-          "source_credibility": 9.0,
-          "info_density": 2.5,
-          "actionability": 5.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
-        "content_refined": true
-      },
-      "category_confirmed": true
-    },
-    {
-      "id": "90bf7506-4eee-484b-bd1b-a4047ece4bd0",
-      "title_zh": "Claude AI 接入多个创意软件生态、FILCO 生产方接手品牌等",
-      "title_en": "",
-      "content_zh": "Framework 推出 RTX 5070 GPU 显卡模块、蚂蚁集团百灵大模型开源 Ling-2.6-flash 等。",
-      "content_en": "",
-      "source_zh": "少数派",
-      "source_en": "",
-      "source_url": "https://sspai.com/post/109235",
-      "lang": "zh",
-      "category": "ai",
-      "published_at": "Thu, 30 Apr 2026 09:16:28 +0800",
-      "created_at": "2026-05-01T17:15:47.051498",
-      "quality": {
-        "total_100": 57.8,
-        "grade": "C",
-        "scores": {
-          "completeness": 1.5,
-          "language": 8.0,
-          "title": 7.0,
-          "source_credibility": 9.0,
-          "info_density": 7.5,
-          "actionability": 5.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
-        "content_refined": true
-      },
-      "category_confirmed": true
-    },
-    {
-      "id": "def8d56a-fde8-4b47-b353-ec506432a95e",
-      "title_zh": "苹果iOS 27或大幅升级照片App/一加realme合并/去年Token调用量达21100万亿",
-      "title_en": "",
-      "content_zh": "Anthropic新一轮融资在路上，估值或突破9000亿美元。Alphabet Q1净利润暴增81%，Google Cloud首破200亿美元大关。Azure增速40%、AI狂飙123%，微软云业务全面提速。",
-      "content_en": "",
-      "source_zh": "爱范儿",
-      "source_en": "",
-      "source_url": "https://www.ifanr.com/1664570?utm_source=rss&utm_medium=rss&utm_campaign=",
-      "lang": "zh",
-      "category": "ai",
-      "published_at": "Thu, 30 Apr 2026 00:07:07 +0000",
-      "created_at": "2026-05-01T17:15:46.902453",
-      "quality": {
-        "total_100": 57.7,
-        "grade": "C",
-        "scores": {
-          "completeness": 2.0,
-          "language": 6.0,
-          "title": 7.0,
-          "source_credibility": 9.0,
-          "info_density": 7.5,
-          "actionability": 6.0,
-          "impact": 5.5,
-          "originality": 5.0
-        },
-        "content_refined": true
-      },
-      "category_confirmed": true
-    },
-    {
-      "id": "99c1a14d-95a3-4144-9a6c-73e6cc028e55",
-      "title_zh": "闻泰科技*ST背后：安世半导体控制权争夺之鉴",
-      "title_en": "",
-      "content_zh": "2025年10月，闻泰科技与安世半导体的控制权争议骤然升温。彼时的舆论场充满“硬刚”、“自主自救”、“不再依赖海外”等情绪化声音。然而仅半年后，现实给出了截然不同的答案。闻泰科技2025年年报显示，实现营收312.53亿元，同比大幅下滑，归母净利润巨亏87.48亿元，被实施*ST，退市风险骤然逼近。",
-      "content_en": "",
+      "id": "b9e985b6-e873-46ed-b205-ece953bc60a1",
+      "title_zh": "闻泰科技*ST困局：安世半导体控制权争夺始末",
+      "content_zh": "2025年10月，闻泰科技与安世半导体的控制权争议骤然升温，舆论充斥“自主自救”等论调。半年后，闻泰科技2025年年报显示营收312.53亿元，同比大幅下滑，归母净利润巨亏87.48亿元，被实施*ST，退市风险骤增。控制权争夺未能挽救公司颓势，反而加速了其陷入困境。",
       "source_zh": "钛媒体",
-      "source_en": "",
-      "source_url": "https://www.tmtpost.com/7974894.html",
       "lang": "zh",
       "category": "news",
       "published_at": "Fri, 01 May 2026 17:00:50 +0800",
-      "created_at": "2026-05-01T17:15:46.576593",
       "quality": {
         "total_100": 56.5,
         "grade": "C",
-        "scores": {
-          "completeness": 2.0,
-          "language": 8.0,
-          "title": 8.5,
-          "source_credibility": 9.0,
-          "info_density": 2.5,
-          "actionability": 6.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
         "content_refined": true
       }
     },
     {
-      "id": "ecd32741-d897-4dd8-b691-08b56f01314a",
-      "title_zh": "NVIDIA苏州开发者见面会：全链路解析基础设施到智能体",
-      "title_en": "",
-      "content_zh": "AI技术正从底层GPU开发、大模型推理演进到自主规划的Agentic AI，全方位重塑软件开发范式。NVIDIA企业开发者社区诚邀您参加苏州开发者见面会，届时全球及本地的技术专家将分享从基础设施优化到智能体应用的全链路实战经验。",
-      "content_en": "",
-      "source_zh": "Solidot",
-      "source_en": "",
-      "source_url": "https://www.solidot.org/story?sid=84194",
+      "id": "14648791-87da-4bac-aeda-b01f3aad8716",
+      "title_zh": "苹果iOS或迎重大更新，一加realme合并，国产AI Token调用量破万亿",
+      "content_zh": "苹果iOS 27照片App或大幅升级；一加、realme被曝正式合并，剑指市场份额；去年我国大模型Token调用量达21100万亿。Anthropic估值或破9000亿美元；Alphabet净利润暴增81%，Google Cloud首破200亿美元；",
+      "source_zh": "爱范儿",
       "lang": "zh",
-      "category": "ai",
+      "category": "news",
+      "published_at": "Thu, 30 Apr 2026 00:07:07 +0000",
+      "quality": {
+        "total_100": 57.7,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "aa3a6aa8-a8e4-486f-9279-3057d90432a5",
+      "title_zh": "Claude AI接入创意软件生态，蚂蚁百灵大模型开源Ling-2.6-flash",
+      "content_zh": "Anthropic旗下Claude AI已接入多个创意软件生态，进一步拓展AI助手应用场景。蚂蚁集团百灵大模型开源轻量级版本Ling-2.6-flash，面向开发者提供高效推理能力。同时，Framework推出搭载RTX 5070的模块化GPU显卡产品，为紧凑型设备提供独立显卡支持。",
+      "source_zh": "少数派",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "Thu, 30 Apr 2026 09:16:28 +0800",
+      "quality": {
+        "total_100": 57.8,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "58e813ff-2408-467c-9f32-26f006cd6143",
+      "title_zh": "NVIDIA 开发者见面会苏州站：从基础设施到智能体，全链路专家深度解析",
+      "content_zh": "从底层GPU开发，到长上下文大模型推理，再到自主规划的Agentic AI，AI技术正重塑软件开发范式。NVIDIA企业开发者社区诚邀您参加苏州开发者见面会，汇集全球及本地技术专家，带来从基础设施优化到前沿智能体应用的全链路干货。",
+      "source_zh": "Solidot",
+      "lang": "zh",
+      "category": "news",
       "published_at": "Thu, 30 Apr 2026 16:21:45 +0800",
-      "created_at": "2026-05-01T17:15:47.245092",
       "quality": {
         "total_100": 55.0,
         "grade": "C",
-        "scores": {
-          "completeness": 3.0,
-          "language": 8.0,
-          "title": 7.0,
-          "source_credibility": 9.0,
-          "info_density": 2.5,
-          "actionability": 5.0,
-          "impact": 5.0,
-          "originality": 5.0
-        },
         "content_refined": true
-      },
-      "category_confirmed": true
+      }
+    },
+    {
+      "id": "dc0a1ecf-6c00-482b-aed8-ce626563b448",
+      "title_zh": "微软在 GitHub 公开 86-DOS 1.00 源代码，纪念发布 45 周年",
+      "content_zh": "2018年微软公开了MS-DOS 1.25和2.11源代码，2024年公开了MS-DOS 4.0源代码。2026年4月，在86-DOS 1.00发布45周年之际，微软延续传统在GitHub上公开了86-DOS 1.00源代码。该系统由Tim Paterson编写，后成为MS-DOS的基础。",
+      "source_zh": "Solidot",
+      "lang": "zh",
+      "category": "tools",
+      "published_at": "Thu, 30 Apr 2026 15:40:05 +0800",
+      "quality": {
+        "total_100": 56.5,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "51651949-0e85-403c-97a7-c54300ffc347",
+      "title_zh": "Rust代码编辑器Zed发布1.0，定位AI原生开发工具",
+      "content_zh": "Rust开发的代码编辑器Zed正式发布1.0版本。开发者强调，1.0并非终点而是关键里程碑。Zed定位为AI原生编辑器，内置Claude Agent、Codex、OpenCode、Cursor等多个AI智能体并行运行能力，AI功能深度集成于编辑器核心架构，而非作为附加组件。",
+      "source_zh": "Solidot",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "Wed, 29 Apr 2026 23:36:21 +0800",
+      "quality": {
+        "total_100": 59.0,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "18f4d478-85c3-45c6-957c-36feda066d29",
+      "title_zh": "追觅发布火箭车：零百加速0.9秒的电动超跑",
+      "content_zh": "4月27日，追觅科技在旧金山发布“星空计划”首款车型——Nebula NEXT 01 JET Edition。该车搭载双固体火箭助推系统，零百加速仅0.9秒，最大推力100千牛。同时亮相的还有激光雷达DHX1、全固态电池等“星空十二全栈技术”。这是追觅以技术切入全球高端新能源市场的尝试。",
+      "source_zh": "36氪",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "2026-05-01 18:26:42  +0800",
+      "quality": {
+        "total_100": 64.8,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "a73031d7-7ea2-4096-8065-32c207ace0bd",
+      "title_zh": "天石科丰完成数千万元pre-A轮融资，聚焦硫化物固态电解质",
+      "content_zh": "36氪获悉，天石科丰完成数千万元pre-A轮融资，由元禾原点领投，天泓投资跟投。本轮融资将用于产品研发及百吨级产线建设。 天石科丰成立于2022年12月，聚焦硫化物固态电解质粉体材料研发，技术源自武汉理工大学。其LPSCB硫化物电解质粉体室温离子电导率达12 mS/cm，性能处于行业领先水平。",
+      "source_zh": "36氪",
+      "lang": "zh",
+      "category": "news",
+      "published_at": "2026-04-30 19:32:16  +0800",
+      "quality": {
+        "total_100": 64.5,
+        "grade": "C",
+        "content_refined": true
+      }
+    },
+    {
+      "id": "0e2b1266-c8ee-4675-9307-0073b889063b",
+      "title_zh": "索诺克枭龙系列发布：纯三色激光投影加速商用落地",
+      "content_zh": "深耕投影行业数十年，索诺克正式发布枭龙系列纯三色激光工程投影机。历经十余年技术攻关，实现三色激光从研究到商用的突破。面对国内品牌新技术快步领跑的压力，索诺克加速产品落地，欲借核心技术代际领先实现弯道超车。",
+      "source_zh": "36氪",
+      "lang": "zh",
+      "category": "product",
+      "published_at": "2026-04-30 18:34:03  +0800",
+      "quality": {
+        "total_100": 62.0,
+        "grade": "C",
+        "content_refined": true
+      }
     }
   ]
 }
