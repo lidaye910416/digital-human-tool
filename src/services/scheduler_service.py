@@ -6,8 +6,8 @@ import logging
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
-from sqlalchemy.orm import Session
-from src.services.news_collector import news_collector
+from src.services.news_collector_v2 import BilingualNewsCollector
+from src.services.news_ai_calibrator import NewsAICalibrator
 
 logger = logging.getLogger(__name__)
 
@@ -20,19 +20,45 @@ async def daily_news_collection():
     logger.info("⏰ 定时任务：开始收集昨日资讯")
     
     try:
-        # 获取昨日日期
-        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        collector = BilingualNewsCollector()
+        calibrator = NewsAICalibrator()
         
-        # 创建新的数据库会话
-        from src.models.database import SessionLocal
+        # 收集新闻
+        news_items = await collector.collect_all()
         
-        db = SessionLocal()
-        try:
-            stats = await news_collector.collect_all(db, yesterday)
-            logger.info(f"✅ 资讯收集完成: {stats}")
-        finally:
-            db.close()
-            
+        # 过滤低质量
+        filtered = [n for n in news_items if (n.quality.total_100 if n.quality else 0) >= 55]
+        
+        # 转换为字典
+        news_dicts = []
+        for item in filtered:
+            news_dicts.append({
+                'id': item.id,
+                'title_zh': item.title_zh,
+                'title_en': item.title_en,
+                'content_zh': item.content_zh,
+                'content_en': item.content_en,
+                'source_zh': item.source_zh,
+                'source_en': item.source_en,
+                'source_url': item.source_url,
+                'lang': item.lang,
+                'category': item.category,
+                'published_at': item.published_at,
+                'created_at': item.created_at,
+                'quality': {
+                    'total_100': item.quality.total_100 if item.quality else 0,
+                    'grade': item.quality.grade if item.quality else 'D',
+                    'scores': item.quality.scores if item.quality else {}
+                }
+            })
+        
+        # AI 校准
+        calibrated_news, stats = calibrator.batch_calibrate(news_dicts, min_score=55)
+        
+        logger.info(f"✅ 资讯收集完成: 通过 {stats['passed']} 条, 舍弃 {stats['discarded']} 条")
+        
+        await collector.close()
+        
     except Exception as e:
         logger.error(f"❌ 资讯收集失败: {e}")
 

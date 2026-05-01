@@ -11,10 +11,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
-UPLOADS_DIR = DATA_DIR / "uploads"
-AVATARS_DIR = DATA_DIR / "avatars"
-VIDEOS_DIR = DATA_DIR / "videos"
-TEMPLATES_DIR = DATA_DIR / "templates"
 AUDIO_DIR = DATA_DIR / "audio"
 
 # ===== API 配置 =====
@@ -27,7 +23,7 @@ MINIMAX_BASE_URL = "https://api.minimax.chat/v1"
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DATA_DIR}/database.db")
 
 # 确保目录存在
-for directory in [DATA_DIR, UPLOADS_DIR, AVATARS_DIR, VIDEOS_DIR, TEMPLATES_DIR, AUDIO_DIR]:
+for directory in [DATA_DIR, AUDIO_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 # ===== 新闻源配置 =====
@@ -49,7 +45,7 @@ def validate_config():
 
 __all__ = [
     # 基础路径
-    'BASE_DIR', 'DATA_DIR', 'UPLOADS_DIR', 'AVATARS_DIR', 'VIDEOS_DIR', 'TEMPLATES_DIR', 'AUDIO_DIR',
+    'BASE_DIR', 'DATA_DIR', 'AUDIO_DIR',
     # API
     'MINIMAX_API_KEY', 'MINIMAX_BASE_URL',
     # 数据库
