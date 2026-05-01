@@ -29,38 +29,40 @@ async def collect_news(category=None, lang=None, limit=None, min_quality=55):
     print(f"语言: {lang or '全部'}")
     print(f"最低质量: {min_quality}")
     print("-" * 50)
-    
+
     try:
         # 导入新闻收集服务
         from services.news_collector_v2 import BilingualNewsCollector
-        
+        from services.news_ai_calibrator import NewsAICalibrator
+
         collector = BilingualNewsCollector()
-        
-        print("\n[1/3] 初始化收集器...")
-        
-        print("\n[2/3] 收集新闻...")
+        calibrator = NewsAICalibrator()
+
+        print("\n[1/4] 初始化收集器...")
+
+        print("\n[2/4] 收集新闻...")
         # 收集新闻
         news_items = await collector.collect_all(lang=lang, category=category)
-        
+
         print(f"   收集到 {len(news_items)} 条原始新闻")
-        
-        print("\n[3/3] 过滤和排序...")
+
+        print("\n[3/4] 过滤和排序...")
         # 过滤低质量新闻
         filtered = [n for n in news_items if (n.quality.total_100 if n.quality else 0) >= min_quality]
         print(f"   过滤后剩余 {len(filtered)} 条 (质量 >= {min_quality})")
-        
+
         # 按质量分数排序
         filtered.sort(key=lambda x: x.quality.total_100 if x.quality else 0, reverse=True)
-        
+
         # 限制数量
         if limit:
             filtered = filtered[:limit]
             print(f"   限制数量后: {len(filtered)} 条")
-        
+
         # 转换为字典
-        result = []
+        news_dicts = []
         for item in filtered:
-            result.append({
+            news_dicts.append({
                 'id': item.id,
                 'title_zh': item.title_zh,
                 'title_en': item.title_en,
@@ -81,33 +83,38 @@ async def collect_news(category=None, lang=None, limit=None, min_quality=55):
                     'scores': item.quality.scores if item.quality else {}
                 }
             })
-        
+
+        print("\n[4/4] AI校准与内容润色...")
+        # 使用 AI 校准器进行分类验证、过滤和内容润色
+        calibrated_news, stats = calibrator.batch_calibrate(news_dicts, min_score=min_quality)
+        print(f"   AI校准完成: 通过 {stats['passed']} 条, 修正 {stats['adjusted']} 条, 润色 {stats['content_refined']} 条, 舍弃 {stats['discarded']} 条")
+
         # 保存到文件
         output_data = {
             'lastUpdate': datetime.now().strftime('%Y-%m-%d %H:%M'),
-            'totalCount': len(result),
+            'totalCount': len(calibrated_news),
             'stats': {
-                'A+': len([n for n in result if n['quality']['grade'] == 'A+']),
-                'A': len([n for n in result if n['quality']['grade'] == 'A']),
-                'B': len([n for n in result if n['quality']['grade'] == 'B']),
-                'C': len([n for n in result if n['quality']['grade'] == 'C']),
-                'D': len([n for n in result if n['quality']['grade'] == 'D'])
+                'A+': len([n for n in calibrated_news if n['quality']['grade'] == 'A+']),
+                'A': len([n for n in calibrated_news if n['quality']['grade'] == 'A']),
+                'B': len([n for n in calibrated_news if n['quality']['grade'] == 'B']),
+                'C': len([n for n in calibrated_news if n['quality']['grade'] == 'C']),
+                'D': len([n for n in calibrated_news if n['quality']['grade'] == 'D'])
             },
-            'categories': list(set(n['category'] for n in result)),
-            'news': result
+            'categories': list(set(n['category'] for n in calibrated_news)),
+            'news': calibrated_news
         }
-        
+
         # 保存到 app/data/news.json
         output_path = os.path.join(os.path.dirname(__file__), '..', 'app', 'data', 'news.json')
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(output_data, f, ensure_ascii=False, indent=2)
-        
+
         print("-" * 50)
         print(f"✅ 完成! 保存到: {output_path}")
-        print(f"   总计: {len(result)} 条新闻")
-        print(f"   高质量 (A/B): {len([n for n in result if n['quality']['grade'] in ['A+', 'A', 'B']])} 条")
-        
-        return result
+        print(f"   总计: {len(calibrated_news)} 条新闻")
+        print(f"   高质量 (A/B): {len([n for n in calibrated_news if n['quality']['grade'] in ['A+', 'A', 'B']])} 条")
+
+        return calibrated_news
         
     except ImportError as e:
         print(f"\n⚠️  导入错误: {e}")
