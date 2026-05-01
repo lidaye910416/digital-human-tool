@@ -27,37 +27,71 @@ TARGET_CATEGORIES = {
     "ai": {
         "name": "AI人工智能",
         "description": "AI基础能力、大模型、机器学习相关",
-        "keywords": ["AI", "LLM", "GPT", "ChatGPT", "OpenAI", "Anthropic", "Claude", "Gemini", 
+        "keywords": ["AI", "LLM", "GPT", "ChatGPT", "OpenAI", "Anthropic", "Claude", "Gemini",
                     "人工智能", "大模型", "深度学习", "神经网络", "AIGC", "AGI", "模型训练",
-                    "机器学习", "自然语言处理", "计算机视觉", "AI应用", "AI工具", "AI产品"]
+                    "机器学习", "自然语言处理", "计算机视觉", "AI应用", "AI工具", "AI产品",
+                    "大模型", "语言模型", "视觉模型", "多模态", "AI芯片", "AI服务器", "AI算力",
+                    "AIGC", "生成式AI", "ChatGPT", "Sora", "文生图", "文生视频", "Agent", "智能体"]
     },
     "tools": {
         "name": "开发工具",
         "description": "前沿科技工具、开发框架、API服务",
         "keywords": ["GitHub", "VS Code", "API", "SDK", "框架", "Python", "JavaScript", "Rust",
                     "编程", "开发", "开源", "代码", "IDE", "编译器", "Docker", "Kubernetes",
-                    "Git", "数据库", "云服务", "AWS", "Azure", "GCP", "Vercel", "Netlify"]
+                    "Git", "数据库", "云服务", "AWS", "Azure", "GCP", "Vercel", "Netlify",
+                    "低代码", "SaaS", "PaaS", "IaaS", "云原生", "Serverless", "API网关",
+                    "开发者平台", "开源社区", "代码托管", "CI/CD", "DevOps", "自动化部署"]
     },
     "news": {
         "name": "科技动态",
         "description": "数字产业、产业数字化动态",
-        "keywords": ["发布", "收购", "融资", "裁员", "上市", "合作", "投资", "财报", "业绩",
-                    "战略", "转型", "布局", "数字经济", "产业数字化", "数字化转型",
-                    "科技公司", "互联网", "半导体", "芯片", "新能源", "电动汽车"]
+        "keywords": ["数字产业", "产业数字化", "数字产业化", "数字化转型", "数字经济",
+                    "数字中国", "智慧城市", "智慧医疗", "智慧教育", "智慧交通", "智慧政务",
+                    "信息化", "数据要素", "数据中心", "云计算", "大数据", "物联网", "区块链",
+                    "半导体", "芯片", "集成电路", "晶圆厂", "光刻机", "GPU", "CPU", "AI芯片",
+                    "新能源", "电动汽车", "自动驾驶", "动力电池", "智能网联",
+                    "发布", "收购", "融资", "上市", "合作", "投资", "财报", "业绩", "财报",
+                    "科技公司", "互联网", "运营商", "设备商", "软件商", "方案商",
+                    "战略合作", "数字化战略", "智能化战略", "转型", "布局", "落地", "应用"],
+        # 排除关键词 - 泛战略、与科技无关的内容
+        "exclude_keywords": ["房地产", "零售", "餐饮", "服装", "美妆", "母婴", "教育(非AI/数字化教育)"]
     },
     "product": {
         "name": "产品设计",
         "description": "优秀软件产品、设计创新",
         "keywords": ["产品", "设计", "UI", "UX", "App", "Launch", "发布", "更新", "版本",
                     "软件", "应用", "小程序", "网站", "平台", "功能", "界面", "交互",
-                    "苹果", "谷歌", "微软", "Meta", "产品发布", "新功能"]
+                    "苹果", "谷歌", "微软", "Meta", "产品发布", "新功能", "Beta", "内测",
+                    "SaaS产品", "软件更新", "版本更新", "功能更新", "界面改版", "交互优化"]
     }
 }
 
 # 过滤无关分类
 UNRELATED_CATEGORIES = [
-    "game", "gaming", "entertainment", "movie", "music", "sports",
-    "游戏", "娱乐", "电影", "音乐", "体育", "八卦", "明星"
+    # 游戏/娱乐
+    "game", "gaming", "entertainment", "movie", "music", "sports", "anime", "comic",
+    "游戏", "娱乐", "电影", "音乐", "体育", "八卦", "明星", "综艺", "电视剧", "演唱会",
+    # 生活消费
+    "food", "restaurant", "fashion", "beauty", "shopping", "retail", "e-commerce",
+    "美食", "餐饮", "服装", "美妆", "购物", "零售", "电商", "母婴", "育儿",
+    # 财经金融 (非科技)
+    "banking", "bank", "insurance", "investment", "stock", "finance",
+    "银行", "保险", "投资", "股票", "证券", "基金", "理财", "外汇", "期货",
+    # 健康医疗 (非AI/数字化)
+    "health", "medical", "hospital", "disease", "doctor", "medicine",
+    "健康", "医疗", "医院", "疾病", "医生", "药品", "养生", "减肥", "美容(医疗)",
+    # 房地产
+    "real estate", "property", "housing", "apartment",
+    "房地产", "房产", "房价", "楼市", "住宅", "买房", "卖房", "租房",
+    # 社会生活
+    "politics", "politician", "government", "law", "crime", "accident",
+    "政治", "政府", "法律", "犯罪", "事故", "社会", "民生", "天气", "环境",
+    # 教育 (非AI/数字化教育)
+    "education", "school", "university", "student", "exam",
+    "教育", "学校", "大学", "学生", "考试", "培训", "留学",
+    # 其他非科技领域
+    "agriculture", "farming", "pet", "travel", "hotel",
+    "农业", "养殖", "宠物", "旅游", "酒店", "航空", "航空"
 ]
 
 
@@ -131,30 +165,28 @@ class NewsAICalibrator:
                 action="pass"
             )
 
-    def _refine_content(self, news: Dict) -> Optional[Dict]:
-        """使用AI对新闻内容进行润色
+    def _refine_content(self, news: Dict, max_retries: int = 10) -> Optional[Dict]:
+        """使用AI对新闻内容进行润色（带重试机制）
 
         润色目标:
-        1. 标题简洁有力，无废话
-        2. 摘要精炼，50-100字
-        3. 正文干净，删除无效信息如"点击阅读全文"、"扫码关注"等
-        4. 保持原文核心信息不变
+        1. 标题简洁有力，15-30字
+        2. 正文干净，删除无效信息
+        3. 正文限制在150字以内，在句子边界截断
+
+        注意: 不再输出摘要字段
         """
         title = news.get('title_zh') or news.get('title_en', '')
-        summary = news.get('summary_zh') or news.get('summary_en', '')
         content = news.get('content_zh') or news.get('content_en', '')
 
         refine_prompt = f"""你是一个专业的科技新闻编辑。请对以下新闻进行润色处理。
 
 ## 原始新闻
 标题: {title}
-摘要: {summary}
 正文: {content[:2000]}
 
 ## 润色要求
 1. 标题: 简洁有力，15-30字，去除无关前缀后缀（如"36氪首发"、"爱范儿消息"等）
-2. 摘要: 50-100字，概括核心内容，语言精炼
-3. 正文: 删除以下无效信息:
+2. 正文: 删除以下无效信息:
    - "点击阅读全文"、"Read more"、"查看详情"等引导点击
    - "扫码关注"、"关注公众号"等引导关注
    - "图片来自于..."、"图源..."等图片来源说明
@@ -162,25 +194,70 @@ class NewsAICalibrator:
    - 重复的段落或句子
    - 广告内容
    - 过多的强调符号（如"！！！"）
+   - HTML实体如&nbsp;等
+3. 正文必须在句子边界（。！？）结束，字数不超过150字
 4. 保持: 核心事实、数据、人名、公司名等重要信息不变
 
 ## 输出格式
 请直接输出JSON，不要使用markdown格式:
 {{
     "title": "润色后的标题",
-    "summary": "润色后的摘要",
-    "content": "润色后的正文",
-    "summary_changes": "摘要修改说明（简述即可）"
+    "content": "润色后的正文（在句子边界结束，最多150字）"
 }}"""
 
-        try:
-            response = self._call_minimax(refine_prompt, max_tokens=1500)
-            if response:
-                return self._parse_refine_response(response)
-        except Exception as e:
-            print(f"   内容润色失败: {e}")
+        for attempt in range(max_retries):
+            try:
+                response = self._call_minimax(refine_prompt, max_tokens=1000)
+                if response:
+                    result = self._parse_refine_response(response)
+                    if result and result.get('content'):
+                        # 确保截断在句子边界
+                        result['content'] = self._truncate_at_sentence(result['content'], 150)
+                        # 检查是否在句子边界结束
+                        if result['content'] and result['content'][-1] not in '。！？':
+                            # 如果没有在句子边界结束，再尝试一次
+                            if attempt < max_retries - 1:
+                                print(f"      🔄 句子未完整，重试 ({attempt + 2}/{max_retries})...")
+                                continue
+                        return result
+                    elif attempt < max_retries - 1:
+                        print(f"      🔄 润色重试 ({attempt + 2}/{max_retries})...")
+                        continue
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    print(f"      🔄 润色重试 ({attempt + 2}/{max_retries}): {e}")
+                    continue
+                print(f"   内容润色失败: {e}")
 
         return None
+
+    def _truncate_at_sentence(self, text: str, max_length: int = 150) -> str:
+        """在句子边界截断文本，确保不在词语中间截断"""
+        if len(text) <= max_length:
+            return text
+
+        # 句子结束标记
+        sentence_ends = ['。', '！', '？', '；', '\n']
+
+        # 从max_length位置向前找最近的句子结束标记
+        truncated = text[:max_length]
+        last_end = -1
+
+        for i, char in enumerate(truncated):
+            if char in sentence_ends:
+                last_end = i
+
+        if last_end > max_length * 0.6:  # 如果句子结束位置在60%之后，使用它
+            return truncated[:last_end + 1]
+
+        # 否则向后找下一个句子结束标记
+        remaining = text[max_length:]
+        for i, char in enumerate(remaining):
+            if char in sentence_ends:
+                return text[:max_length + i + 1]
+
+        # 没有找到句子边界，返回原始截断
+        return truncated.rstrip()
 
     def _parse_refine_response(self, response: str) -> Optional[Dict]:
         """解析润色响应"""
@@ -201,10 +278,33 @@ class NewsAICalibrator:
             cleaned = cleaned.replace('"', '"').replace('"', '"')
 
             data = json.loads(cleaned.strip())
+
+            # 强制限制长度
+            refined_summary = data.get('summary', '')
+            refined_content = data.get('content', '')
+
+            # 摘要严格控制在80-100字
+            if len(refined_summary) > 100:
+                refined_summary = refined_summary[:100]
+            elif len(refined_summary) < 80 and len(refined_summary) > 0:
+                # 如果太短，至少保留可读性
+                refined_summary = refined_summary[:100]
+
+            # 正文限制在150字左右（但不在这里截断，由_truncate_at_sentence处理）
+            if len(refined_content) > 150:
+                refined_content = refined_content[:150]
+
+            # 清理HTML实体
+            refined_content = refined_content.replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>')
+            refined_title = data.get('title', '').replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>')
+
+            # 清理多余的空白
+            refined_content = ' '.join(refined_content.split())
+            refined_title = ' '.join(refined_title.split())
+
             return {
-                'title': data.get('title', ''),
-                'summary': data.get('summary', ''),
-                'content': data.get('content', '')
+                'title': refined_title,
+                'content': refined_content
             }
         except Exception as e:
             print(f"   解析润色结果失败: {e}")
@@ -224,12 +324,22 @@ class NewsAICalibrator:
 摘要: {summary[:200]}
 来源: {source}
 分数: {original_score}
-分类: {original_category}
 
-规则: 分类必须是 ai/tools/news/product 之一，过滤游戏/娱乐。
+我们只关注以下领域的新闻:
+1. AI/人工智能: 大模型、机器学习、AI应用、ChatGPT、AIGC等
+2. 开发工具: 编程框架、API服务、开发者平台、开源工具等
+3. 数字产业动态: 数字化转型、数字经济、半导体、芯片、云计算、大数据、物联网、区块链、新能源汽车、自动驾驶等
+4. 科技产品: 软件产品发布、设计创新等
+
+过滤掉: 游戏/娱乐/影视/音乐/体育/财经(非科技)/医疗(非AI)/房产/零售/餐饮等
+
+特别说明:
+- "战略"类新闻必须有明确的数字化/科技内容才保留
+- 只保留与数字产业、信息化、人工智能产业直接相关的新闻
+- 财报新闻必须是科技公司(互联网/AI/半导体/新能源/运营商/设备商)
 
 返回纯JSON:
-{{"is_related":true,"category":"ai","score_appropriate":true,"adjusted_score":{original_score},"reason":"理由","action":"pass"}}
+{{"is_related":true,"category":"ai/tools/news/product之一","score_appropriate":true,"adjusted_score":{original_score},"reason":"理由","action":"pass"}}
 
 只输出JSON，不要解释。"""
 
@@ -355,10 +465,22 @@ class NewsAICalibrator:
             else:
                 calibrated_score = original_score
 
+            # 标准化分类
+            raw_category = data.get('category', news.get('category', 'news'))
+            CATEGORY_MAP = {
+                'ai': 'ai', 'tool': 'tools', 'tools': 'tools',
+                'news': 'news', '动态': 'news', 'digital': 'news', 'digital_industry': 'news',
+                'product': 'product', '产品': 'product', '科技产品': 'product'
+            }
+            category = CATEGORY_MAP.get(raw_category, raw_category)
+            # 如果不在有效分类中，设为 news
+            if category not in ('ai', 'tools', 'news', 'product'):
+                category = 'news'
+
             return CalibrationResult(
                 original_score=original_score,
                 calibrated_score=calibrated_score,
-                category=data.get('category', news.get('category', 'news')),
+                category=category,
                 category_confirmed=data.get('category_confirmed', True),
                 is_related=data.get('is_related', True),
                 reason=data.get('reason', ''),
@@ -432,12 +554,22 @@ class NewsAICalibrator:
                 stats["content_refined"] += 1
                 if result.refined_title:
                     news['title_zh'] = result.refined_title
-                if result.refined_summary:
-                    news['summary_zh'] = result.refined_summary
                 if result.refined_content:
+                    # 使用润色后的内容（已在_truncate_at_sentence处理）
                     news['content_zh'] = result.refined_content
                 news['quality']['content_refined'] = True
-                print(f"      ✨ 内容润色完成")
+                print(f"      ✨ 内容润色完成 ({len(result.refined_content)}字)")
+            else:
+                # 如果没有润色，确保正文在150字以内并在句子边界截断
+                content = news.get('content_zh', '')
+                if len(content) > 150:
+                    # 使用句子边界截断
+                    truncator = self._truncate_at_sentence(content, 150)
+                    news['content_zh'] = truncator
+                    print(f"      📝 内容简化 ({len(content)}→{len(truncator)}字)")
+                # 清理HTML实体
+                news['content_zh'] = news['content_zh'].replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>')
+                news['content_zh'] = ' '.join(news['content_zh'].split())
 
             # 更新等级
             score = news['quality']['total_100']

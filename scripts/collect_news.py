@@ -59,15 +59,13 @@ async def collect_news(category=None, lang=None, limit=None, min_quality=55):
             filtered = filtered[:limit]
             print(f"   限制数量后: {len(filtered)} 条")
 
-        # 转换为字典
+        # 转换为字典（不包含摘要字段）
         news_dicts = []
         for item in filtered:
             news_dicts.append({
                 'id': item.id,
                 'title_zh': item.title_zh,
                 'title_en': item.title_en,
-                'summary_zh': item.summary_zh,
-                'summary_en': item.summary_en,
                 'content_zh': item.content_zh,
                 'content_en': item.content_en,
                 'source_zh': item.source_zh,
