@@ -1,15 +1,11 @@
 """
 TechEcho Pro - AI质量校准器 (优化版)
 
-优化点:
-1. 合并两次API调用为一次 (分类验证 + 内容润色)
-2. 精简prompt，减少token消耗
-3. 优化解析逻辑，减少解析失败
+支持两种模式:
+1. AI模式: 使用 MiniMax API 进行语义校准 (需要 MINIMAX_API_KEY)
+2. 降级模式: 纯规则截断 (无 API Key 时自动启用)
 
 使用 MiniMax 2.7 模型
-
-依赖:
-- MINIMAX_API_KEY: 必须从环境变量配置
 """
 
 import os
@@ -22,7 +18,7 @@ from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
-# MiniMax API 配置 (必须从环境变量读取)
+# MiniMax API 配置 (从环境变量读取)
 MINIMAX_API_KEY = os.getenv("MINIMAX_API_KEY", "")
 MINIMAX_API_BASE_URL = "https://api.minimaxi.com"
 
@@ -54,39 +50,52 @@ class CalibrationResult:
     content_refined: bool = False
 
 
-class AICalibrationError(Exception):
-    """AI校准异常"""
-    pass
-
-
 class NewsAICalibrator:
-    """AI质量校准器 (单次调用优化版)
+    """AI质量校准器
 
-    注意: 必须配置 MINIMAX_API_KEY 环境变量才能使用
+    支持降级模式:
+    - 有 API Key: 调用 MiniMax API 进行语义校准
+    - 无 API Key: 自动降级为规则截断模式
     """
 
     def __init__(self, api_key: str = None):
         self.api_key = api_key or MINIMAX_API_KEY
-        self._validate_config()
+        self.enabled = bool(self.api_key)
 
-    def _validate_config(self):
-        """验证配置，API Key 是必需的"""
-        if not self.api_key:
-            raise AICalibrationError(
-                "MINIMAX_API_KEY 环境变量未配置。\n"
-                "请设置: export MINIMAX_API_KEY=your-api-key\n"
-                "或创建 .env 文件添加 MINIMAX_API_KEY=your-api-key"
-            )
-        logger.info(f"[AI校准器] 已初始化，使用模型: {SUPPORTED_MODELS[0]}")
+        if self.enabled:
+            logger.info(f"[AI校准器] 已启用，使用模型: {SUPPORTED_MODELS[0]}")
+        else:
+            logger.warning("[AI校准器] 未配置 API Key，将使用降级模式 (规则截断)")
 
     def calibrate(self, news_item: Dict) -> CalibrationResult:
-        """对单条新闻进行AI校准 (单次API调用)"""
+        """对单条新闻进行校准
+
+        - 有 API Key: 调用 MiniMax API
+        - 无 API Key: 降级为规则截断
+        """
         original_score = news_item.get('quality', {}).get('total_100', 0)
 
-        # 构建合并后的提示词
+        # 降级模式: 只做规则截断
+        if not self.enabled:
+            content = news_item.get('content_zh', '')[:500] if news_item.get('lang') == 'zh' \
+                else news_item.get('content_en', '')[:500]
+            refined = self._truncate_at_sentence(content, 150)
+
+            return CalibrationResult(
+                original_score=original_score,
+                calibrated_score=original_score,
+                category=news_item.get('category', 'news'),
+                category_confirmed=False,
+                is_related=True,
+                reason="降级模式: 规则截断",
+                action="pass",
+                refined_content=refined,
+                content_refined=True
+            )
+
+        # AI模式: 调用 MiniMax API
         prompt = self._build_unified_prompt(news_item)
 
-        # 单次API调用 (带重试)
         last_error = None
         for attempt in range(MAX_RETRIES):
             try:
@@ -94,7 +103,6 @@ class NewsAICalibrator:
                 if response:
                     result = self._parse_unified_response(response, news_item)
                     if result:
-                        # 如果内容需要润色，在同一响应中处理
                         if result.action in ('pass', 'adjust') and not result.refined_content:
                             result.refined_content = self._truncate_at_sentence(
                                 news_item.get('content_zh', '')[:500] if news_item.get('lang') == 'zh'
@@ -103,8 +111,6 @@ class NewsAICalibrator:
                             )
                             result.content_refined = True
                         return result
-
-                    # 解析失败，记录错误继续重试
                     last_error = "JSON解析失败"
 
             except requests.exceptions.Timeout:
@@ -117,13 +123,26 @@ class NewsAICalibrator:
                 last_error = f"未知错误: {str(e)}"
                 logger.error(f"[AI校准] {last_error}")
 
-            # 失败重试
             if attempt < MAX_RETRIES - 1:
                 logger.info(f"[AI校准] 重试中... ({attempt + 2}/{MAX_RETRIES})")
 
-        # 所有重试都失败
-        logger.error(f"[AI校准] API调用失败: {last_error}")
-        raise AICalibrationError(f"AI校准失败，已重试 {MAX_RETRIES} 次。最后错误: {last_error}")
+        # 重试耗尽，降级到规则模式
+        logger.warning(f"[AI校准] API调用失败，降级到规则模式: {last_error}")
+        content = news_item.get('content_zh', '')[:500] if news_item.get('lang') == 'zh' \
+            else news_item.get('content_en', '')[:500]
+        refined = self._truncate_at_sentence(content, 150)
+
+        return CalibrationResult(
+            original_score=original_score,
+            calibrated_score=original_score,
+            category=news_item.get('category', 'news'),
+            category_confirmed=False,
+            is_related=True,
+            reason=f"降级模式: API失败 - {last_error}",
+            action="pass",
+            refined_content=refined,
+            content_refined=True
+        )
     
     def _build_unified_prompt(self, news: Dict) -> str:
         """构建统一的提示词 (一次调用完成分类+润色)"""
@@ -306,8 +325,14 @@ class NewsAICalibrator:
         return truncated.rstrip()
 
     def batch_calibrate(self, news_list: List[Dict], min_score: int = 50) -> Tuple[List[Dict], Dict]:
-        """批量校准 (必须调用AI)"""
-        print(f"\n[AI校准] 开始校准 {len(news_list)} 条新闻...")
+        """批量校准
+
+        支持降级模式:
+        - AI模式: 调用 MiniMax API，有语义过滤能力
+        - 降级模式: 纯规则截断，无语义过滤
+        """
+        mode = "AI模式" if self.enabled else "降级模式"
+        print(f"\n[AI校准] 开始校准 {len(news_list)} 条新闻 ({mode})...")
 
         results = []
         stats = {
@@ -316,80 +341,62 @@ class NewsAICalibrator:
             "adjusted": 0,
             "discarded": 0,
             "content_refined": 0,
-            "api_calls": 0,
+            "mode": mode,
             "categories": {"ai": 0, "tools": 0, "news": 0, "product": 0}
         }
 
         for i, news in enumerate(news_list):
             print(f"   [{i+1}/{len(news_list)}] {news.get('title_zh', '')[:30]}...")
 
-            try:
-                result = self.calibrate(news)
-                stats["api_calls"] += 1
+            result = self.calibrate(news)
 
-                if result.action == 'discard' or not result.is_related:
-                    stats["discarded"] += 1
-                    print(f"      ❌ 舍弃: {result.reason}")
-                    continue
+            if result.action == 'discard' or not result.is_related:
+                stats["discarded"] += 1
+                print(f"      ❌ 舍弃: {result.reason}")
+                continue
 
-                if result.action == 'adjust':
-                    stats["adjusted"] += 1
+            if result.action == 'adjust':
+                stats["adjusted"] += 1
 
-                # 应用结果
-                if result.refined_title:
-                    news['title_zh'] = result.refined_title
-                if result.refined_content:
-                    news['content_zh'] = result.refined_content
-                else:
-                    content = news.get('content_zh', '')
-                    if len(content) > 150:
-                        news['content_zh'] = self._truncate_at_sentence(content, 150)
+            # 应用结果
+            if result.refined_title:
+                news['title_zh'] = result.refined_title
+            if result.refined_content:
+                news['content_zh'] = result.refined_content
+            else:
+                content = news.get('content_zh', '')
+                if len(content) > 150:
+                    news['content_zh'] = self._truncate_at_sentence(content, 150)
 
-                if result.category:
-                    news['category'] = result.category
+            if result.category:
+                news['category'] = result.category
 
-                news['quality']['content_refined'] = result.content_refined
+            news['quality']['content_refined'] = result.content_refined
 
-                # 更新等级
-                score = result.calibrated_score or news['quality']['total_100']
-                if score >= 85: news['quality']['grade'] = 'A+'
-                elif score >= 75: news['quality']['grade'] = 'A'
-                elif score >= 65: news['quality']['grade'] = 'B'
-                elif score >= 55: news['quality']['grade'] = 'C'
-                else: news['quality']['grade'] = 'D'
+            # 更新等级
+            score = result.calibrated_score or news['quality']['total_100']
+            if score >= 85: news['quality']['grade'] = 'A+'
+            elif score >= 75: news['quality']['grade'] = 'A'
+            elif score >= 65: news['quality']['grade'] = 'B'
+            elif score >= 55: news['quality']['grade'] = 'C'
+            else: news['quality']['grade'] = 'D'
 
-                news['quality']['total_100'] = score
+            news['quality']['total_100'] = score
 
-                results.append(news)
-                stats["passed"] += 1
-                stats["categories"][result.category] = stats["categories"].get(result.category, 0) + 1
+            results.append(news)
+            stats["passed"] += 1
+            stats["categories"][result.category] = stats["categories"].get(result.category, 0) + 1
 
-                if result.content_refined:
-                    stats["content_refined"] += 1
-                    print(f"      ✅ 通过 | 分类: {result.category} | 润色: {len(result.refined_content)}字")
-                else:
-                    print(f"      ✅ 通过 | 分类: {result.category}")
+            if result.content_refined:
+                stats["content_refined"] += 1
+                print(f"      ✅ 通过 | 分类: {result.category} | 润色: {len(result.refined_content)}字")
+            else:
+                print(f"      ✅ 通过 | 分类: {result.category}")
 
-            except AICalibrationError as e:
-                logger.error(f"[AI校准] 致命错误: {e}")
-                raise  # 重新抛出异常，终止流程
-
-        print(f"\n[AI校准完成] API调用: {stats['api_calls']}, 通过: {stats['passed']}, 舍弃: {stats['discarded']}, 润色: {stats['content_refined']}")
+        print(f"\n[AI校准完成] 通过: {stats['passed']}, 舍弃: {stats['discarded']}, 润色: {stats['content_refined']} ({stats['mode']})")
         return results, stats
 
 
 def get_calibrator() -> NewsAICalibrator:
-    """获取校准器实例 (带配置验证)"""
+    """获取校准器实例"""
     return NewsAICalibrator()
-
-
-# 全局实例 - 延迟初始化, 首次调用时验证配置
-_calibrator: Optional[NewsAICalibrator] = None
-
-
-def get_global_calibrator() -> NewsAICalibrator:
-    """获取全局校准器单例"""
-    global _calibrator
-    if _calibrator is None:
-        _calibrator = NewsAICalibrator()
-    return _calibrator

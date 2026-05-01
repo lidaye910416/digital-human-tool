@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from src.services.news_collector_v2 import BilingualNewsCollector
-from src.services.news_ai_calibrator import NewsAICalibrator, AICalibrationError
+from src.services.news_ai_calibrator import NewsAICalibrator
 
 logger = logging.getLogger(__name__)
 
@@ -52,16 +52,13 @@ async def daily_news_collection():
                 }
             })
         
-        # AI 校准 (必须调用，失败会抛出异常)
+        # AI 校准 (支持降级模式)
         calibrated_news, stats = calibrator.batch_calibrate(news_dicts, min_score=55)
 
-        logger.info(f"✅ 资讯收集完成: 通过 {stats['passed']} 条, 舍弃 {stats['discarded']} 条, API调用 {stats['api_calls']} 次")
+        logger.info(f"✅ 资讯收集完成: 通过 {stats['passed']} 条, 舍弃 {stats['discarded']} 条, 模式: {stats['mode']}")
 
         await collector.close()
 
-    except AICalibrationError as e:
-        logger.error(f"❌ AI校准失败: {e}")
-        raise  # 重新抛出异常，任务不会继续
     except Exception as e:
         logger.error(f"❌ 资讯收集失败: {e}")
         raise
