@@ -3,6 +3,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from src.api.routes import router as api_router
 import os
+from pathlib import Path
+
+# 自动加载 .env 文件
+from dotenv import load_dotenv
+env_path = Path(__file__).parent.parent / ".env"
+if env_path.exists():
+    load_dotenv(env_path)
+    print(f"[启动] 已加载环境变量: {env_path}")
+else:
+    print("[启动] 未找到 .env 文件，请复制 .env.example 为 .env 并配置 MINIMAX_API_KEY")
 
 app = FastAPI(title="Tech Echo - 科技资讯播报", version="0.2.0")
 
@@ -19,6 +29,13 @@ app.add_middleware(
 async def startup_event():
     from src.models.database import init_db
     init_db()
+
+    # 检查必要的环境变量
+    minimax_key = os.getenv("MINIMAX_API_KEY", "")
+    if not minimax_key:
+        print("[警告] MINIMAX_API_KEY 未设置，AI校准功能将无法使用")
+    else:
+        print(f"[启动] MINIMAX_API_KEY 已配置")
 
     # 启动定时调度器
     try:
