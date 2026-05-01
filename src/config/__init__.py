@@ -31,7 +31,10 @@ for directory in [DATA_DIR, AUDIO_DIR]:
 from src.config.sources import (
     RSS_SOURCES_ZH, RSS_SOURCES_EN, RSS_SOURCES,
     WEB_SITES, API_SOURCES, CATEGORIES,
-    UNRELATED_KEYWORDS, SOURCE_TIERS, get_sources
+    UNRELATED_KEYWORDS, SOURCE_TIERS, get_sources,
+    get_categories, get_source_tiers, get_filter_keywords,
+    get_quality_keywords, get_tier_for_source,
+    QUALITY_KEYWORDS, COMPLETENESS_PATTERNS, DENSITY_PATTERNS
 )
 
 # ===== 配置验证 =====
@@ -53,5 +56,10 @@ __all__ = [
     # 新闻源
     'RSS_SOURCES_ZH', 'RSS_SOURCES_EN', 'RSS_SOURCES',
     'WEB_SITES', 'API_SOURCES', 'CATEGORIES',
-    'UNRELATED_KEYWORDS', 'SOURCE_TIERS', 'get_sources'
+    'UNRELATED_KEYWORDS', 'SOURCE_TIERS', 'get_sources',
+    # 配置访问函数
+    'get_categories', 'get_source_tiers', 'get_filter_keywords',
+    'get_quality_keywords', 'get_tier_for_source',
+    # 评分配置
+    'QUALITY_KEYWORDS', 'COMPLETENESS_PATTERNS', 'DENSITY_PATTERNS'
 ]

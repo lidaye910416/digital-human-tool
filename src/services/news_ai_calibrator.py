@@ -28,17 +28,6 @@ SUPPORTED_MODELS = [
     "MiniMax-M2.5-highspeed",
 ]
 
-# 目标分类关键词 (简化版)
-TARGET_KEYWORDS = {
-    "ai": "AI、大模型、ChatGPT、机器学习、深度学习、神经网络、AIGC、Agent、智能体",
-    "tools": "GitHub、API、SDK、框架、编程、开发工具、开源、DevOps、云计算",
-    "news": "数字产业、半导体、芯片、云计算、大数据、物联网、自动驾驶、新能源、科技公司",
-    "product": "产品发布、软件更新、App、UI设计、新功能、Beta"
-}
-
-# 过滤关键词
-FILTER_KEYWORDS = "游戏、娱乐、电影、音乐、体育、金融、银行、保险、医疗健康、房产、教育(非AI)、农业"
-
 
 @dataclass
 class CalibrationResult:

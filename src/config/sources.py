@@ -113,6 +113,63 @@ UNRELATED_KEYWORDS: List[str] = [
     "game", "gaming", "entertainment", "movie", "music", "sports", "celebrity"
 ]
 
+# ===== 评分关键词配置 =====
+
+QUALITY_KEYWORDS = {
+    "clickbait": ["震惊", "刚刚", "内幕", "必看", "突发", "重磅", "爆料", "曝光"],
+    "marketing": ["关注", "公众号", "微信", "扫码", "转发", "扩散"],
+    "high_impact": ["突破", "首创", "首次", "最大", "改变", "颠覆", "革命", "领先"],
+    "originality": ["分析", "解读", "观点", "独家", "深度", "内幕", "揭秘"],
+    "actionability": ["如何使用", "教程", "指南", "方法", "建议", "技巧", "窍门"],
+}
+
+# ===== 内容完整性要素 (5W1H) =====
+
+COMPLETENESS_PATTERNS = {
+    "who": r'(公司|团队|机构|发布|宣布)',
+    "what": r'(发布|推出|收购|融资|合作)',
+    "when": r'(\d+年|\d+月|\d+日|今天|昨天)',
+    "where": r'(中国|美国|全球|北京|上海)',
+    "how": r'(通过|使用|采用|方式|技术)',
+}
+
+# ===== 信息密度指标 =====
+
+DENSITY_PATTERNS = {
+    "numbers": r'\d+[%亿万千]',  # 数字
+    "company": r'[一-龥]{2,6}(公司|集团|机构)',  # 公司实体
+    "tech": r'(AI|模型|技术|功能)',  # 技术术语
+    "action": r'(发布|推出|收购|融资)',  # 动作词
+}
+
+
+def get_categories() -> Dict[str, Dict]:
+    """获取分类配置"""
+    return CATEGORIES
+
+
+def get_source_tiers() -> Dict[str, List[str]]:
+    """获取来源层级"""
+    return SOURCE_TIERS
+
+
+def get_filter_keywords() -> List[str]:
+    """获取过滤关键词"""
+    return UNRELATED_KEYWORDS
+
+
+def get_quality_keywords() -> Dict[str, List[str]]:
+    """获取评分关键词"""
+    return QUALITY_KEYWORDS
+
+
+def get_tier_for_source(source_name: str) -> int:
+    """根据来源名称获取层级 (1=顶级, 2=二级, 0=未知)"""
+    for tier_name, sources in SOURCE_TIERS.items():
+        if source_name in sources:
+            return 1 if tier_name == "tier1" else 2
+    return 0
+
 
 # ===== 来源权威性 =====
 
