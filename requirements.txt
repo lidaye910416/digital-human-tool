@@ -31,7 +31,7 @@ feedparser>=6.0.0
 python-dotenv>=1.0.0
 
 # 微信云存储
-cos-python-sdk-v5>=5.0.0
+cos-python-sdk-v5>=1.9.44
 
 # 开发依赖 (可选)
 # pytest>=7.4.0
