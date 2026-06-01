@@ -104,3 +104,4 @@ app/                       # 前端
 启动服务后访问：
 - 本地：http://localhost:8000/docs
 - 云托管：https://your-domain.sh.run.tcloudbase.com/docs
+<!-- 部署触发标记 - 2026-06-01 -->
