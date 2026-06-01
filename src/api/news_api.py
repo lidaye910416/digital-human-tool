@@ -1040,6 +1040,8 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
             response = await client.post(url, json=data)
             result = response.json()
 
+        logger.info(f"[Cloud] API response: {result}")
+
         if result.get("errcode") == 0 and result.get("file_list"):
             file_info = result["file_list"][0]
             if file_info.get("status") == 0:
