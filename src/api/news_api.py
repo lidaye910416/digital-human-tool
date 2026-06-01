@@ -1133,7 +1133,8 @@ async def test_tts_pipeline(
 # 用于前端从微信云存储下载音频文件
 
 @router.post("/cloud-url")
-async def get_cloud_temp_url(cloud_file_id: str = Body(..., media_type="text/plain", description="微信云存储 fileID")):
+async def get_cloud_temp_url(body: dict = Body(..., description="请求体")):
+    cloud_file_id = body.get("cloud_file_id") if isinstance(body, dict) else body
     """
     根据 cloud_file_id 获取音频文件内容
 
