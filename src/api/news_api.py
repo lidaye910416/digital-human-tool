@@ -351,6 +351,130 @@ async def get_cloud_file_id(news_id: str):
         return {'success': False, 'message': 'No cloud file ID'}
 
 
+# ============ 完整的云存储上传下载测试接口 ============
+
+@router.get("/debug/cloud-test")
+async def test_cloud_storage_complete():
+    """
+    完整的云存储测试接口 - 上传后下载验证
+
+    测试流程：
+    1. 上传测试文件
+    2. 使用相同凭证下载
+    3. 返回下载结果
+    """
+    from src.services.wechat_token import get_access_token
+    import requests
+
+    result = {
+        "test_id": f"complete_test_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+        "steps": []
+    }
+
+    # 步骤1: 获取 access_token
+    access_token = await get_access_token()
+    if not access_token:
+        return {"error": "Cannot get access_token"}
+    result["steps"].append({"step": "get_access_token", "success": True})
+    result["access_token"] = access_token[:20] + "..."
+
+    # 步骤2: 获取临时凭证
+    auth_url = f"https://api.weixin.qq.com/_/cos/getauth?access_token={access_token}"
+    auth_resp = requests.get(auth_url, timeout=30, verify=False)
+    auth_data = auth_resp.json()
+
+    tmp_secret_id = auth_data.get("TmpSecretId", "")
+    tmp_secret_key = auth_data.get("TmpSecretKey", "")
+    session_token = auth_data.get("Token", "")
+
+    if not tmp_secret_id or not tmp_secret_key:
+        return {"error": "No temp credentials", "response": auth_data}
+
+    result["steps"].append({"step": "get_temp_credentials", "success": True})
+    result["credentials"] = {
+        "SecretId": tmp_secret_id[:20] + "...",
+        "Token": session_token[:30] + "..." if session_token else None
+    }
+
+    # 步骤3: 上传测试文件
+    bucket = "7072-prod-d9g7e5osy7b5e7a9c-1433977056"
+    region = "ap-shanghai"
+    test_content = b"TechEcho Cloud Storage Test " + datetime.now().isoformat().encode()
+    cloud_path = f"test/{result['test_id']}.txt"
+
+    try:
+        from qcloud_cos import CosConfig, CosS3Client
+
+        config = CosConfig(
+            Region=region,
+            SecretId=tmp_secret_id,
+            SecretKey=tmp_secret_key,
+            Token=session_token,
+        )
+        client = CosS3Client(config)
+
+        # 上传
+        upload_resp = client.put_object(
+            Bucket=bucket,
+            Body=test_content,
+            Key=cloud_path,
+            ContentType="text/plain",
+        )
+
+        result["steps"].append({"step": "upload", "success": True, "ETag": upload_resp.get("ETag")})
+        result["upload"] = {"cloud_path": cloud_path, "ETag": upload_resp.get("ETag")}
+
+    except Exception as e:
+        return {"error": f"Upload failed: {e}"}
+
+    # 步骤4: 使用相同凭证下载
+    try:
+        # 方法1: 使用 get_object 直接获取文件内容
+        get_resp = client.get_object(
+            Bucket=bucket,
+            Key=cloud_path,
+        )
+        content = get_resp['Body'].read()
+        download_success = content == test_content
+        result["steps"].append({
+            "step": "download_get_object",
+            "success": download_success,
+            "content_match": download_success,
+            "content_length": len(content)
+        })
+
+    except Exception as e:
+        result["steps"].append({"step": "download_get_object", "success": False, "error": str(e)})
+
+    # 步骤5: 尝试生成可分享的下载 URL
+    try:
+        # 使用 COS SDK 生成预签名 URL
+        presigned_url = client.get_presigned_download_url(
+            Bucket=bucket,
+            Key=cloud_path,
+            Expired=3600
+        )
+        result["steps"].append({"step": "generate_presigned_url", "success": True})
+        result["presigned_url"] = presigned_url[:100] + "..."
+
+        # 测试预签名 URL 是否可访问（用 requests）
+        test_resp = requests.get(presigned_url, timeout=30, verify=False)
+        result["steps"].append({
+            "step": "test_presigned_url",
+            "success": test_resp.status_code == 200,
+            "status_code": test_resp.status_code
+        })
+
+    except Exception as e:
+        result["steps"].append({"step": "presigned_url", "success": False, "error": str(e)})
+
+    # 总结
+    all_steps_passed = all(s.get("success", False) for s in result["steps"])
+    result["all_passed"] = all_steps_passed
+
+    return result
+
+
 # ============ 微信云存储测试接口（使用官方 COS-SDK 方式）============
 
 @router.get("/debug/wechat-storage")
