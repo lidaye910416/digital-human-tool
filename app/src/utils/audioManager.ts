@@ -194,34 +194,55 @@ async function downloadFromCloudStorage(cloudFileId: string, newsId: string): Pr
 }
 
 /**
- * 从 API 获取云存储文件的临时链接后下载
+ * 从 API 获取云存储文件（base64 格式）后写入本地
  */
 async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promise<string> {
-  console.log('[Audio] Getting temp URL from API for:', cloudFileId)
+  console.log('[Audio] Getting audio data from API for:', cloudFileId)
 
   try {
-    // 调用后端 API 获取临时链接
+    // 调用后端 API 获取 base64 音频数据
     const res = await wx.cloud.callContainer({
       config: { env: CLOUD_ENV },
-      path: `/api/news/${newsId}/cloud-file`,
-      method: 'GET',
-      header: { 'X-WX-SERVICE': CLOUD_SERVICE },
+      path: `/api/news/cloud-url`,
+      method: 'POST',
+      header: { 'X-WX-SERVICE': CLOUD_SERVICE, 'Content-Type': 'text/plain' },
+      data: cloudFileId,
     })
 
-    if (res?.data?.temp_url) {
-      // 使用临时链接下载
-      const tempUrl = res.data.temp_url
-      console.log('[Audio] Got temp URL:', tempUrl)
+    console.log('[Audio] API response status:', res.statusCode)
 
-      // 下载到本地
-      const tempFilePath = await downloadFromUrl(tempUrl, newsId)
+    if (res?.data?.success && res.data?.audio_data) {
+      const audioB64 = res.data.audio_data
+      const size = res.data.size
+      console.log('[Audio] Got audio data, base64 length:', audioB64.length, 'bytes:', size)
+
+      // 将 base64 写入本地文件
+      const tempFilePath = `${wx.env.USER_DATA_PATH}/${newsId}.mp3`
+      const fs = wx.getFileSystemManager()
+
+      await new Promise<void>((resolve, reject) => {
+        fs.writeFile({
+          filePath: tempFilePath,
+          data: audioB64,
+          encoding: 'base64',
+          success: () => {
+            console.log('[Audio] Write file success:', tempFilePath)
+            resolve()
+          },
+          fail: (err) => {
+            console.error('[Audio] Write file failed:', err)
+            reject(err)
+          }
+        })
+      })
+
       return tempFilePath
     }
 
-    throw new Error('No temp URL in response')
+    throw new Error('No audio_data in response: ' + JSON.stringify(res?.data))
 
   } catch (err) {
-    console.error('[Audio] Get temp URL failed:', err)
+    console.error('[Audio] Get audio data failed:', err)
     throw err
   }
 }
