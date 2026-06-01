@@ -203,18 +203,25 @@ async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promi
     // 调用后端 API 获取临时链接
     const res = await wx.cloud.callContainer({
       config: { env: CLOUD_ENV },
-      path: `/api/news/${newsId}/cloud-file`,
-      method: 'GET',
-      header: { 'X-WX-SERVICE': CLOUD_SERVICE },
+      path: `/api/news/cloud-url`,
+      method: 'POST',
+      header: { 'X-WX-SERVICE': CLOUD_SERVICE, 'Content-Type': 'text/plain' },
+      data: cloudFileId,
     })
 
-    if (res?.data?.temp_url) {
-      // 使用临时链接下载
-      const tempUrl = res.data.temp_url
-      console.log('[Audio] Got temp URL:', tempUrl)
+    console.log('[Audio] API response:', res)
 
-      // 下载到本地
-      const tempFilePath = await downloadFromUrl(tempUrl, newsId)
+    if (res?.data?.temp_url) {
+      const tempUrl = res.data.temp_url
+      const securityToken = res.data.security_token
+
+      console.log('[Audio] Got temp URL:', tempUrl.substring(0, 100))
+      if (securityToken) {
+        console.log('[Audio] Got security token')
+      }
+
+      // 下载到本地（带 security token）
+      const tempFilePath = await downloadFromUrlWithToken(tempUrl, securityToken, newsId)
       return tempFilePath
     }
 
@@ -237,6 +244,38 @@ async function downloadFromUrl(url: string, newsId: string): Promise<string> {
 
   // 注意：微信小程序中 wx.downloadFile 不能指定 filePath，必须使用返回的 tempFilePath
   // tempFilePath 格式为 wxfile://usr/xxx.mp3
+  const result = await new Promise<{ statusCode: number; tempFilePath?: string }>((resolve, reject) => {
+    wx.downloadFile({
+      url,
+      success: (res) => {
+        console.log('[Audio] wx.downloadFile success:', res)
+        resolve(res)
+      },
+      fail: (err) => {
+        console.error('[Audio] wx.downloadFile fail:', err)
+        reject(err)
+      }
+    })
+  })
+
+  if (result.statusCode !== 200 || !result.tempFilePath) {
+    throw new Error(`Download failed: ${result.statusCode}, tempFilePath: ${result.tempFilePath}`)
+  }
+
+  const finalPath = result.tempFilePath
+  console.log('[Audio] Download completed:', finalPath)
+  return finalPath
+}
+
+/**
+ * 从带签名的 URL 下载文件（支持 security token）
+ */
+async function downloadFromUrlWithToken(url: string, securityToken: string | undefined, newsId: string): Promise<string> {
+  console.log('[Audio] downloadFromUrlWithToken:', { url: url.substring(0, 80), hasToken: !!securityToken, newsId })
+
+  // 注意：微信小程序的 wx.downloadFile 不支持自定义 header
+  // 所以需要将 security token 作为 URL 参数传递
+  // COS SDK 生成的签名 URL 已经包含了必要的认证信息
   const result = await new Promise<{ statusCode: number; tempFilePath?: string }>((resolve, reject) => {
     wx.downloadFile({
       url,
