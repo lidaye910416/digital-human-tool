@@ -1044,8 +1044,8 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
 
             # 获取临时凭证
             auth_url = f"https://api.weixin.qq.com/_/cos/getauth?access_token={access_token}"
-            async with httpx.AsyncClient(verify=False, timeout=30.0) as client:
-                auth_resp = await client.get(auth_url)
+            async with httpx.AsyncClient(verify=False, timeout=30.0) as http_client:
+                auth_resp = await http_client.get(auth_url)
                 auth_data = auth_resp.json()
 
             tmp_secret_id = auth_data.get("TmpSecretId")
@@ -1056,33 +1056,39 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
                 logger.error(f"[Cloud] No temp credentials: {auth_data}")
                 raise HTTPException(status_code=500, detail="Cannot get temp credentials")
 
+            logger.info(f"[Cloud] Got temp credentials, generating URL for {cloud_path}")
+
             # 使用 COS SDK 生成下载 URL
             bucket = "7072-prod-d9g7e5osy7b5e7a9c-1433977056"
             region = "ap-shanghai"
 
-            config = CosConfig(
+            cos_config = CosConfig(
                 Region=region,
                 SecretId=tmp_secret_id,
                 SecretKey=tmp_secret_key,
                 Token=session_token,
             )
-            client = CosS3Client(config)
+            cos_client = CosS3Client(cos_config)
 
             # 生成带签名的下载 URL（有效期1小时）
-            temp_url = client.get_presigned_download_url(
+            temp_url = cos_client.get_presigned_download_url(
                 Bucket=bucket,
                 Key=cloud_path,
                 Expired=3600
             )
 
-            logger.info(f"[Cloud] Generated download URL for {cloud_path}")
+            logger.info(f"[Cloud] Generated download URL for {cloud_path}: {temp_url[:80]}...")
             return {"success": True, "temp_url": temp_url, "source": "cos_sdk"}
 
+        except HTTPException:
+            raise
         except ImportError as e:
             logger.error(f"[Cloud] COS SDK not available: {e}")
             raise HTTPException(status_code=500, detail="COS SDK not installed")
         except Exception as sdk_error:
             logger.error(f"[Cloud] COS SDK error: {sdk_error}")
+            import traceback
+            logger.error(f"[Cloud] Traceback: {traceback.format_exc()}")
             raise HTTPException(status_code=500, detail=f"COS SDK error: {str(sdk_error)}")
 
     except HTTPException:
