@@ -194,13 +194,13 @@ async function downloadFromCloudStorage(cloudFileId: string, newsId: string): Pr
 }
 
 /**
- * 从 API 获取云存储文件的临时链接后下载
+ * 从 API 获取云存储文件（base64 格式）后写入本地
  */
 async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promise<string> {
-  console.log('[Audio] Getting temp URL from API for:', cloudFileId)
+  console.log('[Audio] Getting audio data from API for:', cloudFileId)
 
   try {
-    // 调用后端 API 获取临时链接
+    // 调用后端 API 获取 base64 音频数据
     const res = await wx.cloud.callContainer({
       config: { env: CLOUD_ENV },
       path: `/api/news/cloud-url`,
@@ -209,26 +209,40 @@ async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promi
       data: cloudFileId,
     })
 
-    console.log('[Audio] API response:', res)
+    console.log('[Audio] API response status:', res.statusCode)
 
-    if (res?.data?.temp_url) {
-      const tempUrl = res.data.temp_url
-      const securityToken = res.data.security_token
+    if (res?.data?.success && res.data?.audio_data) {
+      const audioB64 = res.data.audio_data
+      const size = res.data.size
+      console.log('[Audio] Got audio data, base64 length:', audioB64.length, 'bytes:', size)
 
-      console.log('[Audio] Got temp URL:', tempUrl.substring(0, 100))
-      if (securityToken) {
-        console.log('[Audio] Got security token')
-      }
+      // 将 base64 写入本地文件
+      const tempFilePath = `${wx.env.USER_DATA_PATH}/${newsId}.mp3`
+      const fs = wx.getFileSystemManager()
 
-      // 下载到本地（带 security token）
-      const tempFilePath = await downloadFromUrlWithToken(tempUrl, securityToken, newsId)
+      await new Promise<void>((resolve, reject) => {
+        fs.writeFile({
+          filePath: tempFilePath,
+          data: audioB64,
+          encoding: 'base64',
+          success: () => {
+            console.log('[Audio] Write file success:', tempFilePath)
+            resolve()
+          },
+          fail: (err) => {
+            console.error('[Audio] Write file failed:', err)
+            reject(err)
+          }
+        })
+      })
+
       return tempFilePath
     }
 
-    throw new Error('No temp URL in response')
+    throw new Error('No audio_data in response: ' + JSON.stringify(res?.data))
 
   } catch (err) {
-    console.error('[Audio] Get temp URL failed:', err)
+    console.error('[Audio] Get audio data failed:', err)
     throw err
   }
 }
@@ -244,38 +258,6 @@ async function downloadFromUrl(url: string, newsId: string): Promise<string> {
 
   // 注意：微信小程序中 wx.downloadFile 不能指定 filePath，必须使用返回的 tempFilePath
   // tempFilePath 格式为 wxfile://usr/xxx.mp3
-  const result = await new Promise<{ statusCode: number; tempFilePath?: string }>((resolve, reject) => {
-    wx.downloadFile({
-      url,
-      success: (res) => {
-        console.log('[Audio] wx.downloadFile success:', res)
-        resolve(res)
-      },
-      fail: (err) => {
-        console.error('[Audio] wx.downloadFile fail:', err)
-        reject(err)
-      }
-    })
-  })
-
-  if (result.statusCode !== 200 || !result.tempFilePath) {
-    throw new Error(`Download failed: ${result.statusCode}, tempFilePath: ${result.tempFilePath}`)
-  }
-
-  const finalPath = result.tempFilePath
-  console.log('[Audio] Download completed:', finalPath)
-  return finalPath
-}
-
-/**
- * 从带签名的 URL 下载文件（支持 security token）
- */
-async function downloadFromUrlWithToken(url: string, securityToken: string | undefined, newsId: string): Promise<string> {
-  console.log('[Audio] downloadFromUrlWithToken:', { url: url.substring(0, 80), hasToken: !!securityToken, newsId })
-
-  // 注意：微信小程序的 wx.downloadFile 不支持自定义 header
-  // 所以需要将 security token 作为 URL 参数传递
-  // COS SDK 生成的签名 URL 已经包含了必要的认证信息
   const result = await new Promise<{ statusCode: number; tempFilePath?: string }>((resolve, reject) => {
     wx.downloadFile({
       url,
