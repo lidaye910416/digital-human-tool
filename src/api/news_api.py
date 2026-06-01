@@ -1026,34 +1026,64 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
         raise HTTPException(status_code=500, detail="Cannot get access_token")
 
     try:
-        # 从 fileID 提取 env 和 path
-        env = cloud_file_id.split('://')[1].split('/')[0]
+        # 从 fileID 提取 path
+        # 格式: cloud://prod-d9g7e5osy7b5e7a9c/audio/xxx.mp3
+        parts = cloud_file_id.split('://')[1].split('/', 1)
+        env = parts[0]
+        cloud_path = parts[1] if len(parts) > 1 else ""
 
-        # 调用微信云存储 API 获取临时 URL
-        url = f"https://api.weixin.qq.com/tcb/batchdownloadfile?access_token={access_token}"
-        data = {
-            "env": env,
-            "file_list": [{"fileid": cloud_file_id, "max_age": 3600}]
-        }
+        if not cloud_path:
+            raise HTTPException(status_code=400, detail="Invalid cloud_file_id format")
 
-        async with httpx.AsyncClient(verify=False, timeout=30.0) as client:
-            response = await client.post(url, json=data)
-            result = response.json()
+        logger.info(f"[Cloud] Getting download URL for path: {cloud_path}")
 
-        logger.info(f"[Cloud] API response: {result}")
+        # 方法1：使用 COS SDK 生成带签名的下载 URL
+        try:
+            from qcloud_cos import CosConfig, CosS3Client
+            import time
 
-        if result.get("errcode") == 0 and result.get("file_list"):
-            file_info = result["file_list"][0]
-            if file_info.get("status") == 0:
-                temp_url = file_info.get("download_url")
-                logger.info(f"[Cloud] Got temp URL for {cloud_file_id[:40]}...")
-                return {"success": True, "temp_url": temp_url, "source": "cloud"}
-            else:
-                logger.error(f"[Cloud] Get URL status error: {file_info}")
-                raise HTTPException(status_code=404, detail="File not found in cloud storage")
-        else:
-            logger.error(f"[Cloud] Get URL error: {result}")
-            raise HTTPException(status_code=500, detail="Failed to get temp URL")
+            # 获取临时凭证
+            auth_url = f"https://api.weixin.qq.com/_/cos/getauth?access_token={access_token}"
+            async with httpx.AsyncClient(verify=False, timeout=30.0) as client:
+                auth_resp = await client.get(auth_url)
+                auth_data = auth_resp.json()
+
+            tmp_secret_id = auth_data.get("TmpSecretId")
+            tmp_secret_key = auth_data.get("TmpSecretKey")
+            session_token = auth_data.get("Token")
+
+            if not tmp_secret_id or not tmp_secret_key:
+                logger.error(f"[Cloud] No temp credentials: {auth_data}")
+                raise HTTPException(status_code=500, detail="Cannot get temp credentials")
+
+            # 使用 COS SDK 生成下载 URL
+            bucket = "7072-prod-d9g7e5osy7b5e7a9c-1433977056"
+            region = "ap-shanghai"
+
+            config = CosConfig(
+                Region=region,
+                SecretId=tmp_secret_id,
+                SecretKey=tmp_secret_key,
+                Token=session_token,
+            )
+            client = CosS3Client(config)
+
+            # 生成带签名的下载 URL（有效期1小时）
+            temp_url = client.get_presigned_download_url(
+                Bucket=bucket,
+                Key=cloud_path,
+                Expired=3600
+            )
+
+            logger.info(f"[Cloud] Generated download URL for {cloud_path}")
+            return {"success": True, "temp_url": temp_url, "source": "cos_sdk"}
+
+        except ImportError as e:
+            logger.error(f"[Cloud] COS SDK not available: {e}")
+            raise HTTPException(status_code=500, detail="COS SDK not installed")
+        except Exception as sdk_error:
+            logger.error(f"[Cloud] COS SDK error: {sdk_error}")
+            raise HTTPException(status_code=500, detail=f"COS SDK error: {str(sdk_error)}")
 
     except HTTPException:
         raise
