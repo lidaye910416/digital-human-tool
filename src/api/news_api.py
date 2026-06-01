@@ -1075,32 +1075,28 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
                 head_resp = cos_client.head_object(Bucket=bucket, Key=cloud_path)
                 logger.info(f"[Cloud] File exists: {head_resp}")
             except Exception as head_err:
-                logger.warning(f"[Cloud] File head error (may not exist): {head_err}")
-
-            # 方法1：尝试使用 get_object_url（不需要签名）
-            try:
-                base_url = cos_client.get_object_url(Bucket=bucket, Key=cloud_path)
-                logger.info(f"[Cloud] Base URL: {base_url}")
-            except Exception as url_err:
-                logger.warning(f"[Cloud] get_object_url error: {url_err}")
-                base_url = None
-
-            # 方法2：直接构造带 Token 的 COS URL（微信云存储专用）
-            cos_url = f"https://{bucket}.cos.{region}.myqcloud.com/{cloud_path}"
+                logger.warning(f"[Cloud] File head error: {head_err}")
 
             # 生成带签名的下载 URL（有效期1小时）
+            # 注意：微信云存储需要包含 x-cos-security-token header
             temp_url = cos_client.get_presigned_download_url(
                 Bucket=bucket,
                 Key=cloud_path,
                 Expired=3600
             )
 
-            logger.info(f"[Cloud] Presigned URL: {temp_url[:100]}...")
+            logger.info(f"[Cloud] Generated URL: {temp_url[:100]}...")
 
-            # 返回 COS URL + Token（微信云存储需要 Token）
-            final_url = f"{cos_url}?token={session_token}"
-            logger.info(f"[Cloud] Final URL with token: {final_url[:100]}...")
-            return {"success": True, "temp_url": final_url, "source": "cos_direct", "presigned": temp_url, "bucket": bucket, "region": region}
+            # 返回带 token 的 URL（微信云存储需要）
+            # 注意：COS SDK 的签名不包含 Token，需要额外处理
+            return {
+                "success": True,
+                "temp_url": temp_url,
+                "security_token": session_token,
+                "source": "cos_sdk",
+                "bucket": bucket,
+                "region": region
+            }
 
         except HTTPException:
             raise
