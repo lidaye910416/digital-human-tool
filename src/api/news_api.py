@@ -1058,3 +1058,5 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
     except Exception as e:
         logger.error(f"[Cloud] Get temp URL error: {e}")
         raise HTTPException(status_code=500, detail=f"Cloud storage error: {str(e)}")
+
+# 部署测试标记 - 2026-06-01
