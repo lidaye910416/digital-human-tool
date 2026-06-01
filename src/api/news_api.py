@@ -1009,14 +1009,15 @@ async def test_tts_pipeline(
 # 用于前端从微信云存储下载音频文件
 
 @router.post("/cloud-url")
-async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信云存储 fileID")):
+async def get_cloud_audio_data(cloud_file_id: str = Body(..., description="微信云存储 fileID")):
     """
-    根据 cloud_file_id 获取临时访问 URL
+    根据 cloud_file_id 获取音频数据（base64 编码）
 
-    用于前端从微信云存储下载音频文件
+    使用 COS SDK get_object 直接获取文件内容并返回 base64 编码
     """
     from src.services.wechat_token import get_access_token
     import httpx
+    import base64
 
     if not cloud_file_id or not cloud_file_id.startswith('cloud://'):
         raise HTTPException(status_code=400, detail="Invalid cloud_file_id format")
@@ -1026,35 +1027,81 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
         raise HTTPException(status_code=500, detail="Cannot get access_token")
 
     try:
-        # 从 fileID 提取 env 和 path
-        env = cloud_file_id.split('://')[1].split('/')[0]
+        # 从 fileID 提取 path
+        # 格式: cloud://prod-d9g7e5osy7b5e7a9c/audio/xxx.mp3
+        parts = cloud_file_id.split('://')[1].split('/', 1)
+        env = parts[0]
+        cloud_path = parts[1] if len(parts) > 1 else ""
 
-        # 调用微信云存储 API 获取临时 URL
-        url = f"https://api.weixin.qq.com/tcb/batchdownloadfile?access_token={access_token}"
-        data = {
-            "env": env,
-            "file_list": [{"fileid": cloud_file_id, "max_age": 3600}]
-        }
+        if not cloud_path:
+            raise HTTPException(status_code=400, detail="Invalid cloud_file_id format")
 
-        async with httpx.AsyncClient(verify=False, timeout=30.0) as client:
-            response = await client.post(url, json=data)
-            result = response.json()
+        logger.info(f"[Cloud] Getting audio data for path: {cloud_path}")
 
-        if result.get("errcode") == 0 and result.get("file_list"):
-            file_info = result["file_list"][0]
-            if file_info.get("status") == 0:
-                temp_url = file_info.get("download_url")
-                logger.info(f"[Cloud] Got temp URL for {cloud_file_id[:40]}...")
-                return {"success": True, "temp_url": temp_url, "source": "cloud"}
-            else:
-                logger.error(f"[Cloud] Get URL status error: {file_info}")
-                raise HTTPException(status_code=404, detail="File not found in cloud storage")
-        else:
-            logger.error(f"[Cloud] Get URL error: {result}")
-            raise HTTPException(status_code=500, detail="Failed to get temp URL")
+        # 获取临时凭证
+        try:
+            from qcloud_cos import CosConfig, CosS3Client
+
+            auth_url = f"https://api.weixin.qq.com/_/cos/getauth?access_token={access_token}"
+            async with httpx.AsyncClient(verify=False, timeout=30.0) as http_client:
+                auth_resp = await http_client.get(auth_url)
+                auth_data = auth_resp.json()
+
+            tmp_secret_id = auth_data.get("TmpSecretId")
+            tmp_secret_key = auth_data.get("TmpSecretKey")
+            session_token = auth_data.get("Token")
+
+            if not tmp_secret_id or not tmp_secret_key:
+                logger.error(f"[Cloud] No temp credentials: {auth_data}")
+                raise HTTPException(status_code=500, detail="Cannot get temp credentials")
+
+            logger.info(f"[Cloud] Got temp credentials, fetching audio data for {cloud_path}")
+
+            bucket = "7072-prod-d9g7e5osy7b5e7a9c-1433977056"
+            region = "ap-shanghai"
+
+            cos_config = CosConfig(
+                Region=region,
+                SecretId=tmp_secret_id,
+                SecretKey=tmp_secret_key,
+                Token=session_token,
+            )
+            cos_client = CosS3Client(cos_config)
+
+            # 使用 get_object 直接获取文件内容
+            try:
+                get_resp = cos_client.get_object(Bucket=bucket, Key=cloud_path)
+                audio_content = get_resp['Body'].read()
+                logger.info(f"[Cloud] Got audio data, size: {len(audio_content)} bytes")
+            except Exception as obj_err:
+                logger.error(f"[Cloud] get_object failed: {obj_err}")
+                raise HTTPException(status_code=404, detail=f"File not found in cloud storage: {obj_err}")
+
+            # 转换为 base64
+            audio_b64 = base64.b64encode(audio_content).decode('utf-8')
+            logger.info(f"[Cloud] Encoded to base64, length: {len(audio_b64)}")
+
+            return {
+                "success": True,
+                "audio_data": audio_b64,
+                "content_type": "audio/mpeg",
+                "size": len(audio_content),
+                "source": "cos_get_object"
+            }
+
+        except HTTPException:
+            raise
+        except ImportError as e:
+            logger.error(f"[Cloud] COS SDK not available: {e}")
+            raise HTTPException(status_code=500, detail="COS SDK not installed")
+        except Exception as sdk_error:
+            logger.error(f"[Cloud] COS SDK error: {sdk_error}")
+            import traceback
+            logger.error(f"[Cloud] Traceback: {traceback.format_exc()}")
+            raise HTTPException(status_code=500, detail=f"COS SDK error: {str(sdk_error)}")
 
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"[Cloud] Get temp URL error: {e}")
+        logger.error(f"[Cloud] Get audio data error: {e}")
         raise HTTPException(status_code=500, detail=f"Cloud storage error: {str(e)}")
