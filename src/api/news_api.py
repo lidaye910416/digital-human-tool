@@ -1070,6 +1070,13 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
             )
             cos_client = CosS3Client(cos_config)
 
+            # 先尝试检查文件是否存在
+            try:
+                head_resp = cos_client.head_object(Bucket=bucket, Key=cloud_path)
+                logger.info(f"[Cloud] File exists: {head_resp}")
+            except Exception as head_err:
+                logger.warning(f"[Cloud] File head error (may not exist): {head_err}")
+
             # 生成带签名的下载 URL（有效期1小时）
             temp_url = cos_client.get_presigned_download_url(
                 Bucket=bucket,
@@ -1077,7 +1084,7 @@ async def get_cloud_temp_url(cloud_file_id: str = Body(..., description="微信�
                 Expired=3600
             )
 
-            logger.info(f"[Cloud] Generated download URL for {cloud_path}: {temp_url[:80]}...")
+            logger.info(f"[Cloud] Generated download URL for {cloud_path}: {temp_url[:100]}...")
             return {"success": True, "temp_url": temp_url, "source": "cos_sdk"}
 
         except HTTPException:
