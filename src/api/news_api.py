@@ -1029,10 +1029,16 @@ async def get_cloud_audio_data(body: dict = Body(..., description="请求体")):
 
     try:
         # 从 fileID 提取 path
-        # 格式: cloud://prod-d9g7e5osy7b5e7a9c/audio/xxx.mp3
-        parts = cloud_file_id.split('://')[1].split('/', 1)
-        env = parts[0]
-        cloud_path = parts[1] if len(parts) > 1 else ""
+        # 格式1: cloud://prod-d9g7e5osy7b5e7a9c/audio/xxx.mp3
+        # 格式2: cloud://prod-d9g7e5osy7b5e7a9c.7072-prod-d9g7e5osy7b5e7a9c-1433977056/audio/xxx.mp3
+        # 只取最后两段：bucket_id/path
+        after_scheme = cloud_file_id.split('://')[1]
+        slash_idx = after_scheme.find('/')
+        if slash_idx == -1:
+            raise HTTPException(status_code=400, detail="Invalid cloud_file_id format")
+        cloud_path = after_scheme[slash_idx + 1:]
+        # 提取 env（用于临时凭证，可选）
+        env = after_scheme[:slash_idx].split('.')[0]
 
         if not cloud_path:
             raise HTTPException(status_code=400, detail="Invalid cloud_file_id format")
