@@ -27,7 +27,8 @@ class MiniMaxClient:
         ]
 
         # 支持的 TTS 模型 (按优先级)
-        self.tts_models = ["speech-2.8-hd", "speech-2.6-hd", "speech-02-hd"]
+        # MiniMax-M3 模型：speech-02 (新一代) > speech-2.8-hd > speech-2.6-hd
+        self.tts_models = ["speech-02", "speech-02-hd", "speech-2.8-hd", "speech-2.6-hd"]
         # 文本对话模型（M2.5 非推理模型，输出干净无 <think> 标签）
         self.chat_model = "MiniMax-M2.5"
 
