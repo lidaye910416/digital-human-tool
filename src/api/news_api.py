@@ -1142,6 +1142,7 @@ async def get_cloud_temp_url(body: dict = Body(..., description="请求体")):
     返回 base64 编码的音频数据
     """
     from src.services.wechat_token import get_access_token
+    import httpx
     import base64
 
     if not cloud_file_id or not cloud_file_id.startswith('cloud://'):
