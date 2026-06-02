@@ -42,6 +42,18 @@
 
 ---
 
+## 分支策略 ⚠️
+
+**主要开发分支：`feature/backend-storage`**
+
+- 所有新功能开发和 bug 修复都在 `feature/backend-storage` 分支上进行
+- worktree 路径：`/Users/jasonlee/techecho/worktrees/backend-storage`
+- **未经用户明确确认，不要自动切换到 `main` 分支**
+- 仅当用户明确说"切换到 main"或类似指令时，才执行分支切换
+- 提交时同时推送到 `feature/backend-storage` 和 `main` 两个分支
+
+---
+
 ## 技术栈
 
 | 层 | 技术 |
