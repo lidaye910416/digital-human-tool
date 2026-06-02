@@ -42,15 +42,31 @@
 
 ---
 
-## 分支策略 ⚠️
+## 分支策略 ⚠️⚠️⚠️ 严格执行
 
-**主要开发分支：`feature/backend-storage`**
+**主要开发分支：`feature/backend-storage`**（worktree 路径：`/Users/jasonlee/techecho/worktrees/backend-storage`）
 
-- 所有新功能开发和 bug 修复都在 `feature/backend-storage` 分支上进行
-- worktree 路径：`/Users/jasonlee/techecho/worktrees/backend-storage`
-- **未经用户明确确认，不要自动切换到 `main` 分支**
-- 仅当用户明确说"切换到 main"或类似指令时，才执行分支切换
-- 提交时同时推送到 `feature/backend-storage` 和 `main` 两个分支
+### 绝对规则
+
+1. **所有开发工作必须在 `feature/backend-storage` 分支上进行**
+2. **绝对不要在主目录 `/Users/jasonlee/techecho`（main 分支）做任何修改**
+3. **未经用户明确确认，禁止以下操作：**
+   - ❌ 切换到 `main` 分支
+   - ❌ 合并到 `main` 分支
+   - ❌ 在 main 分支 commit/push
+   - ❌ 在主目录执行任何 git 操作
+
+### 操作流程
+
+- 开发/修改 → 只在 worktree 中操作 → 只 commit/push 到 `feature/backend-storage`
+- 同步到 main → **必须等用户明确说"同步到 main"或"合并到 main"才能执行**
+- 切换到 main → **必须等用户明确说"切换到 main"才能执行**
+
+### 违规案例（已发生，避免重犯）
+
+- ❌ 在主目录执行 `python3` 脚本意外修改了 `app/data/news.json`
+- ❌ 后续 `git add -A` 把无关文件提交到 main 分支
+- ❌ 在 main 分支直接 commit/push 而未确认
 
 ---
 
