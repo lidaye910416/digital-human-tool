@@ -205,8 +205,8 @@ async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promi
       config: { env: CLOUD_ENV },
       path: `/api/news/cloud-url`,
       method: 'POST',
-      header: { 'X-WX-SERVICE': CLOUD_SERVICE, 'Content-Type': 'text/plain' },
-      data: cloudFileId,
+      header: { 'X-WX-SERVICE': CLOUD_SERVICE, 'Content-Type': 'application/json' },
+      data: { cloud_file_id: cloudFileId },
     })
 
     console.log('[Audio] API response status:', res.statusCode)
