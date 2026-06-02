@@ -1205,8 +1205,19 @@ async def get_cloud_temp_url(body: dict = Body(..., description="请求体")):
             # 使用 get_object 直接获取文件内容
             try:
                 get_resp = cos_client.get_object(Bucket=bucket, Key=cloud_path)
-                audio_content = get_resp['Body'].read()
+                # COS SDK 的 Body 是流式对象，需要循环读取直到 EOF
+                # 单次 read() 可能只读取部分数据
+                stream = get_resp['Body']
+                chunks = []
+                while True:
+                    chunk = stream.read(8192)  # 每次读取 8KB
+                    if not chunk:
+                        break
+                    chunks.append(chunk)
+                audio_content = b''.join(chunks)
                 logger.info(f"[Cloud] Got audio data, size: {len(audio_content)} bytes")
+                if len(audio_content) < 10240:  # 小于 10KB 警告
+                    logger.warning(f"[Cloud] Audio file is suspiciously small: {len(audio_content)} bytes (path: {cloud_path})")
             except Exception as obj_err:
                 logger.error(f"[Cloud] get_object failed: {obj_err}")
                 raise HTTPException(status_code=404, detail=f"File not found in cloud storage: {obj_err}")
