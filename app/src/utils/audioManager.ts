@@ -226,7 +226,16 @@ async function downloadViaApiTempUrl(cloudFileId: string, newsId: string): Promi
           data: audioB64,
           encoding: 'base64',
           success: () => {
-            console.log('[Audio] Write file success:', tempFilePath)
+            // 验证文件大小
+            try {
+              const stat = fs.statSync(tempFilePath)
+              console.log('[Audio] Write file success:', tempFilePath, 'actual size:', stat.size, 'bytes (expected:', size, ')')
+              if (stat.size < 1024) {
+                console.error('[Audio] WARNING: File too small, may be corrupted!')
+              }
+            } catch (e) {
+              console.log('[Audio] Write file success:', tempFilePath, '(stat check failed)')
+            }
             resolve()
           },
           fail: (err) => {
