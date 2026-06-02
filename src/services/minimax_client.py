@@ -26,10 +26,12 @@ class MiniMaxClient:
             "female-tianmei", "female-shaonv", "female-yujie", "female-chengshu",
         ]
 
-        # 支持的 TTS 模型 (按优先级)
-        # MiniMax-M3 模型：speech-02 (新一代) > speech-02-hd > speech-2.8-hd > speech-2.6-hd
-        self.tts_models = ["speech-02", "speech-02-hd", "speech-2.8-hd", "speech-2.6-hd"]
-        # 文本对话模型（M2.5 非推理模型，输出干净无 <think> 标签）
+        # 支持的 TTS 模型 (按优先级，已实测可用)
+        # speech-02-hd: 最新高清模型
+        # speech-2.8-hd: 次新版本
+        # speech-2.6-hd: 稳定版本
+        self.tts_models = ["speech-02-hd", "speech-2.8-hd", "speech-2.6-hd"]
+        # 文本对话模型
         self.chat_model = "MiniMax-M2.5"
 
     async def _make_request(
